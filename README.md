@@ -1,18 +1,6 @@
-ĐỒ ÁN LT DI ĐỘNG - CDTH19PMB - CDKT CAO THANG
-Sinh viên: Nguyễn Ngọc Quân, Nguyễn Quốc Anh, Trương Minh Hiếu
-
-Figma: https://www.figma.com/file/CkiBQisKYbRLIIkali90Oq/0306191102-0306191120-0306191158
+ĐỒ ÁN TỐT NGHIỆP - CDTH19PMB - CDKT CAO THANG
+Sinh viên: Nguyễn Quốc Anh, Trương Minh Hiếu
 
 Link Github PHP: https://github.com/minhhieu2505/QHAShopPHP.git
 
-Getting Started
-clone,open project and run "flutter pub get"
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-Lab: Write your first Flutter app
-Cookbook: Useful Flutter samples
-For help getting started with Flutter, view our online documentation, which offers tutorials, samples, guidance on mobile development, and a full API reference.
-# dungcuso
+Đề tài:Xây dựng website thương mại điện tử bán thiết bị điện tử với PHP
