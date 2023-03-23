@@ -160,12 +160,6 @@
 							<input type="text" class="form-control text-sm" name="data[options][zalo]" id="zalo" placeholder="Zalo" value="<?=(!empty($flash->has('zalo'))) ? $flash->get('zalo') : @$options['zalo']?>">
 						</div>
 					<?php } ?>
-					<?php if(isset($config['setting']['oaidzalo']) && $config['setting']['oaidzalo'] == true) { ?>
-						<div class="form-group col-md-4 col-sm-6">
-							<label for="oaidzalo">OAID Zalo:</label>
-							<input type="text" class="form-control text-sm" name="data[options][oaidzalo]" id="oaidzalo" placeholder="OAID Zalo" value="<?=(!empty($flash->has('oaidzalo'))) ? $flash->get('oaidzalo') : @$options['oaidzalo']?>">
-						</div>
-					<?php } ?>
 					<?php if(isset($config['setting']['website']) && $config['setting']['website'] == true) { ?>
 						<div class="form-group col-md-4 col-sm-6">
 							<label for="website">Website:</label>
@@ -178,12 +172,6 @@
 							<input type="text" class="form-control text-sm" name="data[options][fanpage]" id="fanpage" placeholder="Fanpage" value="<?=(!empty($flash->has('fanpage'))) ? $flash->get('fanpage') : @$options['fanpage']?>">
 						</div>
 					<?php } ?>
-					<?php if(isset($config['setting']['coords']) && $config['setting']['coords'] == true) { ?>
-						<div class="form-group col-md-4 col-sm-6">
-							<label for="coords">Tọa độ google map:</label>
-							<input type="text" class="form-control text-sm" name="data[options][coords]" id="coords" placeholder="Tọa độ google map" value="<?=(!empty($flash->has('coords'))) ? $flash->get('coords') : @$options['coords']?>">
-						</div>
-					<?php } ?>
 				</div>
 				<?php if(isset($config['setting']['coords_iframe']) && $config['setting']['coords_iframe'] == true) { ?>
 					<div class="form-group">
@@ -194,22 +182,6 @@
 						<textarea class="form-control text-sm" name="data[options][coords_iframe]" id="coords_iframe" rows="5" placeholder="Tọa độ google map iframe"><?=htmlspecialchars_decode((!empty($flash->has('coords_iframe'))) ? $flash->get('coords_iframe') : @$options['coords_iframe'])?></textarea>
 					</div>
 				<?php } ?>
-				<div class="form-group">
-					<label for="analytics">Google analytics:</label>
-					<textarea class="form-control text-sm" name="data[analytics]" id="analytics" rows="5" placeholder="Google analytics"><?=htmlspecialchars_decode((!empty($flash->has('analytics'))) ? $flash->get('analytics') : @$item['analytics'])?></textarea>
-				</div>
-				<div class="form-group">
-					<label for="mastertool">Google Webmaster Tool:</label>
-					<textarea class="form-control text-sm" name="data[mastertool]" id="mastertool" rows="5" placeholder="Google Webmaster Tool"><?=htmlspecialchars_decode((!empty($flash->has('mastertool'))) ? $flash->get('mastertool') : @$item['mastertool'])?></textarea>
-				</div>
-				<div class="form-group">
-					<label for="headjs">Head JS:</label>
-					<textarea class="form-control text-sm" name="data[headjs]" id="headjs" rows="5" placeholder="Head JS"><?=htmlspecialchars_decode((!empty($flash->has('headjs'))) ? $flash->get('headjs') : @$item['headjs'])?></textarea>
-				</div>
-				<div class="form-group">
-					<label for="bodyjs">Body JS:</label>
-					<textarea class="form-control text-sm" name="data[bodyjs]" id="bodyjs" rows="5" placeholder="Body JS"><?=htmlspecialchars_decode((!empty($flash->has('bodyjs'))) ? $flash->get('bodyjs') : @$item['bodyjs'])?></textarea>
-				</div>
 				<div class="card card-primary card-outline card-outline-tabs">
 					<div class="card-header p-0 border-bottom-0">
 						<ul class="nav nav-tabs" id="custom-tabs-three-tab-lang" role="tablist">
@@ -235,18 +207,6 @@
 				</div>
 			</div>
 		</div>
-	    <div class="card card-primary card-outline text-sm">
-	        <div class="card-header">
-	            <h3 class="card-title">Nội dung SEO</h3>
-	            <a class="btn btn-sm bg-gradient-success d-inline-block text-white float-right create-seo" title="Tạo SEO">Tạo SEO</a>
-	        </div>
-	        <div class="card-body">
-	            <?php
-	                $seoDB = $seo->getOnDB(0,$com,'update',$com);
-	                include TEMPLATE.LAYOUT."seo.php";
-	            ?>
-	        </div>
-	    </div>
 		<div class="card-footer text-sm">
 			<button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i class="far fa-save mr-2"></i>Lưu</button>
 			<button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>

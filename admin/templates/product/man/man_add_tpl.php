@@ -156,12 +156,6 @@
 											<?=$func->getAjaxCategory('product', 'item', $type)?>
 						                </div>
 						            <?php } ?>
-					                <?php if(isset($config['product'][$type]['sub']) && $config['product'][$type]['sub'] == true) { ?>
-						                <div class="form-group col-xl-6 col-sm-4">
-						                    <label class="d-block" for="id_sub">Danh mục cấp 4:</label>
-						                    <?=$func->getAjaxCategory('product', 'sub', $type)?>
-						                </div>
-						            <?php } ?>
 					            <?php } ?>
 					            <?php if(isset($config['product'][$type]['brand']) && $config['product'][$type]['brand'] == true) { ?>
 							    	<div class="form-group col-xl-6 col-sm-4">
@@ -169,102 +163,6 @@
 					                    <?=$func->getAjaxCategory('product', 'brand', $type, 'Chọn hãng')?>
 					                </div>
 							    <?php } ?>
-							    <?php if(isset($config['product'][$type]['tags']) && $config['product'][$type]['tags'] == true) { ?>
-							    	<div class="form-group col-xl-6 col-sm-4">
-					                    <label class="d-block" for="id_tags">Danh mục tags:</label>
-					                    <?=$func->getTags(@$item['id'], 'dataTags', 'product_tags', $type)?>
-					                </div>
-							    <?php } ?>
-							    <?php if(isset($config['product'][$type]['size']) && $config['product'][$type]['size'] == true) { ?>
-							    	<div class="form-group col-xl-6 col-sm-4">
-					                    <label class="d-block" for="id_size">Danh mục kích thước:</label>
-					                    <?=$func->getSize(@$item['id'])?>
-					                </div>
-							    <?php } ?>
-							    <?php /*
-									<?php if(isset($config['product'][$type]['color']) && $config['product'][$type]['color'] == true) { ?>
-							 
-							    	<?php
-							    		  $row_color = $d->rawQuery("select id, namevi from #_color where type = 'san-pham'"); 
-							    		  $list_price = $d->rawQuery("select id_product, id_color, id from #_pricebycolor where id_product = ?", array($id) );
-							    	?>
-							    	<?php if ($list_price){ 
-							    		foreach ($list_price as $key => $v) {
-							    		$name_color = $d->rawQueryOne("select namevi from #_color where id = ? limit 1", array($v['id_color']) );
-							    		$value_price = $d->rawQueryOne("select regular_price, sale_price from #_pricebycolor where id_product = ? and id_color = ? limit 1", array($id,$v['id_color']) );
-							    	?>
-							    			<div class="item-color item-color<?=$v['id']?> w-100">
-									    		<div class="row mb-2">
-									    			<div class="col-8">
-									    				<label class="d-block" for="id_color">Danh mục màu sắc:</label>
-									    				<select id="dataColor" name="dataColor[]" class="select multiselect" >
-									    					<option value="<?=$v['id_color']?>"><?=$name_color['namevi']?></option>
-									    					<?php for($i=0;$i<count($row_color);$i++){ ?>
-									    						<option value="<?php if($row_color[$i]["id"] > 0){?> <?=$row_color[$i]["id"]?> <?php } else {?> Chọn size: <?php }?>"/>
-									    							<?=$row_color[$i]["namevi"]?>
-									    						</option>
-									    					<?php } ?>
-									    				</select>
-									    			</div>
-									    			<div class="col-4">
-									    				<div class="icon-remove" data-id="<?=$v['id']?>">
-									    					<div class="box-remove">
-									    						<i class="fas fa-trash"></i>
-									    					</div>
-									    				</div>
-									    			</div>
-									    		</div>
-									    		<div class="row">
-									    			<div class="form-group col-xl-6 col-sm-4">
-									    				<label class="d-block" for="regular_price2">Giá bán:</label>
-									    				<input type="text" class="form-control format-price regular_price2 text-sm" name="regular_price2[]" id="regular_price2" placeholder="Giá bán" value="<?=$value_price['regular_price']?>">
-									    			</div>
-									    			<div class="form-group col-xl-6 col-sm-4">
-									    				<label class="d-block" for="sale_price2">Giá mới:</label>
-									    				<div class="input-group">
-									    					<input type="text" class="form-control format-price sale_price2 text-sm" name="sale_price2[]" id="sale_price2" placeholder="Giá mới" value="<?=$value_price['sale_price']?>">
-									    				</div>
-									    			</div>
-									    		</div>
-									    	</div>
-							  		  	<?php } } else { ?>
-							    		<div class="item-color w-100">
-								    		<div class="row mb-2">
-								    			<div class="col-8">
-								    				<label class="d-block" for="id_color">Danh mục màu sắc:</label>
-								    				<select id="dataColor" name="dataColor[]" class="select multiselect" >
-								    					<option value="0">Chọn size</option>
-								    					<?php for($i=0;$i<count($row_color);$i++){ ?>
-								    						<option value="<?php if($row_color[$i]["id"] > 0){?> <?=$row_color[$i]["id"]?> <?php } else {?> Chọn size: <?php }?>"/>
-								    							<?=$row_color[$i]["namevi"]?>
-								    						</option>
-								    					<?php } ?>
-								    				</select>
-								    			</div>
-								    		</div>
-								    		<div class="row">
-								    			<div class="form-group col-xl-6 col-sm-4">
-								    				<label class="d-block" for="regular_price2">Giá bán:</label>
-								    				<input type="text" class="form-control format-price regular_price2 text-sm" name="regular_price2[]" id="regular_price2" placeholder="Giá bán" value="<?=(!empty($flash->has('regular_price2'))) ? $flash->get('regular_price2') : @$item['regular_price2']?>">
-								    			</div>
-								    			<div class="form-group col-xl-6 col-sm-4">
-								    				<label class="d-block" for="sale_price2">Giá mới:</label>
-								    				<div class="input-group">
-								    					<input type="text" class="form-control format-price sale_price2 text-sm" name="sale_price2[]" id="sale_price2" placeholder="Giá mới" value="<?=(!empty($flash->has('sale_price2'))) ? $flash->get('sale_price2') : @$item['sale_price2']?>">
-								    				</div>
-								    			</div>
-								    		</div>
-								    	</div>
-							    	<?php } ?>
-							    <?php } ?>
-							    */ ?>
-
-							    <div class="form-add w-100"></div>
-							    <div class="icon-add">
-							    	<div class="box-add">
-							    		<i class="fas fa-plus"></i>
-							    	</div>
-							    </div>
 							</div>
 			            </div>
 			        </div>

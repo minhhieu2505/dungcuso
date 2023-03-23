@@ -30,6 +30,7 @@
 	    ),
 	);
 
+	error_reporting(1);
 	/* Cấu hình base */
 	$http = 'http://';
 	$configUrl = $config['database']['server-name'] . $config['database']['url'];

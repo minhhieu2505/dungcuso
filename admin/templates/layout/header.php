@@ -1,10 +1,6 @@
 <?php
     $countNotify = 0;
 
-    /* Contact */
-    $contactNotify = $d->rawQuery("select id from #_contact where status = ''");
-    $countNotify += count($contactNotify);
-
     /* Newsletter */
     if(isset($config['newsletter']))
     {
@@ -42,23 +38,6 @@
             }
         }
     }
-
-    /* Comment: News */
-    if(isset($config['news']))
-    {
-        $commentNewsNotify = array();
-        foreach($config['news'] as $k => $v) 
-        {
-            if(!empty($config['news'][$k]['comment']))
-            {
-                $commentNotify = $d->rawQuery("select id from #_comment where type = ? and find_in_set('new-admin',status)",array($k));
-                $commentNewsNotify[$k] = array();
-                $commentNewsNotify[$k]['title'] = $v['title_main'];
-                $commentNewsNotify[$k]['notify'] = count($commentNotify);
-                $countNotify += $commentNewsNotify[$k]['notify'];
-            }
-        }
-    }
 ?>
 <!-- Header -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light text-sm">
@@ -81,15 +60,6 @@
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu-info" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fas fa-cogs"></i></a>
             <ul aria-labelledby="dropdownSubMenu-info" class="dropdown-menu dropdown-menu-right border-0 shadow">
-                <?php if($config['website']['debug-developer'] && count($config['website']['lang']) >= 2) { ?>
-                    <li>
-                        <a href="index.php?com=lang&act=man" class="dropdown-item">
-                            <i class="fas fa-language"></i>
-                            <span>Quản lý ngôn ngữ</span>
-                        </a>
-                    </li>
-                    <div class="dropdown-divider"></div>
-                <?php } ?>
                 <li>
                     <a href="index.php?com=user&act=info_admin" class="dropdown-item">
                         <i class="fas fa-user-cog"></i>
@@ -101,13 +71,6 @@
                     <a href="index.php?com=user&act=info_admin&changepass=1" class="dropdown-item">
                         <i class="fas fa-key"></i>
                         <span>Đổi mật khẩu</span>
-                    </a>
-                </li>
-                <div class="dropdown-divider"></div>
-                <li>
-                    <a href="index.php?com=cache&act=delete" class="dropdown-item">
-                        <i class="far fa-trash-alt"></i>
-                        <span>Xóa bộ nhớ tạm</span>
                     </a>
                 </li>
             </ul>

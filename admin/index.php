@@ -12,19 +12,11 @@
     new AutoLoad();
     $d = new PDODb($config['database']);
     $flash = new Flash();
-    // $seo = new Seo($d);
-    // $emailer = new Email($d);
 	$cache = new Cache($d);
     $func = new Functions($d, $cache);
 
-	/* Check HTTP */
-	// $func->checkHTTP($http, $config['arrayDomainSSL'], $configBase, $configUrl);
-
 	/* Config type */
 	require_once LIBRARIES."config-type.php";
-
-	/* Lang Init */
-	// require_once LIBRARIES."lang/langinit.php";
 
 	/* Setting */
 	$setting = $d->rawQueryOne("select * from #_setting limit 0,1");
@@ -48,31 +40,22 @@
 </head>
 <body class="sidebar-mini hold-transition text-sm <?=(!isset($_SESSION[$loginAdmin]['active']) || $_SESSION[$loginAdmin]['active']==false)?'login-page':''?>">
     <!-- Loader -->
-    <?php if ($template == 'index' || $template == 'user/login') include TEMPLATE . LAYOUT . "loader.php"; ?>
-
+    <?php /* if ($template == 'index' || $template == 'user/login') include TEMPLATE . LAYOUT . "loader.php"; */ ?>
+	
     <!-- Wrapper -->
 	<?php if(isset($_SESSION[$loginAdmin]['active']) && ($_SESSION[$loginAdmin]['active'] == true)) { ?>
 		<div class="wrapper">
 			<?php
 				include TEMPLATE.LAYOUT."header.php";
 				include TEMPLATE.LAYOUT."menu.php";
+				
 			?>
 			<div class="content-wrapper">
-				<?php if($alertlogin) { ?>
-					<section class="content">
-						<div class="container-fluid">
-							<div class="alert my-alert alert-warning alert-dismissible text-sm bg-gradient-warning mt-3 mb-0">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-								<i class="icon fas fa-exclamation-triangle"></i> <?=$alertlogin?>
-							</div>
-						</div>
-					</section>
-				<?php } ?>
 				<?php include TEMPLATE.$template."_tpl.php"; ?>
 			</div>
 			<?php include TEMPLATE.LAYOUT."footer.php"; ?>
 		</div>
-	<?php } else { include TEMPLATE."user/login_tpl.php" ; } ?>
+	<?php } else {  include TEMPLATE."user/login_tpl.php" ; } ?>
 
 	<!-- Js all -->
 	<?php include TEMPLATE.LAYOUT."js.php"; ?>

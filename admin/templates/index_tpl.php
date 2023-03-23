@@ -22,32 +22,12 @@
     /* Make data for js chart */
     $charts = array();
     $charts['month'] = $month;
-
-    for($i=1; $i<=$daysInMonth; $i++)
-    {
-        $k = $i+1;
-        $begin = strtotime($year.'-'.$month.'-'.$i);
-        $end = strtotime($year.'-'.$month.'-'.$k);
-        $todayrc = $d->rawQueryOne("select count(*) as todayrecord from #_counter where tm >= ? and tm < ?",array($begin,$end));
-        $today_visitors = $todayrc['todayrecord'];
-        $charts['series'][] = $today_visitors;
-        $charts['labels'][] = 'D'.$i;
-    }
 ?>
 <!-- Main content -->
 <section class="content mb-3">
     <div class="container-fluid">
         <h5 class="pt-3 pb-2">Dashboard</h5>
         <div class="row mb-2 text-sm">
-            <div class="col-12 col-sm-6 col-md-3">
-                <a class="my-info-box info-box" href="index.php?com=setting&act=update" title="Cấu hình website">
-                    <span class="my-info-box-icon info-box-icon bg-primary"><i class="fas fa-cogs"></i></span>
-                    <div class="info-box-content text-dark">
-                        <span class="info-box-text text-capitalize">Cấu hình website</span>
-                        <span class="info-box-number">View more</span>
-                    </div>
-                </a>
-            </div>
             <div class="col-12 col-sm-6 col-md-3">
                 <a class="my-info-box info-box" href="index.php?com=user&act=info_admin" title="Tài khoản">
                     <span class="my-info-box-icon info-box-icon bg-danger"><i class="fas fa-user-cog"></i></span>
@@ -63,15 +43,6 @@
                     <span class="my-info-box-icon info-box-icon bg-success"><i class="fas fa-key"></i></span>
                     <div class="info-box-content text-dark">
                         <span class="info-box-text text-capitalize">Đổi mật khẩu</span>
-                        <span class="info-box-number">View more</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <a class="my-info-box info-box" href="index.php?com=contact&act=man" title="Thư liên hệ">
-                    <span class="my-info-box-icon info-box-icon bg-info"><i class="fas fa-address-book"></i></span>
-                    <div class="info-box-content text-dark">
-                        <span class="info-box-text text-capitalize">Thư liên hệ</span>
                         <span class="info-box-number">View more</span>
                     </div>
                 </a>

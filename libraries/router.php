@@ -17,9 +17,9 @@
     $router->map('GET|POST', '[a:com]', 'allpage', 'show');
     $router->map('GET|POST', '[a:com]/[a:lang]/', 'allpagelang', 'lang');
     $router->map('GET|POST', '[a:com]/[a:action]', 'account', 'account');
+
     /* Router match */
     $match = $router->match();
-
     /* Router check */
 	if(is_array($match))
 	{
@@ -50,41 +50,9 @@
 	/* Tối ưu link */
 	$requick = array(
 		/* Sản phẩm */
-		array("tbl" => "product_list", "field" => "idl", "source" => "product", "com" => "san-pham", "type" => "san-pham"),
-		array("tbl" => "product_cat", "field" => "idc", "source" => "product", "com" => "san-pham", "type" => "san-pham"),
-		array("tbl" => "product_item", "field" => "idi", "source" => "product", "com" => "san-pham", "type" => "san-pham"),
-		array("tbl" => "product_sub", "field" => "ids", "source" => "product", "com" => "san-pham", "type" => "san-pham"),
-		array("tbl" => "product_brand", "field" => "idb", "source" => "product", "com" => "thuong-hieu", "type" => "san-pham"),
 		array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham", "type" => "san-pham", "menu" => true),
-		
-		/* Tags */
-		array("tbl" => "tags", "tbltag" => "product", "field" => "id", "source" => "tags", "com" => "tags-san-pham", "type" => "san-pham", "menu" => true),
-		array("tbl" => "tags", "tbltag" => "news", "field" => "id", "source" => "tags", "com" => "tags-tin-tuc", "type" => "tin-tuc", "menu" => true),
-
-		/* Thư viện ảnh */
-		array("tbl" => "product", "field" => "id", "source" => "product", "com" => "thu-vien-anh", "type" => "thu-vien-anh", "menu" => true),
-
-		/* Video */
-		array("tbl" => "photo", "field" => "id", "source" => "video", "com" => "video", "type" => "video", "menu" => true),
-
-		/* Tin tức */
-		array("tbl" => "news_list", "field" => "idl", "source" => "news", "com" => "tin-tuc", "type" => "tin-tuc"),
-		array("tbl" => "news_cat", "field" => "idc", "source" => "news", "com" => "tin-tuc", "type" => "tin-tuc"),
-		array("tbl" => "news_item", "field" => "idi", "source" => "news", "com" => "tin-tuc", "type" => "tin-tuc"),
-		array("tbl" => "news_sub", "field" => "ids", "source" => "news", "com" => "tin-tuc", "type" => "tin-tuc"),
-		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tin-tuc", "type" => "tin-tuc", "menu" => true),
-
-		/* Bài viết */
-		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tuyen-dung", "type" => "tuyen-dung", "menu" => true),
-		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "chinh-sach", "type" => "chinh-sach", "menu" => false),
-
-		/* Trang tĩnh */
-		array("tbl" => "static", "field" => "id", "source" => "static", "com" => "gioi-thieu", "type" => "gioi-thieu", "menu" => true),
-
-		/* Liên hệ */
-		array("tbl" => "", "field" => "id", "source" => "", "com" => "lien-he", "type" => "", "menu" => true),
 	);
-
+	
 	/* Find data */
 	if(!empty($com) && !in_array($com, ['tim-kiem', 'account', 'sitemap']))
 	{
@@ -109,7 +77,7 @@
 			}
 		}
 	}
-
+	
 	/* Switch coms */
 	switch($com)
 	{
@@ -119,7 +87,6 @@
 			$type = $com;
 			$titleMain = "Sản phẩm";
 			break;
-		case '':
 		case 'index':
 			$source = "index";
 			$template ="index/index";
@@ -130,6 +97,7 @@
 			include("404.php");
 			exit();
 	}
+	
 	/* Require datas for all page */
 	require_once SOURCES."allpage.php";
 
