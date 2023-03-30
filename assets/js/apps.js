@@ -37,6 +37,12 @@ $(document).ready(function(){
      arrows: false,
      fade: false,
   });
+  $('.slick-pro-thumb').slick({
+     slidesToShow: 4,
+     slidesToScroll: 1,
+     arrows: false,
+     fade: false,
+  });
 
   loadPaging("api/product.php?perpage=8",'.paging-product');
   $(".paging-product-category").each(function(){
@@ -44,3 +50,4 @@ $(document).ready(function(){
     loadPaging("api/product.php?perpage=8&idList="+list,'.paging-product-category-'+list);
   })
 });
+

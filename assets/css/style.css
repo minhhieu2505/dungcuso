@@ -3695,3 +3695,25 @@ a.link:hover {
 .box-brand .items img {
     max-width: 200px !important;
 }
+
+
+.slick-slider {
+    display: none;
+}
+
+.slick-pro-thumb {
+    margin: 0 -5px;
+}
+
+.slick-pro-thumb .slick-slide {
+    margin: 0 5px;
+}
+.slick-slider{
+    display: none;
+}
+.slick-pro-thumb {
+    margin: 0 -5px;
+}
+.slick-pro-thumb .slick-slide{
+    margin: 0 5px;
+}

@@ -29,8 +29,4 @@
 
 	/* SEO */
 	$seo->set('title',$titleMain);
-
-	/* breadCrumbs */
-	$breadcr->set('',$titleMain);
-	$breadcrumbs = $breadcr->get();
 ?>

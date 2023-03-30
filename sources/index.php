@@ -1,9 +1,6 @@
 <?php  
 	if(!defined('SOURCES')) die("Error");
 
-    $slider = $d->rawQuery("select namevi,id,link,photo from #_photo where type = 'slide'");
-    $advertise1 = $d->rawQuery("select namevi,id,link,photo from #_photo where type = 'advertise1' limit 2");
-    $advertise = $d->rawQuery("select namevi,id,link,photo from #_photo where type = 'advertise2'");
     $criteria = $d->rawQuery("select namevi,id,link,photo,descvi from #_photo where type = 'criteria'");
     $bestseller = $d->rawQuery("select namevi, photo, slugvi, slugen, id, regular_price, sale_price, discount from #_product where type = 'san-pham' and find_in_set('banchay',status) and find_in_set('hienthi',status) order by numb,id desc");
     $promotion = $d->rawQuery("select namevi, photo, slugvi, slugen, id, regular_price, sale_price, discount from #_product where type = 'san-pham' and find_in_set('khuyenmai',status) and find_in_set('hienthi',status) order by numb,id desc");

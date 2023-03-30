@@ -22,9 +22,6 @@
 		/* Lấy cấp 2 */
 		$productCat = $d->rawQueryOne("select id, namevi, slugvi, slugen from #_product_cat where id = ? and type = ? and find_in_set('hienthi',status) limit 0,1",array($rowDetail['id_cat'],$type));
 
-		/* Lấy thương hiệu */
-		$productBrand = $d->rawQueryOne("select namevi, slugvi, slugen, id from #_product_brand where id = ? and type = ? and find_in_set('hienthi',status)",array($rowDetail['id_brand'],$type));
-		
 		/* Lấy hình ảnh con */
 		$rowDetailPhoto = $d->rawQuery("select photo from #_gallery where id_parent = ? and com='product' and type = ? and kind='man' and val = ? and find_in_set('hienthi',status) order by numb,id desc",array($rowDetail['id'],$type,$type));
 
@@ -46,16 +43,8 @@
 		$paging = $func->pagination($total,$perPage,$curPage,$url);
 
 		/* Comment */
-		$comment = new Comments($d, $func, $rowDetail['id'], $rowDetail['type']);
+		// $comment = new Comments($d, $func, $rowDetail['id'], $rowDetail['type']);
 
-		/* breadCrumbs */
-		if(!empty($titleMain)) $breadcr->set($com,$titleMain);
-		if(!empty($productList)) $breadcr->set($productList[$sluglang],$productList['name'.vi]);
-		if(!empty($productCat)) $breadcr->set($productCat[$sluglang],$productCat['name'.vi]);
-		if(!empty($productItem)) $breadcr->set($productItem[$sluglang],$productItem['name'.vi]);
-		if(!empty($productSub)) $breadcr->set($productSub[$sluglang],$productSub['name'.vi]);
-		$breadcr->set($rowDetail[$sluglang],$rowDetail['name'.vi]);
-		$breadcrumbs = $breadcr->get();
 	}
 	else if($idl!='')
 	{
@@ -79,10 +68,6 @@
 		$url = $func->getCurrentPageURL();
 		$paging = $func->pagination($total,$perPage,$curPage,$url);
 
-		/* breadCrumbs */
-		if(!empty($titleMain)) $breadcr->set($com,$titleMain);
-		if(!empty($productList)) $breadcr->set($productList[$sluglang],$productList['name'.vi]);
-		$breadcrumbs = $breadcr->get();	
 	}
 	else
 	{

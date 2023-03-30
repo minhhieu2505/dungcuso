@@ -3,7 +3,7 @@
 	$config = array(
 		'database' => array(
 			'server-name' => $_SERVER["SERVER_NAME"],
-			'url' => '/shophouse/',
+			'url' => '/dungcuso/',
 			'type' => 'mysql',
 			'host' => 'localhost',
 			'username' => 'root',
