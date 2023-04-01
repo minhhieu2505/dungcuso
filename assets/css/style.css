@@ -3696,7 +3696,6 @@ a.link:hover {
     max-width: 200px !important;
 }
 
-
 .slick-slider {
     display: none;
 }
@@ -3708,12 +3707,27 @@ a.link:hover {
 .slick-pro-thumb .slick-slide {
     margin: 0 5px;
 }
-.slick-slider{
+.slick-slider {
     display: none;
 }
 .slick-pro-thumb {
     margin: 0 -5px;
 }
-.slick-pro-thumb .slick-slide{
+.slick-pro-thumb .slick-slide {
     margin: 0 5px;
+}
+
+#bar_breadcrumb {
+    line-height: 45px;
+    background: #ccc;
+    margin-top: 10px;
+}
+
+#bar_breadcrumb li a {
+    color: #000;
+}
+
+
+.scale-img img {
+    object-fit: contain;
 }

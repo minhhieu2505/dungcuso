@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-    </div 
+                                                                </div>
     
     <?php }
     } else { ?> <div class="col-12">

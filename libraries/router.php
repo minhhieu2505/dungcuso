@@ -13,13 +13,10 @@
     });
     $router->map('GET|POST', '', 'index', 'home');
     $router->map('GET|POST', 'index.php', 'index', 'index');
-    $router->map('GET|POST', 'sitemap.xml', 'sitemap', 'sitemap');
     $router->map('GET|POST', '[a:com]', 'allpage', 'show');
-    $router->map('GET|POST', '[a:com]/[a:lang]/', 'allpagelang', 'lang');
-    $router->map('GET|POST', '[a:com]/[a:action]', 'account', 'account');
-
     /* Router match */
     $match = $router->match();
+
     /* Router check */
 	if(is_array($match))
 	{
@@ -50,11 +47,14 @@
 	/* Tối ưu link */
 	$requick = array(
 		/* Sản phẩm */
-		array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham", "type" => "san-pham", "menu" => true),
+		array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham", "type" => "san-pham"),
+		
+		/* Tin tức */
+		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "kinh-nghiem", "type" => "kinh-nghiem"),
 	);
 	
 	/* Find data */
-	if(!empty($com) && !in_array($com, ['tim-kiem', 'account', 'sitemap']))
+	if(!empty($com) && !in_array($com, ['tim-kiem']))
 	{
 		foreach($requick as $k => $v)
 		{
@@ -67,7 +67,6 @@
 			if(!empty($urlTbl) && !in_array($urlTbl, ['static', 'photo']))
 			{
 				$row = $d->rawQueryOne("select id from #_$urlTbl where $sluglang = ? and type = ? and find_in_set('hienthi',status) limit 0,1",array($com,$urlType));
-				
 				if(!empty($row['id']))
 				{
 					$_GET[$urlField] = $row['id'];
@@ -86,6 +85,12 @@
 			$template = isset($_GET['id']) ? "product/product_detail" : "product/product";
 			$type = $com;
 			$titleMain = "Sản phẩm";
+			break;
+		case 'kinh-nghiem':
+			$source = "news";
+			$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
+			$type = $com;
+			$titleMain = "Tin tức";
 			break;
 		case 'index':
 			$source = "index";

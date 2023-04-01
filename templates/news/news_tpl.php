@@ -4,17 +4,17 @@
         foreach ($news as $k => $v) { ?>
             <div class="news col-md-6">
                 <div class="row">
-                    <a class="news-image col-sm-5" href="<?= $v[$sluglang] ?>" title="<?= $v['name' . $lang] ?>">
+                    <a class="news-image col-sm-5" href="<?= $v['slugvi'] ?>" title="<?= $v['namevi'] ?>">
                         <span class="scale-img">
-                            <?= $func->getImage(['class' => 'lazy w-100', 'sizes' => '160x120x1', 'upload' => UPLOAD_NEWS_L, 'image' => $v['photo'], 'alt' => $v['name' . $lang]]) ?>
+                            <img src="./upload/news/<?=$v['photo']?>" alt="" width="160" height="120">
                         </span>
                     </a>
                     <div class="news-info col-sm-7">
                         <h3 class="news-name">
-                            <a class="text-decoration-none text-split transition" href="<?= $v[$sluglang] ?>" title="<?= $v['name' . $lang] ?>"><?= $v['name' . $lang] ?></a>
+                            <a class="text-decoration-none text-split transition" href="<?= $v['slugvi'] ?>" title="<?= $v['namevi'] ?>"><?= $v['namevi'] ?></a>
                         </h3>
-                        <p class="news-time"><?= ngaydang ?>: <?= date("d/m/Y h:i A", $v['date_created']) ?></p>
-                        <div class="news-desc text-split"><?= $v['desc' . $lang] ?></div>
+                        <p class="news-time">Ngày đăng: <?= date("d/m/Y h:i A", $v['date_created']) ?></p>
+                        <div class="news-desc text-split"><?= $v['descvi'] ?></div>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
     } else { ?>
         <div class="col-12">
             <div class="alert alert-warning w-100" role="alert">
-                <strong><?= khongtimthayketqua ?></strong>
+                <strong>Không tìm thấy kết quả</strong>
             </div>
         </div>
     <?php } ?>

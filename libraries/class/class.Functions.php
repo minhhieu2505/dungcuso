@@ -1,7 +1,4 @@
 <?php
-	require LIBRARIES.'WebpConvert/vendor/autoload.php';
-	use WebPConvert\WebPConvert;
-
 	class Functions
 	{
 		private $d;
@@ -84,59 +81,6 @@
 			if($index) array_push($urls,"index.php");
 			else if(array_search('index.php', $urls)) $urls = array_diff($urls, ["index.php"]);
 			if(in_array($url, $urls)) $this->redirect($configBase,301);
-		}
-
-		/* Check HTTP */
-		public function checkHTTP($http, $arrayDomain, &$configBase, $configUrl)
-		{
-			if(count($arrayDomain) == 0 && $http == 'https://')
-			{
-				$configBase = 'http://'.$configUrl;
-			}
-		}
-
-		/* Create sitemap */
-		public function createSitemap($com='', $type='', $field='', $table='', $time='', $changefreq='', $priority='', $lang='vi', $orderby='', $menu=true)
-		{
-			global $configBase;
-
-			$urlSm = '';
-			$sitemap = null;
-
-			if(!empty($type) && !in_array($table, ['photo', 'static']))
-			{
-				$where = 'type = ?';
-				$where .= ($table != 'static') ? 'order by '.$orderby.' desc' : '';
-				$sitemap = $this->d->rawQuery("select slug$lang, date_created from #_$table where $where",array($type));
-			}
-
-			if($menu == true && $field == 'id')
-			{
-				$urlSm = $configBase.$com;
-				echo '<url>';
-				echo '<loc>'.$urlSm.'</loc>';
-				echo '<lastmod>'.date('c',time()).'</lastmod>';
-				echo '<changefreq>'.$changefreq.'</changefreq>';
-				echo '<priority>'.$priority.'</priority>';
-				echo '</url>';
-			}
-
-			if(!empty($sitemap))
-			{
-				foreach($sitemap as $value)
-				{
-                    if(!empty($value['slug'.$lang]))
-                    {
-                        $urlSm = $configBase.$value['slug'.$lang];
-                        echo '<url>';
-                        echo '<loc>'.$urlSm.'</loc>';
-                        echo '<lastmod>'.date('c',$value['date_created']).'</lastmod>';
-                        echo '<changefreq>'.$changefreq.'</changefreq>';
-                        echo '<priority>'.$priority.'</priority>';
-                        echo '</url>';
-                    }
-				}
-			}
 		}
 
 		/* Kiểm tra dữ liệu nhập vào */

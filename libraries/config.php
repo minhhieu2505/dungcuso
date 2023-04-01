@@ -12,22 +12,7 @@
 			'port' => 3306,
 			'prefix' => 'table_',
 			'charset' => 'utf8mb4'
-		),
-		'login' => array(
-			'admin' => 'LoginAdmin' . NN_CONTRACT,
-			'member' => 'LoginMember' . NN_CONTRACT,
-			'attempt' => 5,
-			'delay' => 15
-		),
-		'website' => array(
-	        'lang' => array(
-	            'vi' => 'Tiếng Việt'
-	        ),
-	        'lang-doc' => 'vi',
-	        'slug' => array(
-	            'vi' => 'Tiếng Việt'
-	        )
-	    ),
+		)
 	);
 
 	error_reporting(1);

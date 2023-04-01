@@ -5,7 +5,7 @@
             <div class="caterogy-table">
                 <ul class="p-0 m-0 list-unstyled scrrol-view active-menu" id="box">
                     <?php foreach ($splist as $vlist): 
-                        $spcat = $d->rawQuery("select namevi, slugvi, slugen, id from #_product_cat where id_list = ? and find_in_set('hienthi',status) order by numb,id desc",array($vlist['id'])); 
+                        $spcat = $d->rawQuery("select namevi, slugvi, id from #_product_cat where id_list = ? and find_in_set('hienthi',status) order by numb,id desc",array($vlist['id'])); 
                         ?>
                         <li>
                             <a href="<?=$vlist['slugvi']?>" title="<?=$vlist['namevi']?>">
@@ -13,21 +13,7 @@
                                 <?php if ($spcat): ?><i class="fas fa-angle-right"></i><?php endif ?>
                             </a>
                             <?php if ($spcat): ?>
-                                <ul class="table-cat">
-                                    <?php foreach ($spcat as $vcat): 
-                                        $spitem = $d->rawQuery("select namevi, slugvi, slugen, id from #_product_item where id_cat = ? and find_in_set('hienthi',status) order by numb,id desc",array($vcat['id']));
-                                    ?>
-                                        <li><a href="<?=$vcat['slugvi']?>" title="<?=$vcat['namevi']?>" class="title-cat"><?=$vcat['namevi']?></a>
-                                            <?php if ($spitem): ?>
-                                                <ul class="">
-                                                    <?php foreach ($spitem as $vitem): ?>
-                                                        <li><a href="<?=$vitem['slugvi']?>" title="<?=$vitem['namevi']?>"><?=$vitem['namevi']?></a></li>
-                                                    <?php endforeach ?>
-                                                </ul>
-                                            <?php endif ?>
-                                        </li>
-                                    <?php endforeach ?>
-                                </ul>
+                                
                             <?php endif ?>
                         </li>
                     <?php endforeach ?>
