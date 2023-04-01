@@ -27,25 +27,27 @@
 		$sql = "select photo, namevi, slugvi, sale_price, regular_price, discount, id from #_product where $where order by numb,id desc $limit";
 		$product = $d->rawQuery($sql,$params);
 
-		$breadCumb = array('Sản phẩm',$productList['namevi']);
-	}
-	else
-	{
+		$breadCumb = array($titleMain,$productList['namevi'],$rowDetail['namevi']);
+	} elseif ($idl!=''){
+		/* Lấy tất cả sản phẩm */
+		$productList = $d->rawQueryOne("select namevi from #_product_list where id = ? and type = ? and find_in_set('hienthi',status) limit 0,1",array($idl,$type));
+		$titleCate = $productList['namevi'];
+		$where = "";
+		$where = "type = ? and id_list = ? and find_in_set('hienthi',status)";
+		$params = array($type, $idl);
+		$sql = "select photo, namevi, slugvi, sale_price, regular_price, discount, id from #_product where $where order by numb,id desc";
+		$product = $d->rawQuery($sql,$params);
+		$breadCumb = array($titleMain,$productList['namevi']);
+	} else {
+		$breadCumb = array($titleMain);
 		/* Lấy tất cả sản phẩm */
 		$where = "";
 		$where = "type = ? and find_in_set('hienthi',status)";
+		if($com == 'san-pham-moi'){
+			$where .= " and find_in_set('hienthi',status)";
+		}
 		$params = array($type);
-
-		$curPage = $getPage;
-		$perPage = 20;
-		$startpoint = ($curPage * $perPage) - $perPage;
-		$limit = " limit ".$startpoint.",".$perPage;
-		$sql = "select photo, namevi, slugvi, sale_price, regular_price, discount, id from #_product where $where order by numb,id desc $limit";
+		$sql = "select photo, namevi, slugvi, sale_price, regular_price, discount, id from #_product where $where order by numb,id desc";
 		$product = $d->rawQuery($sql,$params);
-		$sqlNum = "select count(*) as 'num' from #_product where $where order by numb,id desc";
-		$count = $d->rawQueryOne($sqlNum,$params);
-		$total = (!empty($count)) ? $count['num'] : 0;
-		$url = $func->getCurrentPageURL();
-		$paging = $func->pagination($total,$perPage,$curPage,$url);
 	}
 ?>

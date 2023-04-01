@@ -8,8 +8,10 @@
 	{
 		/* Lấy bài viết detail */
 		$rowDetail = $d->rawQueryOne("select id, namevi, slugvi, descvi, contentvi, photo, date_created from #_news where id = ? and type = ? and find_in_set('hienthi',status) limit 0,1",array($id,$type));
+		$breadCumb = array($titleMain,$rowDetail['namevi']);
 	}else
 	{
+		$breadCumb = array($titleMain);
 		/* Lấy tất cả bài viết */
 		$where = "";
 		$where = "type = ? and find_in_set('hienthi',status)";

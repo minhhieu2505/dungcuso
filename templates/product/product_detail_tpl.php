@@ -75,9 +75,10 @@
 </div>
 
 <div class="title-main"><span>Sản phẩm cùng loại</span></div>
-<div class="content-main grid-products w-clear">
-    <?php if (!empty($product)) {
-        foreach ($product as $k => $v) { ?>
+<div class="content-main w-clear">
+    <?php if (!empty($product)) { ?>
+        <div class="grid-products">
+        <?php foreach ($product as $k => $v) { ?>
     <div class="">
         <div class="product">
             <div class="box-product">
@@ -112,7 +113,9 @@
             </div>
         </div>
     </div>
-        <?php } } else { ?> 
+        <?php } ?>
+        </div>
+        <?php }  else { ?> 
             <div class="col-12">
     <div class="alert alert-warning w-100" role="alert">
         <strong>Không tìm thấy kết quả</strong>

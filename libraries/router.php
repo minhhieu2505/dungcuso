@@ -47,10 +47,24 @@
 	/* Tối ưu link */
 	$requick = array(
 		/* Sản phẩm */
+		array("tbl" => "product_list", "field" => "idl", "source" => "product", "com" => "san-pham", "type" => "san-pham"),
 		array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham", "type" => "san-pham"),
 		
 		/* Tin tức */
 		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "kinh-nghiem", "type" => "kinh-nghiem"),
+		
+		/* Hướng dẫn mua hàng */
+		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "huong-dan-mua-hang", "type" => "huong-dan-mua-hang"),
+		
+		/* Câu hỏi */
+		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "cau-hoi", "type" => "cau-hoi"),
+		
+		/* Chính sách */
+		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "chinh-sach", "type" => "chinh-sach"),
+	
+		/* Liên hệ */
+		array("tbl" => "static", "source" => "contact", "com" => "lien-he", "type" => "lien-he"),
+
 	);
 	
 	/* Find data */
@@ -86,11 +100,40 @@
 			$type = $com;
 			$titleMain = "Sản phẩm";
 			break;
+		case 'lien-he':
+			$source = "contact";
+			$template = "contact/contact";
+			$titleMain = "Liên hệ";
+			break;
+		case 'san-pham-moi':
+			$source = "product";
+			$template = isset($_GET['id']) ? "product/product_detail" : "product/product";
+			$type = "san-pham";
+			$titleMain = "Sản phẩm mới";
+			break;
 		case 'kinh-nghiem':
 			$source = "news";
 			$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
 			$type = $com;
-			$titleMain = "Tin tức";
+			$titleMain = "Kinh nghiệm";
+			break;
+		case 'huong-dan-mua-hang':
+			$source = "news";
+			$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
+			$type = $com;
+			$titleMain = "Hướng dẫn mua hàng";
+			break;
+		case 'cau-hoi':
+			$source = "news";
+			$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
+			$type = $com;
+			$titleMain = "Câu hỏi";
+			break;
+		case 'chinh-sach':
+			$source = "news";
+			$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
+			$type = $com;
+			$titleMain = "Chính sách";
 			break;
 		case 'index':
 			$source = "index";

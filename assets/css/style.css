@@ -3731,3 +3731,4 @@ a.link:hover {
 .scale-img img {
     object-fit: contain;
 }
+.mz-loading.shown{display:none!important;}
