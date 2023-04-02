@@ -531,24 +531,15 @@
 				{
 					$table = array(
 						"#_product_list",
-						"#_product_cat",
-						"#_product_item",
-						"#_product_sub",
-						"#_product_brand",
 						"#_product",
-						"#_news_list",
-						"#_news_cat",
-						"#_news_item",
-						"#_news_sub",
-						"#_news",
-						"#_tags"
+						"#_news"
 					);
 
 					$where = (!empty($data['id']) && empty($data['copy'])) ? "id != ".$data['id']." and " : "";
 
 					foreach($table as $v)
 					{
-						$check = $this->d->rawQueryOne("select id from $v where $where (slugvi = ? or slugen = ?) limit 0,1", array($data['slug'], $data['slug']));
+						$check = $this->d->rawQueryOne("select id from $v where $where slugvi = ? limit 0,1", array($data['slug']));
 
 						if(!empty($check['id']))
 						{

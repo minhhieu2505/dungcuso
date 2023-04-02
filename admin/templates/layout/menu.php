@@ -4,7 +4,6 @@
     <a class="brand-link" href="index.php">
         <img class="brand-image" src="assets/images/logo.png" alt="Logo">
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
         <nav class="mt-3">

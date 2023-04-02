@@ -21,23 +21,6 @@
         $orderNotify = $d->rawQuery("select id from #_order where order_status = 1");
         $countNotify += count($orderNotify);
     }
-
-    /* Comment: Product */
-    if(isset($config['product']))
-    {
-        $commentProductNotify = array();
-        foreach($config['product'] as $k => $v) 
-        {
-            if(!empty($config['product'][$k]['comment']))
-            {
-                $commentNotify = $d->rawQuery("select id from #_comment where type = ? and find_in_set('new-admin',status)",array($k));
-                $commentProductNotify[$k] = array();
-                $commentProductNotify[$k]['title'] = $v['title_main'];
-                $commentProductNotify[$k]['notify'] = count($commentNotify);
-                $countNotify += $commentProductNotify[$k]['notify'];
-            }
-        }
-    }
 ?>
 <!-- Header -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light text-sm">

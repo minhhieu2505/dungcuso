@@ -1690,13 +1690,13 @@ class PDODb
     public function update($tableName, $tableData, $numRows = null)
     {
         global $loginAdmin;
-
+        
         if ($this->isSubQuery)
         {
             return;
         }
         $where = $this->where;
-
+        
         $this->fillTable($this->getTableName($tableName) , $tableData, $this->getOne($tableName) , $where, true);
 
         $this->query = 'UPDATE ' . $this->getTableName($tableName);
@@ -1705,7 +1705,7 @@ class PDODb
         $status = $stmt->execute();
         $this->lastError = $stmt->errorInfo();
         $this->lastErrorCode = $stmt->errorCode();
-
+        
         if ($this->lastError[1] > 0)
         {
             die($this->sendException('SQL Prepare Error', $this->lastError[0], $this->lastError[2], $this->query));

@@ -17,8 +17,6 @@ if ($func->checkLoginAdmin() == false && $act != "login") {
     $func->redirect("index.php?com=user&act=login");
 }
 
-/* Delete gallery */
-$func->deleteGallery();
 
 /* Delete cache */
 $cacheAction = array(
@@ -27,25 +25,12 @@ $cacheAction = array(
     'save_list',
     'save_cat',
     'save_item',
-    'save_sub',
-    'save_brand',
-    'save_size',
-    'save_color',
-    'save_static',
     'save_photo',
-    'save_city',
-    'save_district',
     'save_ward',
     'update',
     'delete',
     'delete_list',
-    'delete_cat',
-    'delete_item',
-    'delete_sub',
-    'delete_brand',
-    'delete_city',
-    'delete_district',
-    'delete_ward'
+    'delete_cat'
 );
 if (isset($_POST) && isset($cacheAction) && count($cacheAction) > 0) {
     if (in_array($act, $cacheAction)) {
