@@ -25,9 +25,9 @@
         </div>
         <div class="menu">
             <ul class="dflex align-items-center">
-                <li><a class="<?php if ($com == 'khuyen-mai')
-                    echo 'active'; ?> transition" href="khuyen-mai"
-                        title="Khuyến mãi">Khuyến mãi</a></li>
+                <li><a class="<?php if ($com == '')
+                    echo 'active'; ?> transition" href="index.php"
+                        title="Trang chủ">Trang chủ</a></li>
                 <li><a class="<?php if ($com == 'san-pham-moi')
                     echo 'active'; ?> transition" href="san-pham-moi"
                         title="Sản phẩm mới">Sản phẩm mới</a></li>

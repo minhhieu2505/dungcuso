@@ -28,7 +28,7 @@
 				<?php foreach ($advertise as $v): ?>
 					<div>
 						<div class="items">
-							<a href="<?=$v['link']?>" title="<?=$v['namevi']?>">
+							<a href="<?=$v['link']?>" class="scale-img" title="<?=$v['namevi']?>">
 								<img src="upload/photo/<?=$v['photo']?>" alt="" width="640" height="230">
 							</a>
 						</div>

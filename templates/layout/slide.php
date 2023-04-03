@@ -5,7 +5,7 @@
             <?php foreach($slider as $v) { ?>
                 <div>
                     <div class="slideshow-item">
-                        <a class="slideshow-image" href="<?=$v['link']?>" title="<?=$v['namevi']?>">
+                        <a class="slideshow-image scale-img" href="<?=$v['link']?>" title="<?=$v['namevi']?>">
                             <img src="upload/photo/<?=$v['photo']?>" alt="" width="720" height="385">
                         </a>
                     </div>

@@ -1318,8 +1318,6 @@ img:not([src]) {
 .news-time {
     color: #84878a;
     margin-bottom: 0.25rem;
-    background: url(../images/icon-time.png) no-repeat center left;
-    padding-left: 30px;
     margin-top: 5px;
 }
 .news-desc {
@@ -2507,6 +2505,7 @@ a:hover {
 /* Slideshow */
 .slideshow {
     margin-top: 5px;
+    display: none;
 }
 .space-slide {
     width: 17%;
@@ -3730,6 +3729,27 @@ a.link:hover {
 
 
 .scale-img img {
-    object-fit: contain;
+    object-fit: cover;
 }
 .mz-loading.shown{display:none!important;}
+
+.icon-hd {
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: #fff;
+    border-radius: 50%;
+    font-size: 20px;
+    color: var(--main-color);
+    min-width: 50px;
+    margin-right: 10px;
+}
+
+.address-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 250px;
+    font-weight: 500;
+    color: #fff;
+}

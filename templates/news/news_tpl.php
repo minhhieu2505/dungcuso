@@ -6,7 +6,7 @@
                 <div class="row">
                     <a class="news-image col-sm-5" href="<?= $v['slugvi'] ?>" title="<?= $v['namevi'] ?>">
                         <span class="scale-img">
-                            <img src="./upload/news/<?=$v['photo']?>" alt="" width="160" height="120">
+                            <img src="./upload/news/<?=$v['photo']?>" alt="" width="185" height="210">
                         </span>
                     </a>
                     <div class="news-info col-sm-7">
