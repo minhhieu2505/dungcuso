@@ -194,14 +194,12 @@
 					</div>
 					<div class="card-body card-article">
 						<div class="tab-content" id="custom-tabs-three-tabContent-lang">
-							<?php foreach($config['website']['lang'] as $k => $v) { ?>
-								<div class="tab-pane fade show <?=($k=='vi')?'active':''?>" id="tabs-lang-<?=$k?>" role="tabpanel" aria-labelledby="tabs-lang">
+						<div class="tab-pane fade show active" id="tabs-lang-vi" role="tabpanel" aria-labelledby="tabs-lang">
 									<div class="form-group">
-										<label for="name<?=$k?>">Tiêu đề (<?=$k?>):</label>
-										<input type="text" class="form-control for-seo text-sm" name="data[name<?=$k?>]" id="name<?=$k?>" placeholder="Tiêu đề (<?=$k?>)" value="<?=(!empty($flash->has('name'.$k))) ? $flash->get('name'.$k) : @$item['name'.$k]?>" required>
+										<label for="namevi">Tiêu đề (vi):</label>
+										<input type="text" class="form-control for-seo text-sm" name="data[namevi]" id="namevi" placeholder="Tiêu đề (vi)" value="<?=(!empty($flash->has('namevi'))) ? $flash->get('namevi') : @$item['namevi']?>" required>
 									</div>
 								</div>
-                            <?php } ?>
 						</div>
 					</div>
 				</div>

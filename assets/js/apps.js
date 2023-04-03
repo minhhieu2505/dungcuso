@@ -26,14 +26,12 @@ $(document).ready(function(){
   $('.slick-product').slick({
      slidesToShow: 6,
      slidesToScroll: 1,
-     rows: 2,
      arrows: false,
      fade: false,
   });
   $('.slick-brand').slick({
      slidesToShow: 6,
      slidesToScroll: 1,
-     rows: 2,
      arrows: false,
      fade: false,
   });

@@ -340,17 +340,6 @@
 				$func->transfer("Lưu sản phẩm thành công", "index.php?com=product&act=man&type=".$type);
 
 			}
-			else
-			{
-				if($savehere)
-					{
-						$func->transfer("Lưu sản phẩm bị lỗi", "index.php?com=product&act=edit&type=".$type."&p=".$curPage.$strUrl."&id=".$id_insert, false);
-					}
-					else
-					{
-						$func->transfer("Lưu sản phẩm bị lỗi", "index.php?com=product&act=man&type=".$type."&p=".$curPage.$strUrl, false);
-					}
-			}
 		}
 	}
 
@@ -394,74 +383,8 @@
 				if(!empty($row))
 				{
 					/* Xóa chính */
-					$func->deleteFile(UPLOAD_PRODUCT.$row['photo']);
+					$func->deleteFile('../upload/product/'.$row['photo']);
 					$d->rawQuery("delete from #_product where id = ?",array($id));
-
-					/* Xóa SEO */
-					$d->rawQuery("delete from #_seo where id_parent = ? and com = ? and act = ? and type = ?",array($id,$com,'man',$type));
-
-					/* Xóa Tags */
-					$d->rawQuery("delete from #_product_tags where id_parent = ?",array($id));
-
-					/* Xóa Sale */
-					$d->rawQuery("delete from #_product_sale where id_parent = ?",array($id));
-
-					/* Xóa gallery */
-					$rowGallery = $d->rawQuery("select id, photo, file_attach from #_gallery where id_parent = ? and kind = ? and com = ?",array($id,'man',$com));
-
-					if(count($rowGallery))
-					{
-						foreach($rowGallery as $v)
-						{
-							$func->deleteFile(UPLOAD_PRODUCT.$v['photo']);
-							$func->deleteFile(UPLOAD_FILE.$v['file_attach']);
-						}
-
-						$d->rawQuery("delete from #_gallery where id_parent = ? and kind = ? and com = ?",array($id,'man',$com));
-					}
-
-					/* Xóa comment */
-					$rowComment = $d->rawQuery("select id, id_parent from #_comment where id_variant = ? and type = ?",array($id,$type));
-
-					if(!empty($rowComment))
-					{
-						foreach($rowComment as $v)
-						{
-							if($v['id_parent'] == 0)
-							{
-								/* Xóa comment photo */
-								$rowCommentPhoto = $d->rawQuery("select photo from #_comment_photo where id_parent = ?",array($v['id']));
-
-								if(!empty($rowCommentPhoto))
-								{
-									/* Xóa image */
-									foreach($rowCommentPhoto as $v_photo)
-									{
-										$func->deleteFile(UPLOAD_PHOTO.$v_photo['photo']);
-									}
-
-									/* Xóa photo */
-									$d->rawQuery("delete from #_comment_photo where id_parent = ?",array($v['id']));
-								}
-
-								/* Xóa comment video */
-								$rowCommentVideo = $d->rawQueryOne("select photo, video from #_comment_video where id_parent = ? limit 0,1",array($v['id']));
-
-								if(!empty($rowCommentVideo))
-								{
-									$func->deleteFile(UPLOAD_PHOTO.$rowCommentVideo['photo']);
-									$func->deleteFile(UPLOAD_VIDEO.$rowCommentVideo['video']);
-									$d->rawQuery("delete from #_comment_video where id_parent = ?",array($v['id']));
-								}
-
-								/* Xóa child */
-								$d->rawQuery("delete from #_comment where id_parent = ? and type = ?",array($v['id'],$type));
-							}
-
-							/* Xóa comment main */
-							$d->rawQuery("delete from #_comment where id = ? and type = ?",array($v['id'],$type));
-						}
-					}
 				}
 			}
 
@@ -580,23 +503,20 @@
 
 		if(!empty($config['product'][$type]['slug_list']))
 		{
-			foreach($config['website']['slug'] as $k => $v)
-			{
-				$dataSlug = array();
-				$dataSlug['slug'] = $data['slug'.$k];
+			$dataSlug = array();
+				$dataSlug['slug'] = $data['slugvi'];
 				$dataSlug['id'] = $id;
 				$dataSlug['copy'] = false;
 				$checkSlug = $func->checkSlug($dataSlug);
 
 				if($checkSlug == 'exist')
 				{
-					$response['messages'][] = 'Đường dẫn ('.$v.') đã tồn tại';
+					$response['messages'][] = 'Đường dẫn đã tồn tại';
 				}
 				else if($checkSlug == 'empty')
 				{
-					$response['messages'][] = 'Đường dẫn ('.$v.') không được trống';
+					$response['messages'][] = 'Đường dẫn không được trống';
 				}
-			}
 		}
 
 		if(!empty($response))
@@ -643,13 +563,13 @@
 					$photoUpdate = array();
 					$file_name = $func->uploadName($_FILES["file"]["name"]);
 
-					if($photo = $func->uploadImage("file", $config['product'][$type]['img_type_list'], UPLOAD_PRODUCT, $file_name))
+					if($photo = $func->uploadImage("file", $config['product'][$type]['img_type_list'], '../upload/product/', $file_name))
 					{
 						$row = $d->rawQueryOne("select id, photo from #_product_list where id = ? and type = ? limit 0,1",array($id,$type));
 
 						if(!empty($row))
 						{
-							$func->deleteFile(UPLOAD_PRODUCT.$row['photo']);
+							$func->deleteFile('../upload/product/'.$row['photo']);
 						}
 
 						$photoUpdate['photo'] = $photo;
@@ -680,19 +600,13 @@
 					$photoUpdate = array();
 					$file_name = $func->uploadName($_FILES['file']["name"]);
 
-					if($photo = $func->uploadImage("file", $config['product'][$type]['img_type_list'], UPLOAD_PRODUCT, $file_name))
+					if($photo = $func->uploadImage("file", $config['product'][$type]['img_type_list'], '../upload/product/', $file_name))
 					{
 						$photoUpdate['photo'] = $photo;
 						$d->where('id', $id_insert);
 						$d->update('product_list', $photoUpdate);
 						unset($photoUpdate);
 					}
-				}
-				/* Cập nhật hash khi upload multi */
-				$hash = (isset($_POST['hash']) && $_POST['hash'] != '') ? addslashes($_POST['hash']) : null;
-				if($hash)
-				{
-					$d->rawQuery("update #_gallery set hash = ?, id_parent = ? where hash = ?",array('',$id_insert,$hash));
 				}
 
 				$func->transfer("Lưu sản phẩm thành công", "index.php?com=product&act=man_list&type=".$type."&p=".$curPage.$strUrl);
@@ -719,25 +633,8 @@
 			if(!empty($row))
 			{
 				/* Xóa chính */
-				$func->deleteFile(UPLOAD_PRODUCT.$row['photo']);
+				$func->deleteFile('../upload/product/'.$row['photo']);
 				$d->rawQuery("delete from #_product_list where id = ?",array($id));
-
-				/* Xóa SEO */
-				$d->rawQuery("delete from #_seo where id_parent = ? and com = ? and act = ? and type = ?",array($id,$com,'man_list',$type));
-
-				/* Xóa gallery */
-				$row = $d->rawQuery("select id, photo, file_attach from #_gallery where id_parent = ? and kind = ? and com = ?",array($id,'man_list',$com));
-
-				if(count($row))
-				{
-					foreach($row as $v)
-					{
-						$func->deleteFile(UPLOAD_PRODUCT.$v['photo']);
-						$func->deleteFile(UPLOAD_FILE.$v['file_attach']);
-					}
-
-					$d->rawQuery("delete from #_gallery where id_parent = ? and kind = ? and com = ?",array($id,'man_list',$com));
-				}
 
 				$func->transfer("Xóa sản phẩm thành công", "index.php?com=product&act=man_list&type=".$type."&p=".$curPage.$strUrl);
 			}
@@ -760,25 +657,8 @@
 				if(!empty($row))
 				{
 					/* Xóa chính */
-					$func->deleteFile(UPLOAD_PRODUCT.$row['photo']);
+					$func->deleteFile('../upload/product/'.$row['photo']);
 					$d->rawQuery("delete from #_product_list where id = ?",array($id));
-
-					/* Xóa SEO */
-					$d->rawQuery("delete from #_seo where id_parent = ? and com = ? and act = ? and type = ?",array($id,$com,'man_list',$type));
-
-					/* Xóa gallery */
-					$row = $d->rawQuery("select id, photo, file_attach from #_gallery where id_parent = ? and kind = ? and com = ?",array($id,'man_list',$com));
-
-					if(count($row))
-					{
-						foreach($row as $v)
-						{
-							$func->deleteFile(UPLOAD_PRODUCT.$v['photo']);
-							$func->deleteFile(UPLOAD_FILE.$v['file_attach']);
-						}
-
-						$d->rawQuery("delete from #_gallery where id_parent = ? and kind = ? and com = ?",array($id,'man_list',$com));
-					}
 				}
 			}
 
@@ -787,282 +667,6 @@
 		else
 		{
 			$func->transfer("Không nhận được sản phẩm", "index.php?com=product&act=man_list&type=".$type."&p=".$curPage.$strUrl, false);
-		}
-	}
-
-	/* Get cat */
-	function viewCats()
-	{
-		global $d, $func, $strUrl, $curPage, $items, $paging, $type;
-		
-		$where = "";
-		$idlist = (isset($_REQUEST['id_list'])) ? htmlspecialchars($_REQUEST['id_list']) : 0;
-
-		if($idlist) $where .= " and id_list=$idlist";
-		if(isset($_REQUEST['keyword']))
-		{
-			$keyword = htmlspecialchars($_REQUEST['keyword']);
-			$where .= " and (namevi LIKE '%$keyword%' or nameen LIKE '%$keyword%')";
-		}
-
-		$perPage = 10;
-		$startpoint = ($curPage * $perPage) - $perPage;
-		$limit = " limit ".$startpoint.",".$perPage;
-		$sql = "select * from #_product_cat where type = ? $where order by numb,id desc $limit";
-		$items = $d->rawQuery($sql,array($type));
-		$sqlNum = "select count(*) as 'num' from #_product_cat where type = ? $where order by numb,id desc";
-		$count = $d->rawQueryOne($sqlNum,array($type));
-		$total = (!empty($count)) ? $count['num'] : 0;
-		$url = "index.php?com=product&act=man_cat".$strUrl."&type=".$type;
-		$paging = $func->pagination($total,$perPage,$curPage,$url);
-	}
-
-	/* Edit cat */
-	function editCat()
-	{
-		global $d, $func, $strUrl, $curPage, $item, $type;
-
-		$id = (!empty($_GET['id'])) ? htmlspecialchars($_GET['id']) : 0;
-
-		if(empty($id))
-		{
-			$func->transfer("Không nhận được sản phẩm", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl, false);
-		}
-		else
-		{
-			$item = $d->rawQueryOne("select * from #_product_cat where id = ? and type = ? limit 0,1",array($id,$type));
-
-			if(empty($item))
-			{
-				$func->transfer("sản phẩm không có thực", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl, false);
-			}
-		}
-	}
-
-	/* Save cat */
-	function saveCat()
-	{
-		global $d, $strUrl, $func, $flash, $curPage, $config, $com, $type;
-
-		/* Check post */
-		if(empty($_POST))
-		{
-			$func->transfer("Không nhận được sản phẩm", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl, false);
-		}
-
-		/* Post sản phẩm */
-		$message = '';
-		$response = array();
-		$id = (!empty($_POST['id'])) ? htmlspecialchars($_POST['id']) : 0;
-		$data = (!empty($_POST['data'])) ? $_POST['data'] : null;
-		if($data)
-		{
-			foreach($data as $column => $value)
-			{
-				$data[$column] = htmlspecialchars($func->sanitize($value));
-			}
-
-			if(isset($_POST['status']))
-			{
-				$status = '';
-				foreach($_POST['status'] as $attr_column => $attr_value) if($attr_value != "") $status .= $attr_value.',';
-				$data['status'] = (!empty($status)) ? rtrim($status, ",") : "";
-			}
-			else
-			{
-				$data['status'] = "";
-			}
-
-		    if(!empty($config['product'][$type]['slug_cat']))
-		    {
-		    	if(!empty($_POST['slugvi'])) $data['slugvi'] = $func->changeTitle(htmlspecialchars($_POST['slugvi']));
-		    	else $data['slugvi'] = (!empty($data['namevi'])) ? $func->changeTitle($data['namevi']) : '';
-		    	if(!empty($_POST['slugen'])) $data['slugen'] = $func->changeTitle(htmlspecialchars($_POST['slugen']));
-		    	else $data['slugen'] = (!empty($data['nameen'])) ? $func->changeTitle($data['nameen']) : '';
-		    }
-			
-			$data['type'] = $type;
-		}
-
-
-		/* Valid data */
-		$checkTitle = $func->checkTitle($data);
-
-		if(!empty($checkTitle))
-		{
-			foreach($checkTitle as $k => $v)
-			{
-				$response['messages'][] = $v;
-			}
-		}
-
-		if(!empty($config['product'][$type]['slug_cat']))
-		{
-			foreach($config['website']['slug'] as $k => $v)
-			{
-				$dataSlug = array();
-				$dataSlug['slug'] = $data['slug'.$k];
-				$dataSlug['id'] = $id;
-				$dataSlug['copy'] = false;
-				$checkSlug = $func->checkSlug($dataSlug);
-
-				if($checkSlug == 'exist')
-				{
-					$response['messages'][] = 'Đường dẫn ('.$v.') đã tồn tại';
-				}
-				else if($checkSlug == 'empty')
-				{
-					$response['messages'][] = 'Đường dẫn ('.$v.') không được trống';
-				}
-			}
-		}
-		/* Save data */
-		if($id)
-		{
-			$data['date_updated'] = time();
-			
-			$d->where('id', $id);
-			$d->where('type', $type);
-			if($d->update('product_cat',$data))
-			{
-				/* Photo */
-				if($func->hasFile("file"))
-				{
-					$photoUpdate = array();
-					$file_name = $func->uploadName($_FILES["file"]["name"]);
-
-					if($photo = $func->uploadImage("file", $config['product'][$type]['img_type_cat'], UPLOAD_PRODUCT, $file_name))
-					{
-						$row = $d->rawQueryOne("select id, photo from #_product_cat where id = ? and type = ? limit 0,1",array($id,$type));
-
-						if(!empty($row))
-						{
-							$func->deleteFile(UPLOAD_PRODUCT.$row['photo']);
-						}
-
-						$photoUpdate['photo'] = $photo;
-						$d->where('id', $id);
-						$d->update('product_cat', $photoUpdate);
-						unset($photoUpdate);
-					}
-				}
-
-				/* SEO */
-				if(isset($config['product'][$type]['seo_cat']) && $config['product'][$type]['seo_cat'] == true)
-				{
-					$d->rawQuery("delete from #_seo where id_parent = ? and com = ? and act = ? and type = ?",array($id,$com,'man_cat',$type));
-
-					$dataSeo['id_parent'] = $id;
-					$dataSeo['com'] = $com;
-					$dataSeo['act'] = 'man_cat';
-					$dataSeo['type'] = $type;
-					$d->insert('seo',$dataSeo);
-				}
-
-				$func->transfer("Cập nhật sản phẩm thành công", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl);
-			}
-			else
-			{
-				$func->transfer("Cập nhật sản phẩm bị lỗi", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl, false);
-			}
-		}
-		else
-		{
-			$data['date_created'] = time();
-			
-			if($d->insert('product_cat',$data))
-			{
-				$id_insert = $d->getLastInsertId();
-
-				/* Photo */
-				if($func->hasFile("file"))
-				{
-					$photoUpdate = array();
-					$file_name = $func->uploadName($_FILES['file']["name"]);
-
-					if($photo = $func->uploadImage("file", $config['product'][$type]['img_type_cat'], UPLOAD_PRODUCT, $file_name))
-					{
-						$photoUpdate['photo'] = $photo;
-						$d->where('id', $id_insert);
-						$d->update('product_cat', $photoUpdate);
-						unset($photoUpdate);
-					}
-				}
-
-				/* SEO */
-				if(isset($config['product'][$type]['seo_cat']) && $config['product'][$type]['seo_cat'] == true)
-				{
-					$dataSeo['id_parent'] = $id_insert;
-					$dataSeo['com'] = $com;
-					$dataSeo['act'] = 'man_cat';
-					$dataSeo['type'] = $type;
-					$d->insert('seo',$dataSeo);
-				}
-
-				$func->transfer("Lưu sản phẩm thành công", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl);
-			}
-			else
-			{
-				$func->transfer("Lưu sản phẩm bị lỗi", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl, false);
-			}
-		}
-	}
-
-	/* Delete cat */
-	function deleteCat()
-	{
-		global $d, $strUrl, $func, $curPage, $com, $type;
-
-		$id = (!empty($_GET['id'])) ? htmlspecialchars($_GET['id']) : 0;
-
-		if($id)
-		{
-			/* Lấy sản phẩm */
-			$row = $d->rawQueryOne("select id, photo from #_product_cat where id = ? and type = ? limit 0,1",array($id,$type));
-
-			if(!empty($row))
-			{
-				/* Xóa chính */
-				$func->deleteFile(UPLOAD_PRODUCT.$row['photo']);
-				$d->rawQuery("delete from #_product_cat where id = ?",array($id));
-
-				/* Xóa SEO */
-				$d->rawQuery("delete from #_seo where id_parent = ? and com = ? and act = ? and type = ?",array($id,$com,'man_cat',$type));
-
-				$func->transfer("Xóa sản phẩm thành công", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl);
-			}
-			else
-			{
-				$func->transfer("Xóa sản phẩm bị lỗi", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl, false);
-			}
-		}
-		elseif(isset($_GET['listid']))
-		{
-			$listid = explode(",",$_GET['listid']);
-
-			for($i=0;$i<count($listid);$i++)
-			{
-				$id = htmlspecialchars($listid[$i]);
-
-				/* Lấy sản phẩm */
-				$row = $d->rawQueryOne("select id, photo from #_product_cat where id = ? and type = ? limit 0,1",array($id,$type));
-
-				if(!empty($row))
-				{
-					/* Xóa chính */
-					$func->deleteFile(UPLOAD_PRODUCT.$row['photo']);
-					$d->rawQuery("delete from #_product_cat where id = ?",array($id));
-
-					/* Xóa SEO */
-					$d->rawQuery("delete from #_seo where id_parent = ? and com = ? and act = ? and type = ?",array($id,$com,'man_cat',$type));
-				}
-			}
-
-			$func->transfer("Xóa sản phẩm thành công", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl);
-		}
-		else
-		{
-			$func->transfer("Không nhận được sản phẩm", "index.php?com=product&act=man_cat&type=".$type."&p=".$curPage.$strUrl, false);
 		}
 	}
 ?>

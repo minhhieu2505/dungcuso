@@ -6,7 +6,7 @@
 	*/ ?>
 	<div class="photoUpload-detail" id="photoUpload-preview">
 		
-		<img src="<?="../".$photoDetail['upload'] ."/". $photoDetail['image']?>" width="250" height="250" alt="">
+		<img src="<?="../".$photoDetail['upload'] ."/". $photoDetail['image']?>" width="250" height="250" alt="" onerror="this.src='../assets/images/No-Image.png'"s>
 	</div>
 	<label class="photoUpload-file" id="photo-zone" for="file-zone">
 		<input type="file" name="file" id="file-zone">

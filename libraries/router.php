@@ -135,6 +135,11 @@
 			$type = $com;
 			$titleMain = "Chính sách";
 			break;
+		case 'tim-kiem':
+			$source = "search";
+			$template = "product/product";
+			$titleMain = "Tìm kiếm";
+			break;
 		case 'index':
 			$source = "index";
 			$template ="index/index";

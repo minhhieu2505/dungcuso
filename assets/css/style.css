@@ -563,7 +563,7 @@ img:not([src]) {
 
 /* Search */
 .search {
-    width: 200px;
+    width: 250px;
     background: #ffffff;
     border-radius: 25px;
 }
@@ -3690,6 +3690,7 @@ a.link:hover {
 
 .header {
     background: #34495e;
+    padding: 10px 0;
 }
 
 .box-brand .items img {

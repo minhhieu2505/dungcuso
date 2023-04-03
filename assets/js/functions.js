@@ -14,3 +14,17 @@ function loadPaging(url='',eShow='')
         });
     }
 }
+
+function doEnter(event, obj) {
+	if (event.keyCode == 13 || event.which == 13) onSearch(obj);
+}
+function onSearch(obj) {
+	var keyword = $('#' + obj).val();
+
+	if (keyword == '') {
+		notifyDialog(LANG['no_keywords']);
+		return false;
+	} else {
+		location.href = 'tim-kiem?keyword=' + encodeURI(keyword);
+	}
+}
