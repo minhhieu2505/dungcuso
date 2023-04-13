@@ -1,4 +1,4 @@
-<!-- Criteria -->
+<!-- Tiêu chí -->
 <?php if ($criteria): ?>
 	<div class="criteria">
 		<div class="wrap-content">
@@ -10,8 +10,8 @@
 								<img src="upload/photo/<?=$v['photo']?>" alt="" width="80" height="80">
 							</div>
 							<div class="info">
-								<p class="name text-split-1"><?=$v['namevi']?></p>
-								<span class="desc text-split-1"><?=$v['descvi']?></span>
+								<p class="name text-split-1"><?=$v['name']?></p>
+								<span class="desc text-split-1"><?=$v['description']?></span>
 							</div>
 						</div>
 					</div>
@@ -28,7 +28,7 @@
 				<?php foreach ($advertise as $v): ?>
 					<div>
 						<div class="items">
-							<a href="<?=$v['link']?>" class="scale-img" title="<?=$v['namevi']?>">
+							<a href="<?=$v['link']?>" class="scale-img" title="<?=$v['name']?>">
 								<img src="upload/photo/<?=$v['photo']?>" alt="" width="640" height="230">
 							</a>
 						</div>
@@ -52,11 +52,11 @@
 							<div class="">
 								<div class="product">
 									<div class="box-product" >
-										<a href="<?=$v['slugvi']?>" class="pic-product scale-img">
+										<a href="<?=$v['slug']?>" class="pic-product scale-img">
 											<img src="upload/product/<?=$v['photo']?>" alt="" width="600" height="600"> 
 										</a>
 										<div class="info-product">
-											<h3 class="name-product"><a href="<?=$v['slugvi']?>" class="text-decoration-none text-split2"><?=$v['namevi']?></a></h3>
+											<h3 class="name-product"><a href="<?=$v['slug']?>" class="text-decoration-none text-split2"><?=$v['name']?></a></h3>
 											<div class="dflex align-items-center ">
 												<p class="price-product">
 													<?php if($v['discount']) { ?>
@@ -104,11 +104,11 @@
 							<div class="">
 								<div class="product">
 									<div class="box-product" >
-										<a href="<?=$v['slugvi']?>" class="pic-product scale-img">
+										<a href="<?=$v['slug']?>" class="pic-product scale-img">
 											<img src="upload/product/<?=$v['photo']?>" alt="" width="600" height="600"> 
 										</a>
 										<div class="info-product">
-											<h3 class="name-product"><a href="<?=$v['slugvi']?>" class="text-decoration-none text-split2"><?=$v['namevi']?></a></h3>
+											<h3 class="name-product"><a href="<?=$v['slug']?>" class="text-decoration-none text-split2"><?=$v['name']?></a></h3>
 											<div class="dflex align-items-center ">
 												<p class="price-product">
 													<?php if($v['discount']) { ?>
@@ -156,11 +156,11 @@
 							<div class="">
 								<div class="product">
 									<div class="box-product" >
-										<a href="<?=$v['slugvi']?>" class="pic-product scale-img">
+										<a href="<?=$v['slug']?>" class="pic-product scale-img">
 											<img src="upload/product/<?=$v['photo']?>" alt="" width="600" height="600"> 
 										</a>
 										<div class="info-product">
-											<h3 class="name-product"><a href="<?=$v['slugvi']?>" class="text-decoration-none text-split2"><?=$v['namevi']?></a></h3>
+											<h3 class="name-product"><a href="<?=$v['slug']?>" class="text-decoration-none text-split2"><?=$v['name']?></a></h3>
 											<div class="dflex align-items-center ">
 												<p class="price-product">
 													<?php if($v['discount']) { ?>
@@ -191,6 +191,31 @@
 	</div>
 <?php endif ?>
 
+
+<?php /* 
+Criteria
+
+<?php if ($advertise): ?>
+	<div class="advertise-index">
+		<div class="wrap-content">
+			<div class="slick-advertise">
+				<?php foreach ($advertise as $v): ?>
+					<div>
+						<div class="items">
+							<a href="<?=$v['link']?>" class="scale-img" title="<?=$v['name']?>">
+								<img src="upload/photo/<?=$v['photo']?>" alt="" width="640" height="230">
+							</a>
+						</div>
+					</div>
+				<?php endforeach ?>
+			</div>
+		</div>
+	</div>
+<?php endif ?>
+
+
+
+
 <!-- Brand -->
 <?php if ($brand): ?>
 	<div class="brand-index">
@@ -201,7 +226,7 @@
 					<div class="slick-brand">
 						<?php foreach ($brand as $v): ?>
 							<div>
-								<a href="<?=$v['slugvi']?>" class="items">
+								<a href="<?=$v['slug']?>" class="items">
 									<img src="upload/product/<?=$v['photo']?>" alt="" width="200" height="85">
 								</a>
 							</div>
@@ -224,13 +249,13 @@
 					<div class="col-md-6 pd-10">
 						<div class="row mg-7 mb-3">
 							<div class="col-6 pd-7">
-								<a href="<?=$v['slugvi']?>" title="<?=$v['namevi']?>" class="scale-img">
+								<a href="<?=$v['slug']?>" title="<?=$v['name']?>" class="scale-img">
 									<img src="upload/news/<?=$v['photo']?>" alt="" width="185" height="210">
 								</a>
 							</div>
 							<div class="col-6 pd-7">
-								<h3 class="news-name"><a href="<?=$v['slugvi']?>" title="<?=$v['namevi']?>" class="text-split2">
-									<?=$v['namevi']?>
+								<h3 class="news-name"><a href="<?=$v['slug']?>" title="<?=$v['name']?>" class="text-split2">
+									<?=$v['name']?>
 								</a></h3>
 								<span class="news-desc text-split"><?=$v['descvi']?></span>
 								<p class="news-time mb-0"><?=date("d/m/Y",$v['date_created'])?></p>
@@ -247,11 +272,11 @@
 			<?php foreach ($question as $v): ?>
 				<div class="items-question dflex align-items-center">
 					<div class="img">
-						<a href="<?=$v['slugvi']?>" title="<?=$v['namevi']?>">
+						<a href="<?=$v['slug']?>" title="<?=$v['name']?>">
 							<img src="upload/news/<?=$v['photo']?>" alt="" width="60" height="50">
 						</a>
 					</div>
-					<h3><a href="<?=$v['slugvi']?>" title="<?=$v['namevi']?>" class="text-split2"><?=$v['namevi']?></a>
+					<h3><a href="<?=$v['slug']?>" title="<?=$v['name']?>" class="text-split2"><?=$v['name']?></a>
 						
 					</h3>
 				</div>
@@ -259,3 +284,4 @@
 		</div>
 	<?php endif ?>
 </div>
+*/ ?>

@@ -8,12 +8,12 @@
                 <div class="">
                     <div class="product">
                         <div class="box-product">
-                            <a href="<?= $v['slugvi'] ?>" class="pic-product scale-img">
+                            <a href="<?= $v['slug'] ?>" class="pic-product scale-img">
                                 <img src="upload/product/<?= $v['photo'] ?>" alt="" width="600" height="600">
                             </a>
                             <div class="info-product">
-                                <h3 class="name-product"><a href="<?= $v['slugvi'] ?>"
-                                        class="text-decoration-none text-split2"><?= $v['namevi'] ?></a></h3>
+                                <h3 class="name-product"><a href="<?= $v['slug'] ?>"
+                                        class="text-decoration-none text-split2"><?= $v['name'] ?></a></h3>
                                 <div class="dflex align-items-center ">
                                     <p class="price-product">
                                         <?php if ($v['discount']) { ?>

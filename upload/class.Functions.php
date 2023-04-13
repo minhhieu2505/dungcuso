@@ -582,20 +582,9 @@
 				if(!empty($slug))
 				{
 					$table = array(
-						"#_product_list",
-						"#_product_cat",
-						"#_product_item",
-						"#_product_sub",
-						"#_product_brand",
-						"#_product",
-						"#_news_list",
-						"#_news_cat",
-						"#_news_item",
-						"#_news_sub",
-						"#_news",
-						"#_tags"
+						"product",
+						"category",
 					);
-
 					$where = (!empty($data['id']) && empty($data['copy'])) ? "id != ".$data['id']." and " : "";
 
 					foreach($table as $v)

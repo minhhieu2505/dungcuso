@@ -1,12 +1,6 @@
 <div class="photoUpload-zone">
-	<?php /*
-		<div class="photoUpload-detail" id="photoUpload-preview">
-			<?=$func->getImage(['class' => 'rounded', 'size-error' => '250x250x1', 'upload' => $photoDetail['upload'], 'image' => $photoDetail['image'], 'alt' => 'Alt Photo'])?>
-		</div>
-	*/ ?>
 	<div class="photoUpload-detail" id="photoUpload-preview">
-		
-		<img src="<?="../".$photoDetail['upload'] ."/". $photoDetail['image']?>" width="250" height="250" alt="" onerror="this.src='../assets/images/No-Image.png'"s>
+		<img src="<?="../".$photoDetail['upload'] ."/". $photoDetail['image']?>" width="<?=$photoDetail['width']?>" height="<?=$photoDetail['height']?>" alt="" onerror="this.src='../assets/images/No-Image.png'">
 	</div>
 	<label class="photoUpload-file" id="photo-zone" for="file-zone">
 		<input type="file" name="file" id="file-zone">

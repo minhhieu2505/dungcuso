@@ -15,6 +15,8 @@
 	$error = "";
 	$success = "";
 	$login_failed = false;
+
+	
 	/* Kiểm tra thông tin đăng nhập */
 	if($username == '' && $password == '')
 	{
@@ -31,19 +33,14 @@
 	else
 	{
 		/* Kiểm tra đăng nhập */
-		$row = $d->rawQueryOne("select * from #_user where username = ? and find_in_set('hienthi',status) limit 0,1",array($username));
-
+		$row = $d->rawQueryOne("select * from #_user where username = ? limit 0,1",array($username));
+		// var_dump($_POST);die('xx');
 		if(!empty($row['id']))
 		{
-			if(($row['password'] == $func->encryptPassword($password)))
+			if(($row['password'] == $func->encryptPassword($password)) && ($row['role'] == 1))
 			{
-				$timenow = time();
+				/* Tạo Session login */
 				$id_user = $row['id'];
-				$token = md5(time());
-				$user_agent = $_SERVER['HTTP_USER_AGENT'];
-				$sessionhash = md5(sha1($row['password'].$row['username']));
-				
-				   /* Tạo Session login */
 				$_SESSION[$loginAdmin]['active'] = true;
 				$_SESSION[$loginAdmin]['id'] = $row['id'];
 				$_SESSION[$loginAdmin]['username'] = $row['username'];
@@ -51,18 +48,7 @@
 				$_SESSION[$loginAdmin]['phone'] = $row['phone'];
 				$_SESSION[$loginAdmin]['email'] = $row['email'];
 				$_SESSION[$loginAdmin]['role'] = $row['role'];
-				$_SESSION[$loginAdmin]['secret_key'] = $row['secret_key'];
-				$_SESSION[$loginAdmin]['token'] = $sessionhash;
 				$_SESSION[$loginAdmin]['password'] = $row['password'];
-				$_SESSION[$loginAdmin]['login_session'] = $sessionhash;
-				$_SESSION[$loginAdmin]['login_token'] = $token;
-
-				/* Tạo Session Token Website */
-				$_SESSION[TOKEN] = true;
-
-				/* Cập nhật quyền của user đăng nhập */
-				$secret_key = $_SESSION[$loginAdmin]['token'];
-				$d->rawQuery("update #_user set secret_key = ? where id = ?",array($secret_key,$row['id']));
 
 				$success = "Đăng nhập thành công";
 			}

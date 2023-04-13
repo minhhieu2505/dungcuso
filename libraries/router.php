@@ -37,33 +37,15 @@
 		exit;
 	}
 
-	/* Setting */
-    $sqlCache = "select * from #_setting";
-    $setting = $cache->get($sqlCache, null, 'fetch', 7200);
-    $optsetting = (!empty($setting['options'])) ? json_decode($setting['options'],true) : null;
+
 	/* Slug lang */
-    $sluglang = 'slugvi';
+    $sluglang = 'slug';
 
 	/* Tối ưu link */
 	$requick = array(
 		/* Sản phẩm */
-		array("tbl" => "product_list", "field" => "idl", "source" => "product", "com" => "san-pham", "type" => "san-pham"),
-		array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham", "type" => "san-pham"),
-		
-		/* Tin tức */
-		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "kinh-nghiem", "type" => "kinh-nghiem"),
-		
-		/* Hướng dẫn mua hàng */
-		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "huong-dan-mua-hang", "type" => "huong-dan-mua-hang"),
-		
-		/* Câu hỏi */
-		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "cau-hoi", "type" => "cau-hoi"),
-		
-		/* Chính sách */
-		array("tbl" => "news", "field" => "id", "source" => "news", "com" => "chinh-sach", "type" => "chinh-sach"),
-	
-		/* Liên hệ */
-		array("tbl" => "static", "source" => "contact", "com" => "lien-he", "type" => "lien-he"),
+		array("tbl" => "category", "field" => "idl", "source" => "product", "com" => "san-pham"),
+		array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham"),
 
 	);
 	
@@ -80,7 +62,7 @@
 			
 			if(!empty($urlTbl) && !in_array($urlTbl, ['static', 'photo']))
 			{
-				$row = $d->rawQueryOne("select id from #_$urlTbl where $sluglang = ? and type = ? and find_in_set('hienthi',status) limit 0,1",array($com,$urlType));
+				$row = $d->rawQueryOne("select id from $urlTbl where $sluglang = ? and find_in_set('hienthi',status) limit 0,1",array($com));
 				if(!empty($row['id']))
 				{
 					$_GET[$urlField] = $row['id'];

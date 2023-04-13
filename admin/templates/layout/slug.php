@@ -16,35 +16,25 @@
         <?php } ?>
 
         <input type="hidden" class="slug-id" value="<?=isset($id) ? $id : ''?>">
-        <input type="hidden" class="slug-copy" value="<?=(isset($copy) && $copy == true) ? 1 : 0?>">
 
         <div class="card card-primary card-outline card-outline-tabs">
-            <div class="card-header p-0 border-bottom-0">
-                <ul class="nav nav-tabs" id="custom-tabs-three-tab-lang" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="tabs-lang" data-toggle="pill"
-                            href="#tabs-sluglang-vi role="tab" aria-controls="tabs-sluglang-vi
-                            aria-selected="true">Tiếng việt</a>
-                    </li>
-                </ul>
-            </div>
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-three-tabContent-lang">
                 <div class="tab-pane fade show active" id="tabs-sluglang-vi
                         role="tabpanel" aria-labelledby="tabs-lang">
                         <div class="form-gourp mb-0">
-                            <label class="d-block">Đường dẫn mẫu (vi):<span class="pl-2 font-weight-normal"
+                            <label class="d-block">Đường dẫn mẫu:<span class="pl-2 font-weight-normal"
                                     id="slugurlpreviewvi"><?=$configBase?><strong
-                                        class="text-info"><?=@$item['slugvi']?></strong></span></label>
-                            <input type="text" class="form-control slug-input no-validate text-sm" name="slugvi"
-                                id="slugvi" placeholder="Đường dẫn (vi)" value="<?=@$item['slugvi']?>"
+                                        class="text-info"><?=@$item['slug']?></strong></span></label>
+                            <input type="text" class="form-control slug-input no-validate text-sm" name="slug"
+                                id="slug" placeholder="Đường dẫn" value="<?=@$item['slug']?>"
                                 required>
-                            <input type="hidden" id="slug-defaultvi" value="<?=@$item['slugvi']?>">
-                            <p class="alert-slugvi text-danger d-none mt-2 mb-0" id="alert-slug-dangervi">
+                            <input type="hidden" id="slug-defaultvi" value="<?=@$item['slug']?>">
+                            <p class="alert-slug text-danger d-none mt-2 mb-0" id="alert-slug-dangervi">
                                 <i class="fas fa-exclamation-triangle mr-1"></i>
                                 <span>Đường dẫn đã tồn tại. Đường dẫn truy cập mục này có thể bị trùng lặp.</span>
                             </p>
-                            <p class="alert-slugvi text-success d-none mt-2 mb-0" id="alert-slug-successvi">
+                            <p class="alert-slug text-success d-none mt-2 mb-0" id="alert-slug-successvi">
                                 <i class="fas fa-check-circle mr-1"></i>
                                 <span>Đường dẫn hợp lệ.</span>
                             </p>

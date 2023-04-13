@@ -1,28 +1,3 @@
-<?php
-    if((isset($_GET['month']) && $_GET['month'] != '') && (isset($_GET['year']) && $_GET['year'] != ''))
-    {
-        $time = $_GET['year'].'-'.$_GET['month'].'-1';
-        $date = strtotime($time);
-    }
-    else
-    {
-        $date = strtotime(date('y-m-d')); 
-    }
-
-    $day = date('d', $date);
-    $month = date('m', $date);
-    $year = date('Y', $date);
-    $firstDay = mktime(0,0,0,$month, 1, $year);
-    $title = strftime('%B', $firstDay);
-    $dayOfWeek = date('D', $firstDay);
-    $daysInMonth = cal_days_in_month(0, $month, $year);
-    $timestamp = strtotime('next Sunday');
-    $weekDays = array();
-
-    /* Make data for js chart */
-    $charts = array();
-    $charts['month'] = $month;
-?>
 <!-- Main content -->
 <section class="content mb-3">
     <div class="container-fluid">

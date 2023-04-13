@@ -3,21 +3,8 @@
 
     /* Config type - Product */
     require_once LIBRARIES.'type/config-type-product.php';
-
-    // /* Config type - Tags */
-    // require_once LIBRARIES.'type/config-type-tags.php';
-
-    // /* Config type - Newsletter */
-    // require_once LIBRARIES.'type/config-type-newsletter.php';
-
-    // /* Config type - News */
-    // require_once LIBRARIES.'type/config-type-news.php';
-
-    // /* Config type - Static */
-    // require_once LIBRARIES.'type/config-type-static.php';
-
-    // /* Config type - Photo */
-    // require_once LIBRARIES.'type/config-type-photo.php';
+    require_once LIBRARIES.'type/config-type-news.php';
+    require_once LIBRARIES.'type/config-type-photo.php';
 
     /* Setting */
     $config['setting']['address'] = true;
@@ -30,7 +17,5 @@
     $config['setting']['fanpage'] = true;
     $config['setting']['coords'] = true;
     $config['setting']['coords_iframe'] = true;
-
-    $config['coupon'] = true;
 
 ?>

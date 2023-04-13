@@ -4,14 +4,14 @@
             <a id="Zoom-1" class="MagicZoom"
                 data-options="zoomMode: off; hint: off; rightClick: true; selectorTrigger: hover; expandCaption: false; history: false;"
                 href=""
-                title="<?= $rowDetail['namevi'] ?>">
+                title="<?= $rowDetail['name'] ?>">
                 <img src="upload/product/<?=$rowDetail['photo']?>" alt="" width="600" height="600">
             </a>
         </div>
 
         <div class="right-pro-detail col-md-6 col-lg-7 mb-4">
-            <p class="title-pro-detail mb-2"><?= $rowDetail['namevi'] ?></p>
-            <div class="desc-pro-detail"><?= htmlspecialchars_decode($rowDetail['descvi']) ?></div>
+            <p class="title-pro-detail mb-2"><?= $rowDetail['name'] ?></p>
+            <div class="desc-pro-detail"><?= htmlspecialchars_decode($rowDetail['description']) ?></div>
             <ul class="attr-pro-detail">
                 <?php if (!empty($rowDetail['code'])) { ?>
                 <li class="w-clear">
@@ -27,7 +27,7 @@
                         <span class="price-old-pro-detail"><?= $func->formatMoney($rowDetail['regular_price']) ?></span>
                         <?php } else { ?>
                         <span
-                            class="price-new-pro-detail"><?= ($rowDetail['regular_price']) ? $func->formatMoney($rowDetail['regular_price']) : lienhe ?></span>
+                            class="price-new-pro-detail"><?= ($rowDetail['regular_price']) ? $func->formatMoney($rowDetail['regular_price']) : "Liên hệ" ?></span>
                         <?php } ?>
                     </div>
                 </li>
@@ -82,12 +82,12 @@
     <div class="">
         <div class="product">
             <div class="box-product">
-                <a href="<?=$v['slugvi']?>" class="pic-product scale-img">
+                <a href="<?=$v['slug']?>" class="pic-product scale-img">
                     <img src="upload/product/<?=$v['photo']?>" alt="" width="600" height="600">
                 </a>
                 <div class="info-product">
-                    <h3 class="name-product"><a href="<?=$v['slugvi']?>"
-                            class="text-decoration-none text-split2"><?=$v['namevi']?></a></h3>
+                    <h3 class="name-product"><a href="<?=$v['slug']?>"
+                            class="text-decoration-none text-split2"><?=$v['name']?></a></h3>
                     <div class="dflex align-items-center ">
                         <p class="price-product">
                             <?php if($v['discount']) { ?>

@@ -1,12 +1,12 @@
 <?php 
 	$linkView = $configBase;
-	$linkMan = $linkFilter = "index.php?com=product&act=man&type=".$type;
-	$linkAdd = "index.php?com=product&act=add&type=".$type;
-    $linkCopy = "index.php?com=product&act=copy&type=".$type;
-    $linkEdit = "index.php?com=product&act=edit&type=".$type;
-    $linkDelete = "index.php?com=product&act=delete&type=".$type;
-    $linkMulti = "index.php?com=product&act=man_photo&kind=man&type=".$type;
-    $copyImg = (isset($config['product'][$type]['copy_image']) && $config['product'][$type]['copy_image'] == true) ? TRUE : FALSE;
+	$linkMan = $linkFilter = "index.php?source=product&act=man";
+	$linkAdd = "index.php?source=product&act=add";
+    $linkCopy = "index.php?source=product&act=copy";
+    $linkEdit = "index.php?source=product&act=edit";
+    $linkDelete = "index.php?source=product&act=delete";
+    $linkMulti = "index.php?source=product&act=man_photo&kind=man";
+    $copyImg = (isset($config['product']['copy_image']) && $config['product']['copy_image'] == true) ? TRUE : FALSE;
 ?>
 <!-- Content Header -->
 <section class="content-header text-sm">
@@ -14,7 +14,7 @@
         <div class="row">
             <ol class="breadcrumb float-sm-left">
                 <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý <?=$config['product'][$type]['title_main']?></li>
+                <li class="breadcrumb-item active">Quản lý <?=$config['product']['title_main']?></li>
             </ol>
         </div>
     </div>
@@ -24,7 +24,6 @@
 <section class="content">
     <div class="card-footer text-sm sticky-top">
     	<a class="btn btn-sm bg-gradient-primary text-white" href="<?=$linkAdd?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
-        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?=$linkDelete?><?=$strUrl?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
         <div class="form-inline form-search d-inline-block align-middle ml-3">
             <div class="input-group input-group-sm">
                 <input class="form-control form-control-navbar text-sm" type="search" id="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="<?=(isset($_GET['keyword'])) ? $_GET['keyword'] : ''?>" onkeypress="doEnter(event,'keyword','<?=$linkMan?>')">
@@ -37,37 +36,31 @@
         </div>
     </div>
     <?php if(
-        (isset($config['product'][$type]['dropdown']) && $config['product'][$type]['dropdown'] == true)
+        (isset($config['product']['dropdown']) && $config['product']['dropdown'] == true)
     ) { ?>
 	    <div class="card-footer form-group-category text-sm bg-light row">
-			<?php if(isset($config['product'][$type]['list']) && $config['product'][$type]['list'] == true) { ?>
+			<?php if(isset($config['product']['list']) && $config['product']['list'] == true) { ?>
 				<div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?=$func->getLinkCategory('product', 'list', $type)?></div>
 			<?php } ?>
-			<?php if(isset($config['product'][$type]['cat']) && $config['product'][$type]['cat'] == true) { ?>
+			<?php if(isset($config['product']['cat']) && $config['product']['cat'] == true) { ?>
 				<div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?=$func->getLinkCategory('product', 'cat', $type)?></div>
 			<?php } ?>
 	    </div>
 	<?php } ?>
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
-            <h3 class="card-title">Danh sách <?=$config['product'][$type]['title_main']?></h3>
+            <h3 class="card-title">Danh sách <?=$config['product']['title_main']?></h3>
         </div>
         <div class="card-body table-responsive p-0">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle" width="5%">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
                         <th class="align-middle text-center" width="10%">STT</th>
-						<?php if(isset($config['product'][$type]['show_images']) && $config['product'][$type]['show_images'] == true) { ?>
+						<?php if(isset($config['product']['show_images']) && $config['product']['show_images'] == true) { ?>
 							<th class="align-middle">Hình</th>
 						<?php } ?>
 						<th class="align-middle" style="width:30%">Tiêu đề</th>
-						<?php if(isset($config['product'][$type]['check'])) { foreach($config['product'][$type]['check'] as $key => $value) { ?>
+						<?php if(isset($config['product']['check'])) { foreach($config['product']['check'] as $key => $value) { ?>
 							<th class="align-middle text-center"><?=$value?></th>
 						<?php } } ?>
                         <th class="align-middle text-center">Thao tác</th>
@@ -83,26 +76,20 @@
 							if($items[$i]['id_cat']) $linkID .= "&id_cat=".$items[$i]['id_cat']; ?>
                             <tr>
                                 <td class="align-middle">
-                                    <div class="custom-control custom-checkbox my-checkbox">
-                                        <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?=$items[$i]['id']?>" value="<?=$items[$i]['id']?>">
-                                        <label for="select-checkbox-<?=$items[$i]['id']?>" class="custom-control-label"></label>
-                                    </div>
+                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$i+1?>" data-id="<?=$items[$i]['id']?>" data-table="product">
                                 </td>
-                                <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$items[$i]['numb']?>" data-id="<?=$items[$i]['id']?>" data-table="product">
-                                </td>
-                                <?php if(isset($config['product'][$type]['show_images']) && $config['product'][$type]['show_images'] == true) { ?>
+                                <?php if(isset($config['product']['show_images']) && $config['product']['show_images'] == true) { ?>
                                     <td class="align-middle">
-                                    	<a href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['namevi']?>">
-                                            <img src="../upload/product/<?=$items[$i]['photo']?>" width="100" height="100" alt="">
+                                    	<a href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>">
+                                            <img src="../upload/product/<?=$items[$i]['photo']?>" width="100" height="100" alt="" onerror="this.src='../assets/images/No-Image.png'">
                                         </a>
                                     </td>
                                 <?php } ?>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['namevi']?>"><?=$items[$i]['namevi']?></a>
+                                    <a class="text-dark text-break" href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>"><?=$items[$i]['name']?></a>
                                 </td>
                                 <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
-                                <?php if(isset($config['product'][$type]['check'])) { foreach($config['product'][$type]['check'] as $key => $value) { ?>
+                                <?php if(isset($config['product']['check'])) { foreach($config['product']['check'] as $key => $value) { ?>
 								  	<td class="align-middle text-center">
 	                                	<div class="custom-control custom-checkbox my-checkbox">
 	                                        <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?=$key?>-<?=$items[$i]['id']?>" data-table="product" data-id="<?=$items[$i]['id']?>" data-attr="<?=$key?>" <?=(in_array($key, $status_array)) ? 'checked' : ''?>>
@@ -126,6 +113,5 @@
     <?php } ?>
     <div class="card-footer text-sm">
     	<a class="btn btn-sm bg-gradient-primary text-white" href="<?=$linkAdd?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
-        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?=$linkDelete?><?=$strUrl?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
     </div>
 </section>

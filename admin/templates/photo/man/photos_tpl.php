@@ -1,8 +1,8 @@
 <?php
-    $linkMan = "index.php?com=photo&act=man_photo&type=".$type;
-    $linkAdd = "index.php?com=photo&act=add_photo&type=".$type;
-    $linkEdit = "index.php?com=photo&act=edit_photo&type=".$type;
-    $linkDelete = "index.php?com=photo&act=delete_photo&type=".$type;
+    $linkMan = "index.php?source=photo&act=man_photo&type=".$type;
+    $linkAdd = "index.php?source=photo&act=add_photo&type=".$type;
+    $linkEdit = "index.php?source=photo&act=edit_photo&type=".$type;
+    $linkDelete = "index.php?source=photo&act=delete_photo&type=".$type;
 ?>
 <!-- Content Header -->
 <section class="content-header text-sm">
@@ -30,12 +30,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle" width="5%">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
                         <th class="align-middle text-center" width="10%">STT</th>
                         <?php if(isset($config['photo']['man_photo'][$type]['avatar_photo']) && $config['photo']['man_photo'][$type]['avatar_photo'] == true) { ?>
                         	<th class="align-middle text-center" width="8%">Hình</th>
@@ -62,24 +56,18 @@
                         <?php for($i=0;$i<count($items);$i++) { ?>
                             <tr>
                                 <td class="align-middle">
-                                    <div class="custom-control custom-checkbox my-checkbox">
-                                        <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?=$items[$i]['id']?>" value="<?=$items[$i]['id']?>">
-                                        <label for="select-checkbox-<?=$items[$i]['id']?>" class="custom-control-label"></label>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$items[$i]['numb']?>" data-id="<?=$items[$i]['id']?>" data-table="photo">
+                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$i+1?>" data-table="photo">
                                 </td>
                                 <?php if(isset($config['photo']['man_photo'][$type]['avatar_photo']) && $config['photo']['man_photo'][$type]['avatar_photo'] == true) { ?>
 	                                <td class="align-middle text-center">
-	                                    <a href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['namevi']?>">
-                                            <?=$func->getImage(['class' => 'rounded img-preview', 'sizes' => $config['photo']['man_photo'][$type]['thumb_photo'], 'upload' => UPLOAD_PHOTO_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['namevi']])?>
+	                                    <a href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>">
+                                            <img src="../upload/photo/<?=$items[$i]['photo']?>" alt="" class="rounded img-preview">
                                         </a>
 	                                </td>
 	                            <?php } ?>
                                 <?php if(isset($config['photo']['man_photo'][$type]['name_photo']) && $config['photo']['man_photo'][$type]['name_photo'] == true) { ?>
 	                                <td class="align-middle">
-	                                    <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['namevi']?>"><?=$items[$i]['namevi']?></a>
+	                                    <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>"><?=$items[$i]['name']?></a>
 	                                </td>
 	                            <?php } ?>
                                 <?php if(isset($config['photo']['man_photo'][$type]['link_photo']) && $config['photo']['man_photo'][$type]['link_photo'] == true) { ?>

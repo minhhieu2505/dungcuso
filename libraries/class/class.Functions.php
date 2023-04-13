@@ -164,24 +164,24 @@
 		}
 
 		/* Kiểm tra đăng nhập */
-		public function checkLoginAdmin()
-		{
-			global $loginAdmin;
+		// public function checkLoginAdmin()
+		// {
+		// 	global $loginAdmin;
 
-			$token = (!empty($_SESSION[$loginAdmin]['token'])) ? $_SESSION[$loginAdmin]['token'] : '';
-			$row = $this->d->rawQuery("select secret_key from #_user where secret_key = ? and find_in_set('hienthi',status)",array($token));
+		// 	$token = (!empty($_SESSION[$loginAdmin]['token'])) ? $_SESSION[$loginAdmin]['token'] : '';
+		// 	$row = $this->d->rawQuery("select secret_key from #_user where secret_key = ? and find_in_set('hienthi',status)",array($token));
 
-			if(count($row) == 1 && $row[0]['secret_key'] != '')
-			{
-				return true;
-			}
-			else
-			{
-				if(!empty($_SESSION[TOKEN])) unset($_SESSION[TOKEN]);
-				unset($_SESSION[$loginAdmin]);
-				return false;
-			}
-		}
+		// 	if(count($row) == 1 && $row[0]['secret_key'] != '')
+		// 	{
+		// 		return true;
+		// 	}
+		// 	else
+		// 	{
+		// 		if(!empty($_SESSION[TOKEN])) unset($_SESSION[TOKEN]);
+		// 		unset($_SESSION[$loginAdmin]);
+		// 		return false;
+		// 	}
+		// }
 
 		/* Mã hóa mật khẩu admin */
 		public function encryptPassword($str='')
@@ -530,16 +530,15 @@
 				if(!empty($slug))
 				{
 					$table = array(
-						"#_product_list",
-						"#_product",
-						"#_news"
+						"category",
+						"product",
 					);
 
 					$where = (!empty($data['id']) && empty($data['copy'])) ? "id != ".$data['id']." and " : "";
 
 					foreach($table as $v)
 					{
-						$check = $this->d->rawQueryOne("select id from $v where $where slugvi = ? limit 0,1", array($data['slug']));
+						$check = $this->d->rawQueryOne("select id from $v where $where slug = ? limit 0,1", array($data['slug']));
 
 						if(!empty($check['id']))
 						{

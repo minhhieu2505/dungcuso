@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="footer-news col-2">
                     <span>
-                        <img src="upload/photo/<?= $logo2['photo'] ?>" alt="">
+                        <img src="upload/photo/<?= $logo['photo'] ?>" alt="">
                     </span>
                     <ul class="social social-header list-unstyled p-0 m-0 text-center">
                         <?php foreach ($social as $k => $v) { ?>

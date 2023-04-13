@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="vi">
 <head>
     <?php include TEMPLATE.LAYOUT."head.php"; ?>
     <?php include TEMPLATE.LAYOUT."css.php"; ?>
 </head>
 <body>
-   <?php 
+   <?php
       include TEMPLATE.LAYOUT."header.php"; 
       include TEMPLATE.LAYOUT."menu.php";
       include TEMPLATE.LAYOUT."slide.php";

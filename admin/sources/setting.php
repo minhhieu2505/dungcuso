@@ -31,7 +31,7 @@
 		/* Check post */
 		if(empty($_POST))
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=setting&act=update", false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=setting&act=update", false);
 		}
 
 		/* Post dữ liệu */
@@ -61,31 +61,6 @@
 
 					$data[$column] = json_encode($option);
 				}
-				else
-				{
-					if($column == 'mastertool')
-					{
-						$data[$column] = htmlspecialchars($func->sanitize($value, 'meta'));
-					}
-					else if(in_array($column, array('headjs', 'bodyjs', 'analytics')))
-					{
-						$data[$column] = htmlspecialchars($func->sanitize($value, 'script'));
-					}
-					else
-					{
-						$data[$column] = htmlspecialchars($func->sanitize($value));
-					}
-				}
-			}
-		}
-		
-		/* Post Seo */
-		$dataSeo = (isset($_POST['dataSeo'])) ? $_POST['dataSeo'] : null;
-		if($dataSeo)
-		{
-			foreach($dataSeo as $column => $value)
-			{
-				$dataSeo[$column] = htmlspecialchars($func->sanitize($value));
 			}
 		}
 
@@ -185,22 +160,11 @@
 				}
 			}
 
-			if(!empty($dataSeo))
-			{
-				foreach($dataSeo as $k => $v)
-				{
-					if(!empty($v))
-					{
-						$flash->set($k, $v);
-					}
-				}
-			}
-
 			/* Errors */
 			$response['status'] = 'danger';
 			$message = base64_encode(json_encode($response));
 			$flash->set('message', $message);
-			$func->redirect("index.php?com=setting&act=update");
+			$func->redirect("index.php?source=setting&act=update");
 		}
 
 		/* Save data */
@@ -209,37 +173,23 @@
 			$d->where('id',$id);
 			if($d->update('setting',$data))
 			{
-				/* SEO */
-				$d->rawQuery("delete from #_seo where id_parent = ? and com = ? and act = ? and type = ?",array(0,$com,'update',$com));
-				$dataSeo['id_parent'] = 0;
-				$dataSeo['com'] = $com;
-				$dataSeo['act'] = 'update';
-				$dataSeo['type'] = $com;
-				$d->insert('seo',$dataSeo);
-
-				$func->transfer("Cập nhật dữ liệu thành công", "index.php?com=setting&act=update");
+				$func->transfer("Cập nhật dữ liệu thành công", "index.php?source=setting&act=update");
 			}
 			else
 			{
-				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=setting&act=update", false);
+				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?source=setting&act=update", false);
 			}
 		}
 		else
 		{
 			if($d->insert('setting',$data))
 			{
-				/* SEO */
-				$dataSeo['id_parent'] = 0;
-				$dataSeo['com'] = $com;
-				$dataSeo['act'] = 'update';
-				$dataSeo['type'] = $com;
-				$d->insert('seo',$dataSeo);
 
-				$func->transfer("Thêm dữ liệu thành công", "index.php?com=setting&act=update");
+				$func->transfer("Thêm dữ liệu thành công", "index.php?source=setting&act=update");
 			}
 			else
 			{
-				$func->transfer("Thêm dữ liệu bị lỗi", "index.php?com=setting&act=update", false);
+				$func->transfer("Thêm dữ liệu bị lỗi", "index.php?source=setting&act=update", false);
 			}
 		}
 	}

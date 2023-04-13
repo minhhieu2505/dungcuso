@@ -1,13 +1,5 @@
 <?php
 	if(!defined('SOURCES')) die("Error");
-
-	/* Check access user */
-	if(!empty($act) && !in_array($act, array('login', 'info_admin')) && in_array($act, array('man_admin', 'add_admin', 'edit_admin', 'delete_admin', 'man_member', 'add_member', 'edit_member', 'delete_member', 'permission_group', 'add_permission_group', 'edit_permission_group', 'delete_permission_group')) && $func->checkRole())
-	{
-		$func->transfer("Bạn không có quyền truy cập vào khu vực này", "index.php", false);
-		exit;
-	}
-
 	switch($act)
 	{
 		/* Admins */
@@ -817,13 +809,7 @@
 	{
 		global $d, $func, $loginAdmin;
 
-		/* Hủy bỏ quyền */
-		$data_update_permission['secret_key'] = '';
-		$d->where('id',$_SESSION[$loginAdmin]['id']);
-		$d->update('user',$data_update_permission);
-
 		/* Hủy bỏ login */
-		if(!empty($_SESSION[TOKEN])) unset($_SESSION[TOKEN]);
 		unset($_SESSION[$loginAdmin]);
 		$func->redirect("index.php?com=user&act=login");
 	}

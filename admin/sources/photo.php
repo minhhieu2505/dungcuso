@@ -1,21 +1,6 @@
 <?php
 	if(!defined('SOURCES')) die("Error");
 
-	/* Kiểm tra active photo */
-	if(isset($config['photo']))
-	{
-		$arrCheck = array();
-		$actCheck = '';
-		if($act=='photo_static' || $act=='save_static' || $act=='save-watermark' || $act=='preview-watermark') $actCheck = 'photo_static';
-		else $actCheck = 'man_photo';
-		foreach($config['photo'][$actCheck] as $k => $v) $arrCheck[] = $k;
-		if(!count($arrCheck) || !in_array($type,$arrCheck)) $func->transfer("Trang không tồn tại", "index.php", false);
-	}
-	else
-	{
-		$func->transfer("Trang không tồn tại", "index.php", false);
-	}
-
 	switch($act)
 	{
 		/* Photo static */
@@ -27,18 +12,11 @@
 			savePhotoStatic();
 			break;
 
-		/* Watermark */
-		case "save-watermark":
-			saveWatermark();
-			break;
-		case "preview-watermark":
-			previewWatermark();
-			break;
-
 		/* Photos */
 		case "man_photo":
 			viewPhotos();
-			$template = "photo/man/photos";
+			$template 
+= "photo/man/photos";
 			break;
 		case "add_photo":
 			$template = "photo/man/photo_add";
@@ -58,55 +36,12 @@
 			$template = "404";
 	}
 
-	/* Save watermark */
-	function saveWatermark()
-	{
-		global $d, $func, $config, $type;
-
-		if(isset($_POST['data']))
-		{
-			parse_str(urldecode($_POST['data']), $data);
-			$upload = false;
-			if(isset($_FILES['file']))
-			{
-				$file_name = $func->uploadName($_FILES['file']["name"]);
-				$photo = $func->uploadImage("file", $config['photo']['photo_static'][$type]['img_type'], UPLOAD_TEMP, "tmp");
-				$upload = true;
-				$path = UPLOAD_TEMP.$photo;
-			}
-			else
-			{
-				$item = $d->rawQueryOne("select * from #_photo where act = ? and type = ? limit 0,1",array('photo_static',$type));
-				$path = UPLOAD_PHOTO.$item['photo'];
-			}
-		}
-
-		echo json_encode(
-			array(
-				"path" => $path,
-				"upload" => $upload,
-				"data" => $data['data']['options']['watermark'],
-				"position" => $data['data']['options']['watermark']['position'],
-				"image" => "../assets/images/preview-watermark.jpg"
-			)
-		);
-
-		exit;
-	}
-
-	/* Preview watermark */
-	function previewWatermark()
-	{
-		global $func;
-		$func->createThumb(500, 0, 1, $_GET['img'], null, "preview", true, $_GET);
-	}
-
 	/* View photo static */
 	function viewPhotoStatic()
 	{
 		global $d, $item, $type;
 
-		$item = $d->rawQueryOne("select * from #_photo where act = ? and type = ? limit 0,1",array('photo_static',$type));
+		$item = $d->rawQueryOne("select * from multi_media where type = ? limit 0,1",array($type));
 	}
 
 	/* Save photo static */
@@ -115,11 +50,10 @@
 		global $d, $func, $flash, $config, $type;
 
 		/* Post dữ liệu */
-		$row = $d->rawQueryOne("select id, options from #_photo where act = ? and type = ? limit 0,1",array('photo_static',$type));
+		$row = $d->rawQueryOne("select id from multi_media where type = ? limit 0,1",array($type));
 		$message = '';
 		$response = array();
 		$id = (!empty($row['id']) && $row['id'] > 0) ? $row['id'] : 0;
-		$option = (!empty($row['options']) && $row['options'] != '') ? json_decode($row['options'],true) : null;
 		$data = (!empty($_POST['data'])) ? $_POST['data'] : null;
 		if($data)
 		{
@@ -149,56 +83,6 @@
 		}
 
 		$data['type'] = $type;
-		$data['act'] = 'photo_static';
-
-		/* Valid data watermark */
-		if(!empty($config['photo']['photo_static'][$type]['watermark-advanced']))
-		{
-			if(empty($option['watermark']['position']))
-			{
-				$response['messages'][] = 'Chưa chọn vị trí đóng dấu';
-			}
-
-			if(empty($option['watermark']['per']))
-			{
-				$response['messages'][] = 'Tỉ lệ > 300 không được trống';
-			}
-
-			if(!empty($option['watermark']['per']) && !$func->isNumber($option['watermark']['per']))
-			{
-				$response['messages'][] = 'Tỉ lệ > 300 không hợp lệ';
-			}
-
-			if(empty($option['watermark']['small_per']))
-			{
-				$response['messages'][] = 'Tỉ lệ < 300 không được trống';
-			}
-
-			if(!empty($option['watermark']['small_per']) && !$func->isNumber($option['watermark']['small_per']))
-			{
-				$response['messages'][] = 'Tỉ lệ < 300 không hợp lệ';
-			}
-
-			if(empty($option['watermark']['max']))
-			{
-				$response['messages'][] = 'Kích thước tối đa không được trống';
-			}
-
-			if(!empty($option['watermark']['max']) && !$func->isNumber($option['watermark']['max']))
-			{
-				$response['messages'][] = 'Kích thước tối đa không hợp lệ';
-			}
-
-			if(empty($option['watermark']['min']))
-			{
-				$response['messages'][] = 'Kích thước tối thiểu không được trống';
-			}
-
-			if(!empty($option['watermark']['min']) && !$func->isNumber($option['watermark']['min']))
-			{
-				$response['messages'][] = 'Kích thước tối thiểu không hợp lệ';
-			}
-		}
 
 		/* Valid data link */
 		if(!empty($config['photo']['photo_static'][$type]['link']))
@@ -225,17 +109,6 @@
 
 		if(!empty($response))
 		{
-			/* Flash data watermark */
-			if(!empty($option['watermark']))
-			{
-				foreach($option['watermark'] as $k => $v)
-				{
-					if(!empty($v))
-					{
-						$flash->set($k, $v);
-					}
-				}
-			}
 
 			/* Flash data */
 			if(!empty($data))
@@ -253,16 +126,10 @@
 			$response['status'] = 'danger';
 			$message = base64_encode(json_encode($response));
 			$flash->set('message', $message);
-			$func->redirect("index.php?com=photo&act=photo_static&type=".$type);
+			$func->redirect("index.php?source=photo&act=photo_static&type=".$type);
 		}
 
-		/* Xóa cache watermark */
-		if(!empty($config['photo']['photo_static'][$type]['watermark']))
-		{
-			$func->removeDir(WATERMARK);
-			$func->RemoveFilesFromDirInXSeconds(UPLOAD_TEMP, 1);
-		}
-
+		
 		/* Save data */
 		if($id)
 		{
@@ -270,7 +137,7 @@
 
 			$d->where('id', $id);
 			$d->where('type', $type);
-			if($d->update('photo',$data))
+			if($d->update('multi_media',$data))
 			{
 				/* Photo */
 				if($func->hasFile("file"))
@@ -278,36 +145,37 @@
 					$photoUpdate = array();
 					$file_name = $func->uploadName($_FILES["file"]["name"]);
 
-					if($photo = $func->uploadImage("file", $config['photo']['photo_static'][$type]['img_type'], UPLOAD_PHOTO, $file_name))
+					if($photo = $func->uploadImage("file", $config['photo']['photo_static'][$type]['img_type'], "../upload/photo/", $file_name))
 					{
-						$row = $d->rawQueryOne("select id, photo from #_photo where id = ? and act = ? and type = ? limit 0,1",array($id,'photo_static',$type));
+						$row = $d->rawQueryOne("select id, photo from multi_media where id = ? and type = ? limit 0,1",array($id,$type));
 
 						if(!empty($row))
 						{
-							$func->deleteFile(UPLOAD_PHOTO.$row['photo']);
+							$func->deleteFile("../upload/photo/".$row['photo']);
 						}
 
 						$photoUpdate['photo'] = $photo;
 						$d->where('id', $id);
-						$d->update('photo', $photoUpdate);
+						$d->update('multi_media', $photoUpdate);
 						unset($photoUpdate);
 					}
 				}
 
-				$func->transfer("Cập nhật dữ liệu thành công", "index.php?com=photo&act=photo_static&type=".$type);
+				$func->transfer("Cập nhật dữ liệu thành công", "index.php?source=photo&act=photo_static&type=".$type);
 			}
 			else
 			{
-				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=photo&act=photo_static&type=".$type, false);
+				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?source=photo&act=photo_static&type=".$type, false);
 			}
 		}
 		else
 		{
+			
 			$data['date_created'] = time();
 
 			if((!empty($config['photo']['photo_static'][$type]['images']) && $func->hasFile("file")) || (isset($data['link_video']) && $data['link_video'] != ''))
 			{
-				if($d->insert('photo',$data))
+				if($d->insert('multi_media',$data))
 				{
 					$id_insert = $d->getLastInsertId();
 
@@ -317,25 +185,25 @@
 						$photoUpdate = array();
 						$file_name = $func->uploadName($_FILES['file']["name"]);
 
-						if($photo = $func->uploadImage("file", $config['photo']['photo_static'][$type]['img_type'], UPLOAD_PHOTO, $file_name))
+						if($photo = $func->uploadImage("file", $config['photo']['photo_static'][$type]['img_type'], './upload/photo', $file_name))
 						{
 							$photoUpdate['photo'] = $photo;
 							$d->where('id', $id_insert);
-							$d->update('photo', $photoUpdate);
+							$d->update('multi_media', $photoUpdate);
 							unset($photoUpdate);
 						}
 					}
 
-					$func->transfer("Lưu dữ liệu thành công", "index.php?com=photo&act=photo_static&type=".$type);
+					$func->transfer("Lưu dữ liệu thành công", "index.php?source=photo&act=photo_static&type=".$type);
 				}
 				else
 				{
-					$func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=photo&act=photo_static&type=".$type, false);
+					$func->transfer("Lưu dữ liệu bị lỗi", "index.php?source=photo&act=photo_static&type=".$type, false);
 				}
 			}
 			else
 			{
-				$func->transfer("Dữ liệu rỗng", "index.php?com=photo&act=photo_static&type=".$type, false);
+				$func->transfer("Dữ liệu rỗng", "index.php?source=photo&act=photo_static&type=".$type, false);
 			}
 		}
 	}
@@ -348,12 +216,12 @@
 		$perPage = 10;
 		$startpoint = ($curPage * $perPage) - $perPage;
 		$limit = " limit ".$startpoint.",".$perPage;
-		$sql = "select * from #_photo where type = ? and act <> ? order by numb,id desc $limit";
-		$items = $d->rawQuery($sql,array($type,'photo_static'));
-		$sqlNum = "select count(*) as 'num' from #_photo where type = ? and act <> ? order by numb,id desc";
-		$count = $d->rawQueryOne($sqlNum,array($type,'photo_static'));
+		$sql = "select * from multi_media where type = ?  order by id desc $limit";
+		$items = $d->rawQuery($sql,array($type));
+		$sqlNum = "select count(*) as 'num' from multi_media where type = ? order by id desc";
+		$count = $d->rawQueryOne($sqlNum,array($type));
 		$total = (!empty($count)) ? $count['num'] : 0;
-		$url = "index.php?com=photo&act=man_photo&type=".$type;
+		$url = "index.php?source=photo&act=man_photo&type=".$type;
 		$paging = $func->pagination($total,$perPage,$curPage,$url);
 	}
 
@@ -366,15 +234,15 @@
 
 		if(empty($id))
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage, false);
 		}
 		else
 		{
-			$item = $d->rawQueryOne("select * from #_photo where id = ? and act <> ? and type = ? limit 0,1",array($id,'photo_static',$type));
+			$item = $d->rawQueryOne("select * from multi_media where id = ? and type = ? limit 0,1",array($id,$type));
 
 			if(empty($item))
 			{
-				$func->transfer("Dữ liệu không có thực", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage, false);
+				$func->transfer("Dữ liệu không có thực", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage, false);
 			}
 		}
 	}
@@ -387,7 +255,7 @@
 		/* Check post */
 		if(empty($_POST))
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage, false);
 		}
 
 		/* Post dữ liệu */
@@ -405,7 +273,7 @@
 		}
 
 		/* Save data */
-		if($id)
+		if($id>0)
 		{
 			/* Valid data link */
 			if(!empty($config['photo']['man_photo'][$type]['link_photo']))
@@ -429,7 +297,7 @@
 					$response['messages'][] = 'Đường dẫn video không hợp lệ';
 				}
 			}
-
+			
 			if(!empty($response))
 			{
 				/* Flash data */
@@ -448,7 +316,7 @@
 				$response['status'] = 'danger';
 				$message = base64_encode(json_encode($response));
 				$flash->set('message', $message);
-				$func->redirect("index.php?com=photo&act=edit_photo&type=".$type."&id=".$id);
+				$func->redirect("index.php?source=photo&act=edit_photo&type=".$type."&id=".$id);
 			}
 
 			if(isset($_POST['status']))
@@ -463,11 +331,11 @@
 			}
 
 			$data['date_updated'] = time();
-			$data['act'] = 'photo_multi';
+
 
 			$d->where('id', $id);
 			$d->where('type', $type);
-			if($d->update('photo',$data))
+			if($d->update('multi_media',$data))
 			{
 				/* Photo */
 				if($func->hasFile("file"))
@@ -475,27 +343,27 @@
 					$photoUpdate = array();
 					$file_name = $func->uploadName($_FILES["file"]["name"]);
 
-					if($photo = $func->uploadImage("file", $config['photo']['man_photo'][$type]['img_type_photo'], UPLOAD_PHOTO, $file_name))
+					if($photo = $func->uploadImage("file", $config['photo']['man_photo'][$type]['img_type_photo'], '../upload/photo/', $file_name))
 					{
-						$row = $d->rawQueryOne("select id, photo from #_photo where id = ? and type = ? limit 0,1",array($id,$type));
+						$row = $d->rawQueryOne("select id, photo from multi_media where id = ? and type = ? limit 0,1",array($id,$type));
 
 						if(!empty($row))
 						{
-							$func->deleteFile(UPLOAD_PHOTO.$row['photo']);
+							$func->deleteFile('../upload/photo/'.$row['photo']);
 						}
 
 						$photoUpdate['photo'] = $photo;
 						$d->where('id', $id);
-						$d->update('photo', $photoUpdate);
+						$d->update('multi_media', $photoUpdate);
 						unset($photoUpdate);
 					}
 				}
 
-				$func->transfer("Cập nhật dữ liệu thành công", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage);
+				$func->transfer("Cập nhật dữ liệu thành công", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage, false);
+				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage, false);
 			}
 		}
 		else
@@ -522,7 +390,6 @@
 					}
 					$dataMulti['date_created'] = time();
 					$dataMulti['type'] = $type;
-					$dataMulti['act'] = 'photo_multi';
 
 					if(isset($config['photo']['man_photo'][$type]['images_photo']) && $config['photo']['man_photo'][$type]['images_photo'] == true)
 					{
@@ -572,7 +439,7 @@
 
 					if(($success_photo || $success_video) && empty($response))
 					{
-						if($d->insert('photo',$dataMulti))
+						if($d->insert('multi_media',$dataMulti))
 						{
 							$id_insert = $d->getLastInsertId();
 
@@ -584,11 +451,11 @@
 									$photoUpdate = array();
 									$file_name = $func->uploadName($_FILES["file".$i]["name"]);
 
-									if($photo = $func->uploadImage("file".$i, $config['photo']['man_photo'][$type]['img_type_photo'], UPLOAD_PHOTO,$file_name.$i))
+									if($photo = $func->uploadImage("file".$i, $config['photo']['man_photo'][$type]['img_type_photo'], "../upload/photo/",$file_name.$i))
 									{
 										$photoUpdate['photo'] = $photo;
 										$d->where('id', $id_insert);
-										$d->update('photo', $photoUpdate);
+										$d->update('multi_media', $photoUpdate);
 										unset($photoUpdate);
 									}
 								}
@@ -598,7 +465,7 @@
 						}
 						else
 						{
-							$func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage, false);
+							$func->transfer("Lưu dữ liệu bị lỗi", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage, false);
 						}
 					}
 				}
@@ -609,21 +476,22 @@
 					$response['status'] = 'danger';
 					$message = base64_encode(json_encode($response));
 					$flash->set('message', $message);
-					$func->redirect("index.php?com=photo&act=add_photo&type=".$type);
+					$func->redirect("index.php?source=photo&act=add_photo&type=".$type);
 				}
 
 				if($success == false)
 				{
-					$func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage, false);
+					$func->transfer("Lưu dữ liệu bị lỗi", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage, false);
 				}
 				else
 				{
-					$func->transfer("Lưu dữ liệu thành công", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage);
+					$func->transfer("Lưu dữ liệu thành công", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage);
 				}
 			}
 
-			$func->transfer("Dữ liệu rỗng", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage, false);
+			$func->transfer("Dữ liệu rỗng", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage, false);
 		}
+		
 	}
 
 	/* Delete photo */
@@ -635,17 +503,17 @@
 
 		if($id)
 		{
-			$row = $d->rawQueryOne("select id, photo from #_photo where id = ? and type = ? limit 0,1",array($id,$type));
+			$row = $d->rawQueryOne("select id, photo from multi_media where id = ? and type = ? limit 0,1",array($id,$type));
 
 			if(!empty($row))
 			{
 				$func->deleteFile(UPLOAD_PHOTO.$row['photo']);
-				$d->rawQuery("delete from #_photo where id = ? and type = ?",array($id,$type));
-				$func->transfer("Xóa dữ liệu thành công", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage);
+				$d->rawQuery("delete from multi_media where id = ? and type = ?",array($id,$type));
+				$func->transfer("Xóa dữ liệu thành công", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage, false);
+				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage, false);
 			}
 		}
 		elseif(isset($_GET['listid']))
@@ -655,20 +523,20 @@
 			for($i=0;$i<count($listid);$i++)
 			{
 				$id = htmlspecialchars($listid[$i]);
-				$row = $d->rawQueryOne("select id, photo from #_photo where id = ? and type = ? limit 0,1",array($id,$type));
+				$row = $d->rawQueryOne("select id, photo from multi_media where id = ? and type = ? limit 0,1",array($id,$type));
 
 				if(!empty($row))
 				{
 					$func->deleteFile(UPLOAD_PHOTO.$row['photo']);
-					$d->rawQuery("delete from #_photo where id = ? and type = ?",array($id,$type));
+					$d->rawQuery("delete from multi_media where id = ? and type = ?",array($id,$type));
 				}
 			}
 			
-			$func->transfer("Xóa dữ liệu thành công", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage);
+			$func->transfer("Xóa dữ liệu thành công", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage);
 		}
 		else
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=".$type."&p=".$curPage, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=photo&act=man_photo&type=".$type."&p=".$curPage, false);
 		}
 	}
 ?>

@@ -5,8 +5,8 @@
             <?php foreach($slider as $v) { ?>
                 <div>
                     <div class="slideshow-item">
-                        <a class="slideshow-image scale-img" href="<?=$v['link']?>" title="<?=$v['namevi']?>">
-                            <img src="upload/photo/<?=$v['photo']?>" alt="" width="720" height="385">
+                        <a class="slideshow-image scale-img" href="<?=$v['link']?>" title="<?=$v['name']?>">
+                            <img src="upload/photo/<?=$v['photo']?>" alt="" width="990" height="375">
                         </a>
                     </div>
                 </div>
@@ -18,7 +18,7 @@
             <?php foreach ($advertise1 as $v): ?>
                 <div>
                     <div class="items">
-                        <a class="scale-img" href="<?=$v['link']?>" title="<?=$v['namevi']?>">
+                        <a class="scale-img" href="<?=$v['link']?>" title="<?=$v['name']?>">
                             <img src="upload/photo/<?=$v['photo']?>" alt="" width="350" height="190">
                         </a>
                     </div>

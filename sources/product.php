@@ -7,10 +7,10 @@
 	if($id!='')
 	{
 		/* Lấy sản phẩm detail */
-		$rowDetail = $d->rawQueryOne("select type, id, namevi, slugvi, descvi, contentvi, code, view, id_list, photo, discount, sale_price, regular_price from #_product where id = ? and type = ? and find_in_set('hienthi',status) limit 0,1",array($id,$type));
+		$rowDetail = $d->rawQueryOne("select * from #_product where id = ? and find_in_set('hienthi',status) limit 0,1",array($id));
 
 		/* Lấy danh mục sản phẩm */
-		$productList = $d->rawQueryOne("select namevi from #_product_list where id = ? and type = ? and find_in_set('hienthi',status) limit 0,1",array($rowDetail['id_list'],$type));
+		$productList = $d->rawQueryOne("select * from category where id = ? and find_in_set('hienthi',status) limit 0,1",array($rowDetail['id_category']));
 
 
 		/* Cập nhật lượt xem */
@@ -22,32 +22,31 @@
 
 		/* Lấy sản phẩm cùng loại */
 		$where = "";
-		$where = "id <> ? and id_list = ? and type = ? and find_in_set('hienthi',status)";
-		$params = array($id,$rowDetail['id_list'],$type);
-		$sql = "select photo, namevi, slugvi, sale_price, regular_price, discount, id from #_product where $where order by numb,id desc $limit";
+		$where = "id <> ? and id_category = ? and find_in_set('hienthi',status)";
+		$params = array($id,$rowDetail['id_category']);
+		$sql = "select * from #_product where $where order by id desc $limit";
 		$product = $d->rawQuery($sql,$params);
 
-		$breadCumb = array($titleMain,$productList['namevi'],$rowDetail['namevi']);
+		$breadCumb = array($titleMain,$productList['name'],$rowDetail['name']);
 	} elseif ($idl!=''){
 		/* Lấy tất cả sản phẩm */
-		$productList = $d->rawQueryOne("select namevi from #_product_list where id = ? and type = ? and find_in_set('hienthi',status) limit 0,1",array($idl,$type));
-		$titleCate = $productList['namevi'];
+		$productList = $d->rawQueryOne("select name from category where id = ? and type = ? and find_in_set('hienthi',status) limit 0,1",array($idl,$type));
+		$titleCate = $productList['name'];
 		$where = "";
 		$where = "type = ? and id_list = ? and find_in_set('hienthi',status)";
 		$params = array($type, $idl);
-		$sql = "select photo, namevi, slugvi, sale_price, regular_price, discount, id from #_product where $where order by numb,id desc";
+		$sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where order by id desc";
 		$product = $d->rawQuery($sql,$params);
-		$breadCumb = array($titleMain,$productList['namevi']);
+		$breadCumb = array($titleMain,$productList['name']);
 	} else {
 		$breadCumb = array($titleMain);
 		/* Lấy tất cả sản phẩm */
 		$where = "";
-		$where = "type = ? and find_in_set('hienthi',status)";
+		$where = "id <> 0 and find_in_set('hienthi',status)";
 		if($com == 'san-pham-moi'){
 			$where .= " and find_in_set('hienthi',status)";
 		}
-		$params = array($type);
-		$sql = "select photo, namevi, slugvi, sale_price, regular_price, discount, id from #_product where $where order by numb,id desc";
+		$sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where order by id desc";
 		$product = $d->rawQuery($sql,$params);
 	}
 ?>

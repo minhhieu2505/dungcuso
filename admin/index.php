@@ -4,9 +4,6 @@
 	define('SOURCES','./sources/');
 	define('TEMPLATE','./templates/');
 	define('LAYOUT','layout/');
-	define('THUMBS','thumbs');
-	define('WATERMARK','../watermark');
-
 	require_once LIBRARIES."config.php";
     require_once LIBRARIES.'autoload.php';
     new AutoLoad();
@@ -14,16 +11,17 @@
     $flash = new Flash();
 	$cache = new Cache($d);
     $func = new Functions($d, $cache);
-
+	
 	/* Config type */
 	require_once LIBRARIES."config-type.php";
-
+	
 	/* Setting */
 	$setting = $d->rawQueryOne("select * from #_setting limit 0,1");
 	$optsetting = (isset($setting['options']) && $setting['options'] != '') ? json_decode($setting['options'],true) : null;
-
+	
 	/* Requick */
 	require_once LIBRARIES."requick.php";
+	
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -31,8 +29,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="assets/images/nina.png" rel="shortcut icon" type="image/x-icon" />
-	<title>Administrator - <?=$setting['namevi']?></title>
+	<link href="assets/images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+	<title>Administrator</title>
 	<!-- Css all -->
 	<?php include TEMPLATE.LAYOUT."css.php"; ?>
 	<script src="assets/js/jquery.min.js"></script>
@@ -50,7 +48,7 @@
 			</div>
 			<?php include TEMPLATE.LAYOUT."footer.php"; ?>
 		</div>
-	<?php } else {  include TEMPLATE."user/login_tpl.php" ; } ?>
+	<?php } else { include TEMPLATE."user/login_tpl.php" ; } ?>
 
 	<!-- Js all -->
 	<?php include TEMPLATE.LAYOUT."js.php"; ?>
