@@ -3,18 +3,17 @@
     <?php if (!empty($news)) {
         foreach ($news as $k => $v) { ?>
             <div class="news col-md-6">
-                <div class="row">
-                    <a class="news-image col-sm-5" href="<?= $v['slugvi'] ?>" title="<?= $v['namevi'] ?>">
+                <div class="row items-news">
+                    <a class="news-image col-sm-5" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
                         <span class="scale-img">
                             <img src="./upload/news/<?=$v['photo']?>" alt="" width="185" height="210">
                         </span>
                     </a>
                     <div class="news-info col-sm-7">
                         <h3 class="news-name">
-                            <a class="text-decoration-none text-split transition" href="<?= $v['slugvi'] ?>" title="<?= $v['namevi'] ?>"><?= $v['namevi'] ?></a>
+                            <a class="text-decoration-none text-split transition" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>
                         </h3>
-                        <p class="news-time">Ngày đăng: <?= date("d/m/Y h:i A", $v['date_created']) ?></p>
-                        <div class="news-desc text-split"><?= $v['descvi'] ?></div>
+                        <div class="news-desc text-split"><?= $v['description'] ?></div>
                     </div>
                 </div>
             </div>

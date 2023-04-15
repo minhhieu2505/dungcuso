@@ -68,7 +68,7 @@
         </ul>
         <div class="tab-content pt-4 pb-4" id="tabsProDetailContent">
             <div class="tab-pane fade show active content-ck" id="info-pro-detail" role="tabpanel">
-                <?= htmlspecialchars_decode($rowDetail['contentvi']) ?>
+                <?= htmlspecialchars_decode($rowDetail['content']) ?>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
 <div class="title-main"><span>Sản phẩm cùng loại</span></div>
 <div class="content-main w-clear">
     <?php if (!empty($product)) { ?>
-        <div class="grid-products">
+        <div class="grid-products grid-6">
         <?php foreach ($product as $k => $v) { ?>
     <div class="">
         <div class="product">
@@ -91,12 +91,12 @@
                     <div class="dflex align-items-center ">
                         <p class="price-product">
                             <?php if($v['discount']) { ?>
-                            <span class="price-new"><?=$v['sale_price']?> đ</span><br>
-                            <span class="price-old"><?=$v['regular_price']?> đ</span>
+                            <span class="price-new"><?=$func->formatMoney($v['sale_price']);?> </span><br>
+                            <span class="price-old"><?=$func->formatMoney($v['regular_price']);?> </span>
                             <span class="price-per"><?='-'.$v['discount'].'%'?></span>
                             <?php } else { ?>
                             <div class="price-new">
-                                <?php if($v['regular_price']) { $v['regular_price']; }
+                                <?php if($v['regular_price']) { $func->formatMoney($v['regular_price']); }
 								    else { ?>
                                     <span>
                                         <a href="tel:<?=$optsetting['hotline']?>" class="text-dark">Liên hệ</a>

@@ -43,8 +43,8 @@
 		/* Lấy tất cả sản phẩm */
 		$where = "";
 		$where = "id <> 0 and find_in_set('hienthi',status)";
-		if($com == 'san-pham-moi'){
-			$where .= " and find_in_set('hienthi',status)";
+		if($com == 'san-pham-ban-chay'){
+			$where .= " and find_in_set('banchay',status)";
 		}
 		$sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where order by id desc";
 		$product = $d->rawQuery($sql,$params);

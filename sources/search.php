@@ -8,9 +8,9 @@ if (!empty($_GET['keyword'])) {
 
     if ($tukhoa) {
         $where = "";
-        $where = "type = ? and (namevi LIKE ? or slugvi LIKE ?) and find_in_set('hienthi',status)";
-        $params = array("san-pham", "%$tukhoa%", "%$tukhoa%");
-        $sql = "select photo, namevi, slugvi, sale_price, regular_price, discount, id from #_product where $where order by numb,id desc";
+        $where = " (name LIKE ? or slug LIKE ?) and find_in_set('hienthi',status)";
+        $params = array("%$tukhoa%", "%$tukhoa%");
+        $sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where order by id desc";
         $product = $d->rawQuery($sql, $params);
     }
 }

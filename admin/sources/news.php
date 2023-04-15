@@ -46,7 +46,7 @@
 		$sqlNum = "select count(*) as 'num' from news where type = ? $where order by id desc";
 		$count = $d->rawQueryOne($sqlNum,array($type));
 		$total = (!empty($count)) ? $count['num'] : 0;
-		$url = "index.php?com=news&act=man".$strUrl."&type=".$type;
+		$url = "index.php?source=news&act=man".$strUrl."&type=".$type;
 		$paging = $func->pagination($total,$perPage,$curPage,$url);
 	}
 
@@ -60,7 +60,7 @@
 
 		if(empty($id))
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
 		}
 		else
 		{
@@ -80,7 +80,7 @@
 		/* Check post */
 		if(empty($_POST))
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
 		}
 
 		/* Post dữ liệu */
@@ -166,11 +166,11 @@
 
 			if($id)
 			{
-				$func->redirect("index.php?com=news&act=edit&type=".$type."&p=".$curPage.$strUrl."&id=".$id);
+				$func->redirect("index.php?source=news&act=edit&type=".$type."&p=".$curPage.$strUrl."&id=".$id);
 			}
 			else
 			{
-				$func->redirect("index.php?com=news&act=add&type=".$type."&p=".$curPage.$strUrl);
+				$func->redirect("index.php?source=news&act=add&type=".$type."&p=".$curPage.$strUrl);
 			}
 		}
 
@@ -206,11 +206,11 @@
 				}
 
 
-				$func->transfer("Cập nhật dữ liệu thành công", "index.php?com=news&act=man&type=".$type."&p=".$curPage.$strUrl);
+				$func->transfer("Cập nhật dữ liệu thành công", "index.php?source=news&act=man&type=".$type."&p=".$curPage.$strUrl);
 			}
 			else
 			{
-				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
+				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?source=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
 			}
 		}
 		else
@@ -236,12 +236,12 @@
 					}
 				}
 
-				$func->transfer("Lưu dữ liệu thành công", "index.php?com=news&act=man&type=".$type."&p=".$curPage.$strUrl);
+				$func->transfer("Lưu dữ liệu thành công", "index.php?source=news&act=man&type=".$type."&p=".$curPage.$strUrl);
 
 			}
 			else
 			{
-				$func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
+				$func->transfer("Lưu dữ liệu bị lỗi", "index.php?source=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
 			}
 		}
 	}
@@ -272,11 +272,11 @@
 					}
 				}
 
-				$func->transfer("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=".$type."&p=".$curPage.$strUrl);
+				$func->transfer("Xóa dữ liệu thành công", "index.php?source=news&act=man&type=".$type."&p=".$curPage.$strUrl);
 			}
 			else
 			{
-				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
+				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?source=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
 			}
 		}
 		elseif(isset($_GET['listid']))
@@ -306,11 +306,11 @@
 				}
 			}
 
-			$func->transfer("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=".$type."&p=".$curPage.$strUrl);
+			$func->transfer("Xóa dữ liệu thành công", "index.php?source=news&act=man&type=".$type."&p=".$curPage.$strUrl);
 		} 
 		else
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=news&act=man&type=".$type."&p=".$curPage.$strUrl, false);
 		}
 	}
 ?>

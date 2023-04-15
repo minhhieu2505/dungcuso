@@ -3,7 +3,7 @@
     </span></div>
 <div class="content-main  w-clear">
     <?php if (!empty($product)) { ?>
-        <div class="grid-products">
+        <div class="grid-products grid-6">
             <?php foreach ($product as $k => $v) { ?>
                 <div class="">
                     <div class="product">
@@ -18,10 +18,10 @@
                                     <p class="price-product">
                                         <?php if ($v['discount']) { ?>
                                             <span class="price-new">
-                                                <?= $v['sale_price'] ?> đ
+                                                <?= $func->formatMoney($v['sale_price'] );?> 
                                             </span><br>
                                             <span class="price-old">
-                                                <?= $v['regular_price'] ?> đ
+                                                <?= $func->formatMoney($v['regular_price'] );?>
                                             </span>
                                             <span class="price-per">
                                                 <?= '-' . $v['discount'] . '%' ?>
@@ -29,7 +29,7 @@
                                         <?php } else { ?>
                                             <span class="price-new">
                                                 <?php if ($v['regular_price']) {
-                                                    $v['regular_price'];
+                                                    $func->formatMoney($v['regular_price'] );
                                                 } else { ?>
                                                     <span><a href="tel:<?= $optsetting['hotline'] ?>" class="text-dark">Liên
                                                             hệ</a></span>

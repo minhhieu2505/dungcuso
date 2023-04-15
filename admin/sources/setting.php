@@ -173,7 +173,7 @@
 			$d->where('id',$id);
 			if($d->update('setting',$data))
 			{
-				$func->transfer("Cập nhật dữ liệu thành công", "index.php?source=setting&act=update");
+				$func->transfer("Cập nhật dữ liệu thành công ", "index.php?source=setting&act=update");
 			}
 			else
 			{

@@ -14,19 +14,19 @@ $(document).ready(function(){
   $('.slick-advertise').slick({
      slidesToShow: 2,
      slidesToScroll: 1,
-     arrows: false,
+     arrows: true,
      fade: false,
   });
   $('.slick-bestseller').slick({
      slidesToShow: 6,
      slidesToScroll: 1,
-     arrows: false,
+     arrows: true,
      fade: false,
   });
   $('.slick-product').slick({
      slidesToShow: 6,
      slidesToScroll: 1,
-     arrows: false,
+     arrows: true,
      fade: false,
   });
   $('.slick-brand').slick({
@@ -41,6 +41,12 @@ $(document).ready(function(){
      arrows: false,
      fade: false,
   });
+  $('.slick-news').slick({
+   slidesToShow: 4,
+   slidesToScroll: 1,
+   arrows: false,
+   fade: false,
+   });
 
   loadPaging("api/product.php?perpage=8",'.paging-product');
   $(".paging-product-category").each(function(){

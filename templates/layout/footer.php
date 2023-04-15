@@ -18,10 +18,41 @@
                 </div>
                 <div class="footer-news col-3">
                     <h2 class="footer-title">
-                        <?= $footer['namevi'] ?>
+                        CTY TNHH DỊCH VỤ CÔNG NGHỆ ĐỨC KHANG
                     </h2>
                     <div class="footer-info content-ck">
-                        <?= htmlspecialchars_decode($footer['contentvi']) ?>
+                        <div class="items">
+                            <p>
+                                <i class="fa-sharp fa-solid fa-location-dot"></i>
+                                <span>
+                                    <?= $optsetting['address'] ?>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="items">
+                            <p>
+                                <i class="fa-solid fa-phone"></i>
+                                <span>
+                                    <?= $optsetting['phone'] ?>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="items">
+                            <p>
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>
+                                    <?= $optsetting['email'] ?>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="items">
+                            <p>
+                                <i class="fa-solid fa-globe"></i>
+                                <span>
+                                    <?= $optsetting['website'] ?>
+                                </span>
+                            </p>
+                        </div>
                     </div>
 
                 </div>
@@ -29,18 +60,16 @@
                     <h2 class="footer-title">Chính sách</h2>
                     <ul class="footer-ul">
                         <?php foreach ($policy as $v) { ?>
-                            <li><a href="<?= $v['slugvi'] ?>" title="<?= $v['namevi'] ?>"><?= $v['namevi'] ?></a></li>
+                            <li><a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a></li>
                         <?php } ?>
                     </ul>
                 </div>
                 <div class="footer-news col-2">
                     <h2 class="footer-title">Danh mục</h2>
                     <ul class="footer-ul">
-                        <li><a href="thuong-hieu" title="Thương hiệu">Thương hiệu</a></li>
-                        <li><a href="khuyen-mai" title="Khuyến mãi">Khuyến mãi</a></li>
-                        <li><a href="san-pham-moi" title="Sản phẩm mới">Sản phẩm mới</a></li>
+                        <li><a href="san-pham-ban-chay" title="Sản phẩm bán chạy">Sản phẩm bán chạy</a></li>
                         <li><a href="huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua hàng</a></li>
-                        <li><a href="kinh-nghiem" title="Kinh nghiệm">Kinh nghiệm</a></li>
+                        <li><a href="tin-tuc" title="Tin tức">Tin tức</a></li>
                         <li><a href="lien-he" title="Liên hệ">Liên hệ</a></li>
                     </ul>
                 </div>

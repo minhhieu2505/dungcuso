@@ -3,6 +3,10 @@
 		<a href="index.php">
 			<img src="upload/photo/<?= $logo['photo'] ?>" alt="" width="200" height="75">
 		</a>
+		<div class="search w-clear">
+			<input type="text" id="keyword" placeholder="Tìm sản phẩm" onkeypress="doEnter(event,'keyword');" />
+			<p onclick="onSearch('keyword');"></p>
+		</div>
 		<div class="address-header">
 			<div class="icon-hd">
 				<i class="fa-sharp fa-solid fa-location-dot"></i>

@@ -8,7 +8,7 @@
     $social = $d->rawQuery("select name,id,link,photo from multi_media where type = 'social'");
     $slider = $d->rawQuery("select name,id,link,photo from multi_media where type = 'slide'");
     // $logo2 = $d->rawQueryOne("select photo from multi_media where type = 'logo2'");
-    // $policy = $d->rawQuery("select name,id,slugvi from #_news where type = 'chinh-sach'");
+    $policy = $d->rawQuery("select name,id,slug from #_news where type = 'chinh-sacha'");
     // $advertise1 = $d->rawQuery("select name,id,link,photo from multi_media where type = 'advertise1' limit 2");
     // $advertise = $d->rawQuery("select name,id,link,photo from multi_media where type = 'advertise2'");
     // $footer = $d->rawQueryOne("select name,id,contentvi from #_static where type = 'footer' limit 1");
