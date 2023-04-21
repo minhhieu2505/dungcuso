@@ -12,7 +12,7 @@ $d = new PDODb($config['database']);
 $flash = new Flash();
 $router = new AltoRouter();
 $func = new Functions($d, $cache);
-
+$cart = new Cart($d);
 /* Router */
 require_once LIBRARIES . "router.php";
 include TEMPLATE . "index.php";

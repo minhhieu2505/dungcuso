@@ -47,7 +47,7 @@
 	function viewMans()
 	{
 		
-		global $d, $func, $comment, $strUrl, $curPage, $items, $paging, $type;
+		global $d, $func, $comment, $strUrl, $curPage, $items, $paging, $type, $$category;
 
 		$where = "";
 
@@ -56,6 +56,8 @@
 			$keyword = htmlspecialchars($_REQUEST['keyword']);
 			$where .= " and (name LIKE '%$keyword%')";
 		}
+
+		$category = $d->rawQuery("select * from category order by id desc");
 
 		$perPage = 10;
 		$startpoint = ($curPage * $perPage) - $perPage;
@@ -72,11 +74,13 @@
 	/* Edit man */
 	function editMan()
 	{
-		global $d, $func, $strUrl, $curPage, $item, $com, $act;
+		global $d, $func, $strUrl, $curPage, $item, $com, $act, $category;
 
 		if(!empty($_GET['id'])) $id = htmlspecialchars($_GET['id']);
 		else if(!empty($_GET['id_copy'])) $id = htmlspecialchars($_GET['id_copy']);
 		else $id = 0;
+
+		$category = $d->rawQuery("select * from category order by id desc");
 
 		if(empty($id))
 		{
@@ -110,6 +114,8 @@
 		$savehere = (isset($_POST['save-here'])) ? true : false;
 		$id = (!empty($_POST['id'])) ? htmlspecialchars($_POST['id']) : 0;
 		$data = (!empty($_POST['data'])) ? $_POST['data'] : null;
+
+		// $func->dump($_POST,true);
 
 		
 		if($data)

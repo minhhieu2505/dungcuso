@@ -64,7 +64,7 @@ if (!empty($com) && !in_array($com, ['tim-kiem', 'san-pham-moi'])) {
 			$where .= " and type = '" . $urlType . "' ";
 		}
 		if (!empty($urlTbl) && !in_array($urlTbl, ['static', 'photo'])) {
-			$row = $d->rawQueryOne("select id from $urlTbl where $sluglang = ? $where and find_in_set('hienthi',status) limit 0,1", array($com));
+			$row = $d->rawQueryOne("select id from $urlTbl where slug = ? $where and find_in_set('hienthi',status) limit 0,1", array($com));
 			if (!empty($row['id'])) {
 				$_GET[$urlField] = $row['id'];
 				$com = $urlCom;
@@ -114,6 +114,11 @@ switch ($com) {
 		$source = "search";
 		$template = "product/product";
 		$titleMain = "Tìm kiếm";
+		break;
+	case 'gio-hang':
+		$source = "order";
+		$template = 'order/order';
+		$titleMain = "Giỏ hàng";
 		break;
 	case 'index':
 		$source = "index";

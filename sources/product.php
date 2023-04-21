@@ -30,11 +30,11 @@
 		$breadCumb = array($titleMain,$productList['name'],$rowDetail['name']);
 	} elseif ($idl!=''){
 		/* Lấy tất cả sản phẩm */
-		$productList = $d->rawQueryOne("select name from category where id = ? and type = ? and find_in_set('hienthi',status) limit 0,1",array($idl,$type));
+		$productList = $d->rawQueryOne("select name from category where id = ? and find_in_set('hienthi',status) limit 0,1",array($idl));
 		$titleCate = $productList['name'];
 		$where = "";
-		$where = "type = ? and id_list = ? and find_in_set('hienthi',status)";
-		$params = array($type, $idl);
+		$where = " id_category = ? and find_in_set('hienthi',status)";
+		$params = array($idl);
 		$sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where order by id desc";
 		$product = $d->rawQuery($sql,$params);
 		$breadCumb = array($titleMain,$productList['name']);
@@ -48,5 +48,8 @@
 		}
 		$sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where order by id desc";
 		$product = $d->rawQuery($sql,$params);
+
+		$minPrice = $d->rawQueryOne("select sale_price from #_product where id<>0 order by sale_price asc");
+		$maxPrice = $d->rawQueryOne("select sale_price from #_product where id<>0 order by sale_price desc");
 	}
 ?>

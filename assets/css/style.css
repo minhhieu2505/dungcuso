@@ -14,7 +14,7 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; marg
 .none { display: none; } 
 .hidden-seoh { visibility: hidden; height: 0px; margin: 0px; overflow: hidden; } 
 .wrap-main,
-.wrap-content { max-width: 1330px; margin: 20px auto; padding: 0px 15px; } 
+.wrap-content {max-width: 1330px;margin: 0px auto;padding: 0px 15px;} 
 .wrap-home { max-width: 100%; padding: 0px; margin: 30px 0; } 
 .wrap-content { margin: auto; } 
 .content-ck img { height: auto !important; } 
@@ -243,7 +243,9 @@ img:not([src]) { visibility: hidden; }
 .brand { display: block; border: 1px solid #eee; max-width: 160px; margin: 0px auto; } 
 
 /* Product */
-.grid-products { display: grid; grid-gap: 20px; grid-template-columns: repeat(4, 1fr); } 
+.grid-products {display: grid;grid-gap: 20px;grid-template-columns: repeat(4, 1fr);background: #fff;}
+
+.grid-products.grid-4 {} 
 .product { } 
 .box-product { position: relative; display: block; margin-bottom: 1rem; padding: 10px; border: 0.5px solid #ddd; } 
 .box-product .pic-product { display: block; background: #ffffff; } 
@@ -938,3 +940,46 @@ a.slideshow-image.scale-img img { object-fit: cover; }
 .items-newsnb { position: relative; } 
 
 .menu .dflex { justify-content: start; } 
+
+.box-filter {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.wrap-main {
+    /* background: #f3f3f3; */
+}
+
+.filter-items-name {}
+.filter-items-name { font-weight: 700; text-transform: uppercase; font-size: 18px; color: #555555; position: relative; padding-bottom: 15px; margin-bottom: 20px; }
+.filter-items-name:before { content: ''; position: absolute; background: #e5e5e5; width: 30px; height: 3px; bottom: 0; left: 0; }
+
+.name-filter {
+    font-size: 17px;
+}
+
+.check-box {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ccc;
+}
+
+.items-filter-child {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-items .items-filter-child:last-child {
+    border-bottom: none;
+}
+
+.check-box i {
+    line-height: 25px;
+    text-align: center;
+    display: block;
+}

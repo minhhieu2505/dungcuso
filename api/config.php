@@ -11,15 +11,14 @@
     require_once LIBRARIES.'autoload.php';
     new AutoLoad();
     $d = new PDODb($config['database']);
-    $cache = new Cache($d);
     $func = new Functions($d, $cache);
+    $cart = new Cart($d);
     // $cart = new Cart($d);
 
     /* Slug lang */
     $sluglang = 'slugvi';
 
     /* Setting */
-    $sqlCache = "select * from #_setting";
-    $setting = $cache->get($sqlCache, null, 'fetch', 7200);
+    $setting = $d->rawQueryOne("select * from #_setting");
     $optsetting = (!empty($setting['options'])) ? json_decode($setting['options'],true) : null;
 ?>

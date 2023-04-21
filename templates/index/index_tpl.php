@@ -252,7 +252,6 @@
 	</div>
 <?php endif ?>
 
-
 <?php /* 
  Criteria
  <?php if ($advertise): ?>
