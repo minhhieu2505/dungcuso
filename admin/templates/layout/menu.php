@@ -80,8 +80,7 @@
                                 if ($com == 'photo' && $_GET['type'] == $k && $act == 'photo_static')
                                     $active = "active"; ?>
                                 <li class="nav-item">
-                                    <a class="nav-link"
-                                        href="index.php?source=photo&act=photo_static&type=<?= $k ?>"
+                                    <a class="nav-link" href="index.php?source=photo&act=photo_static&type=<?= $k ?>"
                                         title="<?= $v['title_main'] ?>"><i
                                             class="nav-icon text-sm far fa-caret-square-right"></i>
                                         <p>
@@ -103,7 +102,8 @@
                                     if ($com == 'photo' && $_GET['type'] == $k && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo'))
                                         $active = "active"; ?>
                                     <li class="nav-item <?= $none ?>">
-                                        <a class="nav-link <?= $active ?>" href="index.php?source=photo&act=man_photo&type=<?= $k ?>"
+                                        <a class="nav-link <?= $active ?>"
+                                            href="index.php?source=photo&act=man_photo&type=<?= $k ?>"
                                             title="<?= $v['title_main_photo'] ?>"><i
                                                 class="nav-icon text-sm far fa-caret-square-right"></i>
                                             <p>
@@ -121,6 +121,12 @@
                     <a class="nav-link" href="index.php?source=setting&act=update" title="Thiết lập thông tin">
                         <i class="nav-icon text-sm fas fa-cogs"></i>
                         <p>Thiết lập thông tin</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?source=order&act=man" title="Quản lý đơn hàng">
+                        <i class="nav-icon text-sm fas fa-shopping-bag"></i>
+                        <p>Quản lý đơn hàng</p>
                     </a>
                 </li>
             </ul>

@@ -143,6 +143,21 @@ $(document).ready(function () {
 		var code = $(this).data('code');
 		updateCart(id, code, quantity);
 	});
+	/* Quantity */
+	$('body').on('click', '.btn-opencart', function () {
+		$.ajax({
+			url: 'api/open_cart.php',
+			type: 'POST',
+			dataType: 'html',
+			async: false,
+			data: {
+			},
+			success: function (result) {
+				$('#popup-cart .modal-body').html(result);
+				$('#popup-cart').modal('show');
+			}
+		});
+	});
 	/* Payments */
 	if (isExist($('.payments-label'))) {
 		$('.payments-label').click(function () {

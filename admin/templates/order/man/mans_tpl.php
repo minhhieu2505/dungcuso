@@ -1,9 +1,9 @@
 <?php
-    $linkMan = $linkFilter = "index.php?com=order&act=man";
-    $linkEdit = "index.php?com=order&act=edit";
-    $linkDelete = "index.php?com=order&act=delete";
-    $linkExcel = "index.php?com=excelAll";
-    $linkWord = "index.php?com=wordAll";
+    $linkMan = $linkFilter = "index.php?source=order&act=man";
+    $linkEdit = "index.php?source=order&act=edit";
+    $linkDelete = "index.php?source=order&act=delete";
+    $linkExcel = "index.php?source=excelAll";
+    $linkWord = "index.php?source=wordAll";
 ?>
 <!-- Content Header -->
 <section class="content-header text-sm">
@@ -63,8 +63,7 @@
         </div>
     </div>
     <div class="card-footer text-sm sticky-top">
-        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?=$linkDelete?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
-        <div class="form-inline form-search d-inline-block align-middle ml-3">
+        <div class="form-inline form-search d-inline-block align-middle">
             <div class="input-group input-group-sm">
                 <input class="form-control form-control-navbar text-sm" type="search" id="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="<?=(isset($_GET['keyword'])) ? $_GET['keyword'] : ''?>" onkeypress="doEnter(event,'keyword','<?=$linkMan?>')">
                 <div class="input-group-append bg-primary rounded-right">
@@ -204,10 +203,10 @@
                                 ) { ?>
                                     <td class="align-middle text-center text-lg text-nowrap">
                                         <?php if(isset($config['order']['excel']) && $config['order']['excel'] == true) { ?>
-                                            <a class="text-primary mr-2" href="index.php?com=excel&id=<?=$items[$i]['id']?>" title="Xuất file excel"><i class="far fa-file-excel"></i></a>
+                                            <a class="text-primary mr-2" href="index.php?source=excel&id=<?=$items[$i]['id']?>" title="Xuất file excel"><i class="far fa-file-excel"></i></a>
                                         <?php } ?>
                                         <?php if(isset($config['order']['word']) && $config['order']['word'] == true) { ?>
-                                            <a class="text-primary" href="index.php?com=word&id=<?=$items[$i]['id']?>" title="Xuất file word"><i class="far fa-file-word"></i></a>
+                                            <a class="text-primary" href="index.php?source=word&id=<?=$items[$i]['id']?>" title="Xuất file word"><i class="far fa-file-word"></i></a>
                                         <?php } ?>
                                     </td>
                                 <?php } ?>
@@ -228,6 +227,5 @@
         </div>
     <?php } ?>
     <div class="card-footer text-sm">
-        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?=$linkDelete?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
     </div>
 </section>

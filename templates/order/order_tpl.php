@@ -156,7 +156,7 @@
                                 <textarea class="form-control text-sm" id="requirements" name="dataOrder[requirements]" placeholder="Ghi chú" /><?= (!empty($flash->has('requirements'))) ? $flash->get('requirements') : '' ?></textarea>
                             </div>
                         </div>
-                        <input type="submit" class="btn btn-primary btn-cart w-100" name="thanhtoan" value="Thanh toán" disabled />
+                        <input type="submit" class="btn btn-primary btn-cart w-100" name="thanhtoan" value="Thanh toán" />
                     </div>
                 </div>
             <?php } else { ?>

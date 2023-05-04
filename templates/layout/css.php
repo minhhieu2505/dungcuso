@@ -8,5 +8,5 @@
 <link rel="stylesheet" type="text/css" href="./assets/css/cart.css">
 <link rel="stylesheet" type="text/css" href="./assets/confirm/confirm.css">
 <link rel="stylesheet" type="text/css" href="./assets/ion.rangeSlider/ion.rangeSlider.css">
-<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-<link rel="stylesheet" type="text/css" href="./assets/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="./assets/css/style.css?v=1.1">
+<link rel="stylesheet" type="text/css" href="./assets/slick/slick.css?v=1.1"/>

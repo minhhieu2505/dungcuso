@@ -15,5 +15,5 @@
 <script type="text/javascript" src="./assets/magiczoomplus/magiczoomplus.js"></script>
 <!-- <script type="text/javascript" src="./assets/owlcarousel2/owl.carousel.js"></script> -->
 <script type="text/javascript" src="./assets/ion.rangeSlider/ion.rangeSlider.js"></script>
-<script type="text/javascript" src="./assets/js/apps.js"></script>
+<script type="text/javascript" src="./assets/js/apps.js?v=1.1"></script>
 
