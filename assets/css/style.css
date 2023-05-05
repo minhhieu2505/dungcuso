@@ -989,8 +989,3 @@ a.slideshow-image.scale-img img { object-fit: cover; }
  } 
 .btn-opencart i { font-size: 22px; color: #fff; } 
 .btn-opencart { height: 50px; width: 50px; background: var(--main-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; position: fixed; right: 20px; bottom: 320px; cursor: pointer; } 
-
-
-.full-row {
-    grid-area: 1 / 1 / 2 / 5;
-}
