@@ -39,5 +39,11 @@
 				</span>
 			</div>
 		</div>
+		<div class="cart-header">
+			<div class="icon-hd">
+				<i class="fa-solid fa-cart-shopping"></i>
+			</div>
+			<span class="count-cart">0</span>
+		</div>
 	</div>
 </div>

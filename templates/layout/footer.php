@@ -81,7 +81,7 @@
                             data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                             <div class="fb-xfbml-parse-ignore">
                                 <blockquote cite="<?= $optsetting['fanpage'] ?>">
-                                    <a href="<?= $optsetting['fanpage'] ?>">Facebook</a>
+                                    <a href="<?= $optsetting['fanpage'] ?>"></a>
                                 </blockquote>
                             </div>
                         </div>

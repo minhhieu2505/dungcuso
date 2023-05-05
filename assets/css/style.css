@@ -986,3 +986,18 @@ a.slideshow-image.scale-img img { object-fit: cover; }
  } 
 .btn-opencart i { font-size: 22px; color: #fff; } 
 .btn-opencart { height: 50px; width: 50px; background: var(--main-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; position: fixed; right: 20px; bottom: 320px; cursor: pointer; } 
+.cart-header span {
+    color: #fff;
+    background: #d3041e;
+    position: absolute;
+    top: -3px;
+    width: 15px;
+    height: 15px;
+    right: 10px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
