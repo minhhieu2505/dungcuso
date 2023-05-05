@@ -95,14 +95,15 @@
                             <span class="price-old"><?=$func->formatMoney($v['regular_price']);?> </span>
                             <span class="price-per"><?='-'.$v['discount'].'%'?></span>
                             <?php } else { ?>
-                            <div class="price-new">
-                                <?php if($v['regular_price']) { $func->formatMoney($v['regular_price']); }
-								    else { ?>
-                                    <span>
-                                        <a href="tel:<?=$optsetting['hotline']?>" class="text-dark">Liên hệ</a>
+                                <span class="price-new">
+                                        <?php if ($v['regular_price']) { ?>
+                                            <?= $func->formatMoney($v['regular_price']); ?>
+                                        <?php } else { ?>
+                                            <span><a href="tel:<?= $optsetting['hotline'] ?>" class="text-dark">Liên
+                                                    hệ</a></span>
+                                        <?php }
+                                        ?>
                                     </span>
-                                <?php } ?>
-                            </div>
                             <?php } ?>
                         </p>
                         <div class="product-cart"><a class="addcart" data-id="<?=$v['id']?>" data-action="addnow"><i

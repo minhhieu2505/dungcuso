@@ -2,13 +2,36 @@
     <div class="col-lg-3">
         <div class="box-filter">
             <div class="filter-items">
+                <div class="filter-items-name"> Sắp xếp</div>
+                <div class="items-filter-sort" data-sort="0">
+                    <div class="name-filter">
+                        Mặc định
+                    </div>
+                    <div class="check-box"><i></i></div>
+                </div>
+                <div class="items-filter-sort" data-sort="1">
+                    <div class="name-filter">
+                        Tăng dần
+                    </div>
+                    <div class="check-box"><i></i></div>
+                </div>
+                <div class="items-filter-sort" data-sort="2">
+                    <div class="name-filter">
+                        Giảm dần
+                    </div>
+                    <div class="check-box"><i></i></div>
+                </div>
+            </div>
+            <div class="filter-items">
                 <div class="filter-items-name"> Danh mục sản phẩm</div>
                 <?php foreach ($splist as $key => $v) { ?>
-                    <div class="items-filter-child filter-category" data-idcategory="<?=$v['id']?>">
-                        <div class="name-filter"><?=$v['name']?></div>
+                    <div class="items-filter-child filter-category" data-idcategory="<?= $v['id'] ?>">
+                        <div class="name-filter">
+                            <?= $v['name'] ?>
+                        </div>
                         <div class="check-box"><i></i></div>
                     </div>
-                <?php } ?>  
+                <?php } ?>
             </div>
             <div class="filter-items">
                 <div class="filter-items-name"> Giá</div>
@@ -39,7 +62,7 @@
                                                 class="text-decoration-none text-split2"><?= $v['name'] ?></a></h3>
                                         <div class="dflex align-items-center ">
                                             <p class="price-product">
-                                                <?php if ($v['discount']) { ?>
+                                                <?php if ($v['discount'] > 0) { ?>
                                                     <span class="price-new">
                                                         <?= $func->formatMoney($v['sale_price']); ?>
                                                     </span><br>
@@ -51,13 +74,12 @@
                                                     </span>
                                                 <?php } else { ?>
                                                     <span class="price-new">
-                                                        <?php if ($v['regular_price']) {
-                                                            $func->formatMoney($v['regular_price']);
-                                                        } else { ?>
+                                                        <?php if ($v['regular_price']) { ?>
+                                                            <?= $func->formatMoney($v['regular_price']); ?>
+                                                        <?php } else { ?>
                                                             <span><a href="tel:<?= $optsetting['hotline'] ?>" class="text-dark">Liên
                                                                     hệ</a></span>
-                                                        <?php }
-                                                        ?>
+                                                        <?php } ?>
                                                     </span>
                                                 <?php } ?>
                                             </p>

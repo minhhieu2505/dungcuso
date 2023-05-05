@@ -65,7 +65,9 @@
 											<div class="dflex align-items-center ">
 												<p class="price-product">
 													<?php if ($v['discount']) { ?>
-														<span class="price-new"><?= $func->formatMoney($v['sale_price']); ?></span><br>
+														<span class="price-new">
+															<?= $func->formatMoney($v['sale_price']); ?>
+														</span><br>
 														<span class="price-old">
 															<?= $func->formatMoney($v['regular_price']); ?>
 														</span>
@@ -74,9 +76,9 @@
 														</span>
 													<?php } else { ?>
 														<span class="price-new">
-															<?php if ($v['regular_price']) {
-																$func->formatMoney($v['regular_price']);
-															} else { ?>
+															<?php if ($v['regular_price']) { ?>
+																<?= $func->formatMoney($v['regular_price']); ?>
+															<?php } else { ?>
 																<span><a href="tel:<?= $optsetting['hotline'] ?>" class="text-dark">Liên
 																		hệ</a></span>
 															<?php }
@@ -125,7 +127,9 @@
 											<div class="dflex align-items-center ">
 												<p class="price-product">
 													<?php if ($v['discount']) { ?>
-														<span class="price-new"><?= $func->formatMoney($v['sale_price']); ?></span><br>
+														<span class="price-new">
+															<?= $func->formatMoney($v['sale_price']); ?>
+														</span><br>
 														<span class="price-old">
 															<?= $func->formatMoney($v['regular_price']); ?>
 														</span>
@@ -134,9 +138,9 @@
 														</span>
 													<?php } else { ?>
 														<span class="price-new">
-															<?php if ($v['regular_price']) {
-																$func->formatMoney($v['regular_price']);
-															} else { ?>
+															<?php if ($v['regular_price']) { ?>
+																<?= $func->formatMoney($v['regular_price']); ?>
+															<?php } else { ?>
 																<span><a href="tel:<?= $optsetting['hotline'] ?>" class="text-dark">Liên
 																		hệ</a></span>
 															<?php }
@@ -185,7 +189,9 @@
 											<div class="dflex align-items-center ">
 												<p class="price-product">
 													<?php if ($v['discount']) { ?>
-														<span class="price-new"><?= $func->formatMoney($v['sale_price']); ?></span><br>
+														<span class="price-new">
+															<?= $func->formatMoney($v['sale_price']); ?>
+														</span><br>
 														<span class="price-old">
 															<?= $func->formatMoney($v['regular_price']); ?>
 														</span>
@@ -194,9 +200,9 @@
 														</span>
 													<?php } else { ?>
 														<span class="price-new">
-															<?php if ($v['regular_price']) {
-																$func->formatMoney($v['regular_price']);
-															} else { ?>
+															<?php if ($v['regular_price']) { ?>
+																<?= $func->formatMoney($v['regular_price']); ?>
+															<?php } else { ?>
 																<span><a href="tel:<?= $optsetting['hotline'] ?>" class="text-dark">Liên
 																		hệ</a></span>
 															<?php }
@@ -241,8 +247,12 @@
 								</span>
 							</div>
 							<p class="news-time mb-0">
-								<span><?= date("d", $v['date_created']) ?></span>
-								<span>Th<?= date("m", $v['date_created']) ?></span>
+								<span>
+									<?= date("d", $v['date_created']) ?>
+								</span>
+								<span>Th
+									<?= date("m", $v['date_created']) ?>
+								</span>
 							</p>
 						</div>
 					</div>

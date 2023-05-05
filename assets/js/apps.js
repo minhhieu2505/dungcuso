@@ -194,6 +194,12 @@ $(document).ready(function () {
 		$(this).find('i').removeClass('fa-duotone fa-check');
 		$(this).removeClass('active');
 	})
+	$('body').on('click', '.items-filter-sort', function () {
+		$('.items-filter-sort').removeClass('active');
+		$('.items-filter-sort').find('i').removeClass('fa-duotone fa-check');
+		$(this).addClass('active');
+		$(this).find('i').addClass('fa-duotone fa-check');
+	})
 });
 
 
@@ -207,8 +213,13 @@ function LoadFilter() {
 		id_category += id + ",";
 	});
 
+	$('.items-filter-sort.active').each(function () {
+		var sort = $(this).data('sort');
+		id_sort = sort;
+	});
+
 	var $inp = $('#range_price');
-	var from = $inp.data("from"); // reading input data-from attribute
+	var from = $inp.data("from"); 
 	var to = $inp.data("to");
 	start = from;
 
@@ -217,7 +228,7 @@ function LoadFilter() {
 		url: "api/filter.php",
 		type: "POST",
 		data: {
-			id_category, from, to
+			id_category, from, to, id_sort
 		},
 		success: function (result) {
 			$('.grid-products').html(result);
@@ -230,6 +241,9 @@ $(document).ready(function () {
 		LoadFilter();
 	});
 	$('body').on('change', '#range_price', function () {
+		LoadFilter();
+	})
+	$('body').on('click', '.items-filter-sort', function () {
 		LoadFilter();
 	})
 });

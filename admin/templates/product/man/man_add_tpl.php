@@ -125,10 +125,10 @@
                         <div class="form-group-category row">
                         <div class="form-group col-xl-12 col-sm-6">
                                 <label class="d-block" for="id_list">Danh mục cấp 1:</label>
-                                <select name="data['id_category']" id="id_category" class="select2 w-100">
+                                <select name="data[id_category]" id="id_category" class="select2 w-100">
                                     <option value="">Chọn danh mục sản phẩm</option>
                                     <?php foreach($category as $v) { ?>
-                                        <option value="<?=$v['id']?> <?=($v['id'] == $item['id_category'] ? 'selected' : '')?>"><?=$v['name']?></option>
+                                        <option value="<?=$v['id']?>" <?=($v['id'] == $item['id_category'] ? 'selected' : '')?> ><?=$v['name']?></option>
                                     <?php }?>
                                 </select>
                             </div>

@@ -966,7 +966,7 @@ a.slideshow-image.scale-img img { object-fit: cover; }
  border: 1px solid #ccc; 
  } 
 
-.items-filter-child { 
+.items-filter-sort,.items-filter-child { 
  margin-bottom: 10px; 
  padding-bottom: 10px; 
  border-bottom: 1px solid #ccc; 
@@ -978,6 +978,9 @@ a.slideshow-image.scale-img img { object-fit: cover; }
 .filter-items .items-filter-child:last-child { 
  border-bottom: none; 
  } 
+.filter-items .items-filter-sort:last-child { 
+ border-bottom: none; 
+ } 
 
 .check-box i { 
  line-height: 25px; 
@@ -986,3 +989,8 @@ a.slideshow-image.scale-img img { object-fit: cover; }
  } 
 .btn-opencart i { font-size: 22px; color: #fff; } 
 .btn-opencart { height: 50px; width: 50px; background: var(--main-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; position: fixed; right: 20px; bottom: 320px; cursor: pointer; } 
+
+
+.full-row {
+    grid-area: 1 / 1 / 2 / 5;
+}

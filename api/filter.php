@@ -11,23 +11,33 @@ $start = ($p - 1) * $pagingAjax->perpage;
 $pageLink = "api/product.php?perpage=" . $pagingAjax->perpage;
 $tempLink = "";
 $where = "";
+$order = "";
 $params = array();
 
 $id_category = (!empty($_POST['id_category'])) ? htmlspecialchars($_POST['id_category']) : "";
+$id_sort = (!empty($_POST['id_sort'])) ? htmlspecialchars($_POST['id_sort']) : 0;
 $from = (!empty($_POST['from'])) ? htmlspecialchars($_POST['from']) : 0;
 $to = (!empty($_POST['to'])) ? htmlspecialchars($_POST['to']) : 0;
-if(!empty($id_category)){
+if (!empty($id_category)) {
     $where .= " and find_in_set(id_category,'$id_category')";
 }
-if(!empty($to)){
-    $where .= " and sale_price >=".$from." and sale_price <= ".$to;
+if (!empty($to)) {
+    $where .= " and sale_price >=" . $from . " and sale_price <= " . $to;
+}
+
+if ($id_sort == 2) {
+    $order .= " order by sale_price desc";
+} elseif ($id_sort == 1) {
+    $order .= " order by sale_price asc";
+} else {
+    $order .= " order by id desc";
 }
 
 $tempLink .= "&p=";
 $pageLink .= $tempLink;
 
 /* Get data */
-$sql = "select name, slug, id, photo, regular_price, sale_price, discount from product where id <> 0 $where and find_in_set('hienthi',status) order by id desc";
+$sql = "select name, slug, id, photo, regular_price, sale_price, discount from product where id <> 0 $where and find_in_set('hienthi',status) $order ";
 $sqlCache = $sql . " ";
 $items = $d->rawQuery($sqlCache, $params);
 
@@ -38,50 +48,58 @@ $items = $d->rawQuery($sqlCache, $params);
 // $pagingItems = $pagingAjax->getAllPageLinks($countItems, $pageLink, $eShow);
 ?>
 <?php if ($items) { ?>
-        <?php foreach ($items as $k => $v) { ?>
-            <div class="">
-                <div class="product">
-                    <div class="box-product">
-                        <a href="<?= $v['slug'] ?>" class="pic-product scale-img">
-                            <img src="upload/product/<?= $v['photo'] ?>" alt="" width="600" height="600">
-                        </a>
-                        <div class="info-product">
-                            <h3 class="name-product"><a href="<?= $v['slug'] ?>" class="text-decoration-none text-split2"><?= $v['name'] ?></a></h3>
-                            <div class="dflex align-items-center ">
-                                <p class="price-product">
-                                    <?php if ($v['discount']) { ?>
-                                        <span class="price-new">
-                                            <?= $func->formatMoney($v['sale_price']); ?>
-                                        </span><br>
-                                        <span class="price-old">
+    <?php foreach ($items as $k => $v) { ?>
+        <div class="">
+            <div class="product">
+                <div class="box-product">
+                    <a href="<?= $v['slug'] ?>" class="pic-product scale-img">
+                        <img src="upload/product/<?= $v['photo'] ?>" alt="" width="600" height="600">
+                    </a>
+                    <div class="info-product">
+                        <h3 class="name-product"><a href="<?= $v['slug'] ?>" class="text-decoration-none text-split2"><?= $v['name'] ?></a></h3>
+                        <div class="dflex align-items-center ">
+                            <p class="price-product">
+                                <?php if ($v['discount']) { ?>
+                                    <span class="price-new">
+                                        <?= $func->formatMoney($v['sale_price']); ?>
+                                    </span><br>
+                                    <span class="price-old">
+                                        <?= $func->formatMoney($v['regular_price']); ?>
+                                    </span>
+                                    <span class="price-per">
+                                        <?= '-' . $v['discount'] . '%' ?>
+                                    </span>
+                                <?php } else { ?>
+                                    <span class="price-new">
+                                        <?php if ($v['regular_price']) { ?>
                                             <?= $func->formatMoney($v['regular_price']); ?>
-                                        </span>
-                                        <span class="price-per">
-                                            <?= '-' . $v['discount'] . '%' ?>
-                                        </span>
-                                    <?php } else { ?>
-                                        <span class="price-new">
-                                            <?php if ($v['regular_price']) {
-                                                $func->formatMoney($v['regular_price']);
-                                            } else { ?>
-                                                <span><a href="tel:<?= $optsetting['hotline'] ?>" class="text-dark">Liên
-                                                        hệ</a></span>
-                                            <?php }
-                                            ?>
-                                        </span>
-                                    <?php } ?>
-                                </p>
-                                <div class="product-cart"><a class="addcart" data-id="<?= $v['id'] ?>" data-action="addnow"><i
-                                            class="fas fa-shopping-cart"></i></a></div>
+                                        <?php } else { ?>
+                                            <span><a href="tel:<?= $optsetting['hotline'] ?>" class="text-dark">Liên
+                                                    hệ</a></span>
+                                        <?php }
+                                        ?>
+                                    </span>
+                                <?php } ?>
+                            </p>
+                            <div class="product-cart"><a class="addcart" data-id="<?= $v['id'] ?>" data-action="addnow"><i
+                                        class="fas fa-shopping-cart"></i></a></div>
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-        <?php } ?>
+    <?php } ?>
     <div class="pagination-ajax">
         <?= $pagingItems ?>
+    </div>
+<?php } else { ?>
+    <div class="full-row">
+        <div class="alert alert-warning w-100" role="alert">
+            <strong>
+                Không có sản phẩm phù hợp
+            </strong>
+        </div>
     </div>
 <?php } ?>

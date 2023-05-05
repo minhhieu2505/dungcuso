@@ -9,6 +9,7 @@
 			$template = "product/man/mans";
 			break;
 		case "add":
+			$category = $d->rawQuery("select * from category order by id desc");
 			$template = "product/man/man_add";
 			break;
 		case "edit":
@@ -47,7 +48,7 @@
 	function viewMans()
 	{
 		
-		global $d, $func, $comment, $strUrl, $curPage, $items, $paging, $type, $$category;
+		global $d, $func, $comment, $strUrl, $curPage, $items, $paging, $type, $category;
 
 		$where = "";
 
@@ -115,7 +116,6 @@
 		$id = (!empty($_POST['id'])) ? htmlspecialchars($_POST['id']) : 0;
 		$data = (!empty($_POST['data'])) ? $_POST['data'] : null;
 
-		// $func->dump($_POST,true);
 
 		
 		if($data)
@@ -140,9 +140,13 @@
 			}
 
 			$data['regular_price'] = (isset($data['regular_price']) && $data['regular_price'] != '') ? str_replace(",","",$data['regular_price']) : 0;
-			$data['sale_price'] = (isset($data['sale_price']) && $data['sale_price'] != '') ? str_replace(",","",$data['sale_price']) : 0;
+			$temp_price = $data['sale_price'] = (isset($data['sale_price']) && $data['sale_price'] != '') ? str_replace(",","",$data['sale_price']) : 0;
 			$data['discount'] = (isset($data['discount']) && $data['discount'] != '') ? $data['discount'] : 0;
+			if($temp_price == 0){
+				$data['sale_price'] = $data['regular_price'];
+			}
 		}
+
 
 		/* Valid data */
 		$checkTitle = $func->checkTitle($data);
