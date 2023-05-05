@@ -40,9 +40,9 @@
 			</div>
 		</div>
 		<div class="cart-header">
-			<div class="icon-hd">
+			<a href="gio-hang"><div class="icon-hd">
 				<i class="fa-solid fa-cart-shopping"></i>
-			</div>
+			</div></a>
 			<span class="count-cart">0</span>
 		</div>
 	</div>
