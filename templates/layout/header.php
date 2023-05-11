@@ -45,5 +45,10 @@
 			</div></a>
 			<span class="count-cart">0</span>
 		</div>
+		<div class="login-header">
+			<a href="login"><div class="icon-hd">
+				<i class="fa-solid fa-user"></i>
+			</div></a>
+		</div>
 	</div>
 </div>

@@ -814,7 +814,7 @@ a:hover { text-decoration: none; }
 
 /* Member*/
 #info { max-width: 500px; margin: 0px auto; } 
-.wrap-user { width: 100%; } 
+.wrap-user { width: 100%; margin:  auto; border-radius: 5px; } 
 .title-user { background-color: #34495e; padding: 12px 15px; border-radius: 5px 5px 0px 0px; position: relative; } 
 .title-user span { color: #fff; text-transform: capitalize; } 
 .title-user a { color: #fff; font-size: 13px; text-transform: capitalize; } 
@@ -898,7 +898,7 @@ a.link:hover { opacity: 0.8; }
 .items-social p { font-size: 1.25em; color: #0a0a0a; text-transform: uppercase; font-weight: 700; margin-top: 15px; } 
 .items-social a { display: block; color: #005bb7; font-size: 16px; } 
 
-.wrap-chill { max-width: 550px !important; } 
+.wrap-chill { max-width: 550px !important;margin: 20px auto; padding: 0px 15px; } 
 .scroll-view { position: sticky; top: 45px; } 
 
 .header { background: #34495e; padding: 10px 0; } 
@@ -994,3 +994,40 @@ a.slideshow-image.scale-img img { object-fit: cover; }
 .full-row {
     grid-area: 1 / 1 / 2 / 5;
 }
+.input-group{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    width: 100%;
+}
+label{display: inline-block;
+    margin-bottom: 0.5rem;}
+.form-group .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;
+    font-weight: 700;
+}
+.forget-password{margin-bottom:  1rem; text-align: right;}
+
+.form-control {
+    height: 48px;
+    font-size: 14px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+    border-bottom: 1px solid #b689b0;
+    padding-left: 30px;
+    padding-right: 0;
+    letter-spacing: 1px;
+}
+
+.login-form{
+    padding: 20px 0px;
+}
+.btn-primary{background-color: #34495e;}

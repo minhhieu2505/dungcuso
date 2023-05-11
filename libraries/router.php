@@ -124,6 +124,10 @@ switch ($com) {
 		$source = "index";
 		$template = "index/index";
 		break;
+	case 'login':
+		$source = "login";
+		$template = "account/login";
+		break;
 
 	default:
 		header('HTTP/1.0 404 Not Found', true, 404);
