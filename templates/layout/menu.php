@@ -6,7 +6,7 @@
                 <ul class="p-0 m-0 list-unstyled scrrol-view active-menu" id="box">
                     <?php foreach ($splist as $vlist): ?>
                         <li>
-                            <a href="<?= $vlist['slug'] ?>" title="<?= $vlist['name'] ?>">
+                            <a href="<?=$configBase?><?= $vlist['slug'] ?>" title="<?= $vlist['name'] ?>">
                                 <span>
                                     <?= $vlist['name'] ?>
                                 </span>
@@ -21,16 +21,24 @@
         <div class="menu">
             <ul class="dflex align-items-center">
                 <li><a class="<?php if ($com == '')
-                    echo 'active'; ?> transition" href="index.php" title="Trang chủ">Trang chủ</a></li>
+                    echo 'active'; ?> transition" href="<?=$configBase?>" title="Trang chủ">Trang chủ</a></li>
                 <li><a class="<?php if ($com == 'san-pham-ban-chay')
-                    echo 'active'; ?> transition" href="san-pham-ban-chay" title="Sản phẩm bán chạy">Sản phẩm bán chạy</a></li>
+                    echo 'active'; ?> transition" href="<?=$configBase?>san-pham-ban-chay" title="Sản phẩm bán chạy">Sản phẩm bán
+                        chạy</a></li>
                 <li><a class="<?php if ($com == 'huong-dan-mua-hang')
-                    echo 'active'; ?> transition" href="huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua
+                    echo 'active'; ?> transition" href="<?=$configBase?>huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua
                         hàng</a></li>
                 <li><a class="<?php if ($com == 'tin-tuc')
-                    echo 'active'; ?> transition" href="tin-tuc" title="Tin tức">Tin tức</a></li>
+                    echo 'active'; ?> transition" href="<?=$configBase?>tin-tuc" title="Tin tức">Tin tức</a></li>
                 <li><a class="<?php if ($com == 'lien-he')
-                    echo 'active'; ?> transition" href="lien-he" title="Liên hệ">Liên hệ</a></li>
+                    echo 'active'; ?> transition" href="<?=$configBase?>lien-he" title="Liên hệ">Liên hệ</a></li>
+                <li class="ml-auto">
+                    <div class="search w-clear">
+                        <input type="text" id="keyword" placeholder="Tìm sản phẩm"
+                            onkeypress="doEnter(event,'keyword');" />
+                        <p onclick="onSearch('keyword');"></p>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

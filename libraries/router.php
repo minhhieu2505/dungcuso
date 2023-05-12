@@ -14,6 +14,8 @@ $router->map('GET', array(ADMIN, 'admin'), function () {
 $router->map('GET|POST', '', 'index', 'home');
 $router->map('GET|POST', 'index.php', 'index', 'index');
 $router->map('GET|POST', '[a:com]', 'allpage', 'show');
+$router->map('GET|POST', '[a:com]/[a:action]', 'account', 'account');
+
 /* Router match */
 $match = $router->match();
 
@@ -52,7 +54,7 @@ $requick = array(
 
 );
 /* Find data */
-if (!empty($com) && !in_array($com, ['tim-kiem', 'san-pham-moi'])) {
+if (!empty($com) && !in_array($com, ['tim-kiem','account', 'san-pham-moi'])) {
 	foreach ($requick as $k => $v) {
 		$urlTbl = (!empty($v['tbl'])) ? $v['tbl'] : '';
 		$urlTblTag = (!empty($v['tbltag'])) ? $v['tbltag'] : '';
@@ -73,6 +75,7 @@ if (!empty($com) && !in_array($com, ['tim-kiem', 'san-pham-moi'])) {
 		}
 	}
 }
+
 
 /* Switch coms */
 switch ($com) {
@@ -120,6 +123,9 @@ switch ($com) {
 		$template = 'order/order';
 		$titleMain = "Giỏ hàng";
 		break;
+	case 'account':
+        $source = "user";
+        break;
 	case 'index':
 		$source = "index";
 		$template = "index/index";

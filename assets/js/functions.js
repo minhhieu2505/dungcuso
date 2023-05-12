@@ -28,7 +28,7 @@ function onSearch(obj) {
 		notifyDialog("Không có từ khóa tìm kiếm");
 		return false;
 	} else {
-		location.href = 'tim-kiem?keyword=' + encodeURI(keyword);
+		location.href = CONFIG_BASE + 'tim-kiem?keyword=' + encodeURI(keyword);
 	}
 }
 

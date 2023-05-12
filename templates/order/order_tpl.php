@@ -109,21 +109,17 @@
                             <div class="form-row row">
                                 <div class="input-cart col-md-6">
                                     <input type="text" class="form-control text-sm" id="fullname" name="dataOrder[fullname]" placeholder="Nhập họ tên" value="<?= (!empty($flash->has('fullname'))) ? $flash->get('fullname') : '' ?>" required />
-                                    <div class="invalid-feedback"><?= vuilongnhaphoten ?></div>
                                 </div>
                                 <div class="input-cart col-md-6">
                                     <input type="number" class="form-control text-sm" id="phone" name="dataOrder[phone]" placeholder="Số điện thoại" value="<?= (!empty($flash->has('phone'))) ? $flash->get('phone') : '' ?>" required />
-                                    <div class="invalid-feedback"><?= vuilongnhapsodienthoai ?></div>
                                 </div>
                             </div>
                             <div class="row">
                             <div class="input-cart col-md-6">
                                     <input type="email" class="form-control text-sm" id="email" name="dataOrder[email]" placeholder="Email" value="<?= (!empty($flash->has('email'))) ? $flash->get('email') : '' ?>" required />
-                                    <div class="invalid-feedback"><?= vuilongnhapdiachiemail ?></div>
                                 </div>
                                 <div class="input-cart col-md-6">
                                     <input type="text" class="form-control text-sm" id="address" name="dataOrder[address]" placeholder="Địa chỉ" value="<?= (!empty($flash->has('address'))) ? $flash->get('address') : '' ?>" required />
-                                    <div class="invalid-feedback"><?= vuilongnhapdiachi ?></div>
                                 </div>
                             </div>
                             <?php /*
