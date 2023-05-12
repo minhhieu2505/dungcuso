@@ -36,19 +36,15 @@
 			</div>
 		</div>
 		<div class="cart-header">
-			<a href="<?=$configBase?>gio-hang">
 			<div class="icon-hd">
-					<i class="fa-solid fa-cart-shopping"></i>
-				</div>
-				<span class="count-cart">0</span>
-			</a>
+				<i class="fa-solid fa-cart-shopping"></i>
+			</div>
+			<span class="count-cart">0</span>
 		</div>
-		<div class="cart-header">
-			<a href="<?=$configBase?>account/dang-nhap">
-				<div class="icon-hd">
+		<div class="login-header">
+			<a href="login"><div class="icon-hd">
 				<i class="fa-solid fa-user"></i>
-				</div>
-			</a>
+			</div></a>
 		</div>
 	</div>
 </div>
