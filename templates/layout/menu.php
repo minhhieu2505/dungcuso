@@ -22,6 +22,8 @@
             <ul class="dflex align-items-center">
                 <li><a class="<?php if ($com == '')
                     echo 'active'; ?> transition" href="<?=$configBase?>" title="Trang chủ">Trang chủ</a></li>
+                <li><a class="<?php if ($com == 'san-pham')
+                    echo 'active'; ?> transition" href="<?=$configBase?>san-pham" title="Sản phẩm">Sản phẩm</a></li>
                 <li><a class="<?php if ($com == 'san-pham-ban-chay')
                     echo 'active'; ?> transition" href="<?=$configBase?>san-pham-ban-chay" title="Sản phẩm bán chạy">Sản phẩm bán
                         chạy</a></li>

@@ -92,62 +92,24 @@
                 </div>
                 <div class="bottom-cart col-12 col-lg-12">
                     <div class="section-cart">
-                        <?php /*
-                        <p class="title-cart"><?= hinhthucthanhtoan ?>:</p>
-                        <div class="information-cart">
-                            <?php $flashPayment = $flash->get('payments'); ?>
-                            <?php foreach ($payments_info as $key => $value) { ?>
-                                <div class="payments-cart custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="payments-<?= $value['id'] ?>" name="dataOrder[payments]" value="<?= $value['id'] ?>" <?= (!empty($flashPayment) && $flashPayment == $value['id']) ? 'checked' : '' ?> required>
-                                    <label class="payments-label custom-control-label" for="payments-<?= $value['id'] ?>" data-payments="<?= $value['id'] ?>"><?= $value['name' . $lang] ?></label>
-                                    <div class="payments-info payments-info-<?= $value['id'] ?> transition"><?= str_replace("\n", "<br>", $value['desc' . $lang]) ?></div>
-                                </div>
-                            <?php } ?>
-                        </div> */ ?>
                         <p class="title-cart">Thông tin nhận hàng:</p>
                         <div class="information-cart">
                             <div class="form-row row">
                                 <div class="input-cart col-md-6">
-                                    <input type="text" class="form-control text-sm" id="fullname" name="dataOrder[fullname]" placeholder="Nhập họ tên" value="<?= (!empty($flash->has('fullname'))) ? $flash->get('fullname') : '' ?>" required />
+                                    <input type="text" class="form-control text-sm" id="fullname" name="dataOrder[fullname]" placeholder="Nhập họ tên" value="<?= (!empty($flash->has('fullname'))) ? $flash->get('fullname') : $userDetail['fullname'] ?>" required />
                                 </div>
                                 <div class="input-cart col-md-6">
-                                    <input type="number" class="form-control text-sm" id="phone" name="dataOrder[phone]" placeholder="Số điện thoại" value="<?= (!empty($flash->has('phone'))) ? $flash->get('phone') : '' ?>" required />
+                                    <input type="number" class="form-control text-sm" id="phone" name="dataOrder[phone]" placeholder="Số điện thoại" value="<?= (!empty($flash->has('phone'))) ? $flash->get('phone') : $userDetail['phone'] ?>" required />
                                 </div>
                             </div>
                             <div class="row">
                             <div class="input-cart col-md-6">
-                                    <input type="email" class="form-control text-sm" id="email" name="dataOrder[email]" placeholder="Email" value="<?= (!empty($flash->has('email'))) ? $flash->get('email') : '' ?>" required />
+                                    <input type="email" class="form-control text-sm" id="email" name="dataOrder[email]" placeholder="Email" value="<?= (!empty($flash->has('email'))) ? $flash->get('email') : $userDetail['email'] ?>" required />
                                 </div>
                                 <div class="input-cart col-md-6">
-                                    <input type="text" class="form-control text-sm" id="address" name="dataOrder[address]" placeholder="Địa chỉ" value="<?= (!empty($flash->has('address'))) ? $flash->get('address') : '' ?>" required />
+                                    <input type="text" class="form-control text-sm" id="address" name="dataOrder[address]" placeholder="Địa chỉ" value="<?= (!empty($flash->has('address'))) ? $flash->get('address') : $userDetail['address'] ?>" required />
                                 </div>
                             </div>
-                            <?php /*
-                                    <div class="form-row">
-                                    <div class="input-cart col-md-4">
-                                        <select class="select-city-cart custom-select text-sm" required id="city" name="dataOrder[city]">
-                                            <option value=""><?= tinhthanh ?></option>
-                                            <?php foreach ($city as $k => $v) { ?>
-                                                <option value="<?= $v['id'] ?>"><?= $v['name'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                        <div class="invalid-feedback"><?= vuilongchontinhthanh ?></div>
-                                    </div>
-                                    <div class="input-cart col-md-4">
-                                        <select class="select-district-cart select-district custom-select text-sm" required id="district" name="dataOrder[district]">
-                                            <option value=""><?= quanhuyen ?></option>
-                                        </select>
-                                        <div class="invalid-feedback"><?= vuilongchonquanhuyen ?></div>
-                                    </div>
-                                    <div class="input-cart col-md-4">
-                                        <select class="select-ward-cart select-ward custom-select text-sm" required id="ward" name="dataOrder[ward]">
-                                            <option value=""><?= phuongxa ?></option>
-                                        </select>
-                                        <div class="invalid-feedback"><?= vuilongchonphuongxa ?></div>
-                                    </div>
-                                </div>
-                            */ ?>
-                            
                             <div class="input-cart">
                                 <textarea class="form-control text-sm" id="requirements" name="dataOrder[requirements]" placeholder="Ghi chú" /><?= (!empty($flash->has('requirements'))) ? $flash->get('requirements') : '' ?></textarea>
                             </div>

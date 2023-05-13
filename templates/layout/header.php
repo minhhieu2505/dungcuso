@@ -36,15 +36,23 @@
 			</div>
 		</div>
 		<div class="cart-header">
+			<a href="<?=$configBase?>gio-hang">
 			<div class="icon-hd">
-				<i class="fa-solid fa-cart-shopping"></i>
-			</div>
-			<span class="count-cart">0</span>
+					<i class="fa-solid fa-cart-shopping"></i>
+				</div>
+				<span class="count-cart">0</span>
+			</a>
 		</div>
-		<div class="login-header">
-			<a href="login"><div class="icon-hd">
+		<div class="cart-header">
+			<?php if ($_SESSION[$loginMember]['active'] == true) { ?>
+				<p class="title-login"><a href="account/thong-tin-ca-nhan">Hi.<?=$_SESSION[$loginMember]['fullname']?></a></p>
+			<?php } else { ?>
+			<a href="<?=$configBase?>account/dang-nhap">
+				<div class="icon-hd">
 				<i class="fa-solid fa-user"></i>
-			</div></a>
+				</div>
+			</a>
+			<?php } ?>
 		</div>
 	</div>
 </div>

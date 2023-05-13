@@ -96,3 +96,25 @@ function confirmDialog(action, text, value, title = 'Thông báo', icon = 'fas f
 		}
 	});
 }
+function notifyDialog(content = '', title = 'Thông báo', icon = 'fas fa-exclamation-triangle', type = 'blue') {
+	$.alert({
+		title: title,
+		icon: icon, // font awesome
+		type: type, // red, green, orange, blue, purple, dark
+		content: content, // html, text
+		backgroundDismiss: true,
+		animationSpeed: 600,
+		animation: 'zoom',
+		closeAnimation: 'scale',
+		typeAnimated: true,
+		animateFromElement: false,
+		autoClose: 'accept|3000',
+		escapeKey: 'accept',
+		buttons: {
+			accept: {
+				text: 'Đồng ý',
+				btnClass: 'btn-sm btn-primary'
+			}
+		}
+	});
+}

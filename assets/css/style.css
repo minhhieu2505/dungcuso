@@ -815,10 +815,10 @@ a:hover { text-decoration: none; }
 /* Member*/
 #info { max-width: 500px; margin: 0px auto; } 
 .wrap-user { width: 100%; margin:  auto; border-radius: 5px; } 
-.title-user { background-color: #34495e; padding: 12px 15px; border-radius: 5px 5px 0px 0px; position: relative; } 
-.title-user span { color: #fff; text-transform: capitalize; } 
+.title-user {padding: 12px 15px;border-radius: 5px 5px 0px 0px;position: relative;color: #000;text-align: center;} 
+.title-user span {color: #000;text-transform: capitalize;font-weight: 700;font-size: 24px;} 
 .title-user a { color: #fff; font-size: 13px; text-transform: capitalize; } 
-.form-user { padding: 20px 15px; border: 1px solid #000; } 
+.form-user {padding: 20px 15px;border: 1px solid #27589a;margin-bottom: 30PX;border-radius: 10px;} 
 .input-user { margin-bottom: 0.75rem; } 
 .input-user input { font-size: 14px; } 
 .button-user { margin-bottom: 1rem; } 
@@ -835,7 +835,7 @@ a:hover { text-decoration: none; }
 .radio-user label::before,
 .radio-user label::after { top: calc(50% - 1rem / 2); } 
 .note-user { font-size: 14px; border-top: 1px solid #ddd; padding-top: 0.5rem; } 
-.box-user { width: 270px; position: sticky; top: 80px; } 
+.box-user {width: 270px;position: sticky;top: 0;padding: 10px;border: 1px solid #34495e;border-radius: 10px;} 
 .box-user-right { width: 75%; } 
 .box-user span.name-user { padding: 5px; } 
 .list-content { padding: 10px; border: 1px solid #000; } 
@@ -1018,16 +1018,67 @@ label{display: inline-block;
 .form-control {
     height: 48px;
     font-size: 14px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
     border-radius: 0;
-    border-bottom: 1px solid #b689b0;
     padding-left: 30px;
     padding-right: 0;
     letter-spacing: 1px;
+    box-shadow: 2px 0px 5px #cccccc8c;
 }
 
 .login-form{
     padding: 20px 0px;
 }
 .btn-primary{background-color: #34495e;}
+
+.alert.box-alert.alert-danger {
+    background: transparent;
+    border: none;
+    color: #f70000;
+    font-weight: 700;
+    padding: 0;
+}
+
+p.title-login {
+    margin-bottom: 0;
+    background: #fcaf3d;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+p.title-login:hover {
+    background: #d3041e;
+}
+
+p.title-login a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.box-info {
+    width: calc(100% - 300px);
+}
+
+.form-user label {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.items-info a {
+    line-height: 36px;
+    color: #000;
+    font-weight: 600;
+}
+
+.items-info a.act {
+    color: #d3041e;
+}
+
+.box-info .table thead {
+    padding: 0.5rem 0.5rem;
+    background-color: #34495e3d;
+}
+
+.box-info .table img {
+    object-fit: contain;
+}
