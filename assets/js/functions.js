@@ -28,7 +28,7 @@ function onSearch(obj) {
 		notifyDialog("Không có từ khóa tìm kiếm");
 		return false;
 	} else {
-		location.href = 'tim-kiem?keyword=' + encodeURI(keyword);
+		location.href = CONFIG_BASE + 'tim-kiem?keyword=' + encodeURI(keyword);
 	}
 }
 
@@ -92,6 +92,28 @@ function confirmDialog(action, text, value, title = 'Thông báo', icon = 'fas f
 			cancel: {
 				text: 'Hủy',
 				btnClass: 'btn-sm btn-danger'
+			}
+		}
+	});
+}
+function notifyDialog(content = '', title = 'Thông báo', icon = 'fas fa-exclamation-triangle', type = 'blue') {
+	$.alert({
+		title: title,
+		icon: icon, // font awesome
+		type: type, // red, green, orange, blue, purple, dark
+		content: content, // html, text
+		backgroundDismiss: true,
+		animationSpeed: 600,
+		animation: 'zoom',
+		closeAnimation: 'scale',
+		typeAnimated: true,
+		animateFromElement: false,
+		autoClose: 'accept|3000',
+		escapeKey: 'accept',
+		buttons: {
+			accept: {
+				text: 'Đồng ý',
+				btnClass: 'btn-sm btn-primary'
 			}
 		}
 	});

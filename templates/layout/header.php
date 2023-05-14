@@ -1,12 +1,8 @@
 <div class="header">
 	<div class="wrap-content dflex align-items-center">
-		<a href="index.php">
-			<img src="upload/photo/<?= $logo['photo'] ?>" alt="" width="200" height="75">
+		<a href="<?=$configBase?>">
+			<img src="<?=$configBase?>upload/photo/<?= $logo['photo'] ?>" alt="" width="200" height="75">
 		</a>
-		<div class="search w-clear">
-			<input type="text" id="keyword" placeholder="Tìm sản phẩm" onkeypress="doEnter(event,'keyword');" />
-			<p onclick="onSearch('keyword');"></p>
-		</div>
 		<div class="address-header">
 			<div class="icon-hd">
 				<i class="fa-sharp fa-solid fa-location-dot"></i>
@@ -40,15 +36,23 @@
 			</div>
 		</div>
 		<div class="cart-header">
-			<a href="gio-hang"><div class="icon-hd">
-				<i class="fa-solid fa-cart-shopping"></i>
-			</div></a>
-			<span class="count-cart">0</span>
+			<a href="<?=$configBase?>gio-hang">
+			<div class="icon-hd">
+					<i class="fa-solid fa-cart-shopping"></i>
+				</div>
+				<span class="count-cart">0</span>
+			</a>
 		</div>
-		<div class="login-header">
-			<a href="login"><div class="icon-hd">
+		<div class="cart-header">
+			<?php if ($_SESSION[$loginMember]['active'] == true) { ?>
+				<p class="title-login"><a href="account/thong-tin-ca-nhan">Hi.<?=$_SESSION[$loginMember]['fullname']?></a></p>
+			<?php } else { ?>
+			<a href="<?=$configBase?>account/dang-nhap">
+				<div class="icon-hd">
 				<i class="fa-solid fa-user"></i>
-			</div></a>
+				</div>
+			</a>
+			<?php } ?>
 		</div>
 	</div>
 </div>

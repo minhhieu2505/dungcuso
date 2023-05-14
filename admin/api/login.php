@@ -34,7 +34,6 @@
 	{
 		/* Kiểm tra đăng nhập */
 		$row = $d->rawQueryOne("select * from #_user where username = ? limit 0,1",array($username));
-		// var_dump($_POST);die('xx');
 		if(!empty($row['id']))
 		{
 			if(($row['password'] == $func->encryptPassword($password)) && ($row['role'] == 1))

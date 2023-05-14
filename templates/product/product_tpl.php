@@ -5,19 +5,19 @@
                 <div class="filter-items-name"> Sắp xếp</div>
                 <div class="items-filter-sort" data-sort="0">
                     <div class="name-filter">
-                        Mặc định
+                        Giá mặc định
                     </div>
                     <div class="check-box"><i></i></div>
                 </div>
                 <div class="items-filter-sort" data-sort="1">
                     <div class="name-filter">
-                        Tăng dần
+                        Giá tăng dần
                     </div>
                     <div class="check-box"><i></i></div>
                 </div>
                 <div class="items-filter-sort" data-sort="2">
                     <div class="name-filter">
-                        Giảm dần
+                        Giá giảm dần
                     </div>
                     <div class="check-box"><i></i></div>
                 </div>

@@ -1,9 +1,6 @@
 <?php
 if (!defined('SOURCES')) die("Error");
 
-/* Hình thức thanh toán */
-// $payments_info = $d->rawQuery("select name$lang, desc$lang, id from #_news where type = ? order by numb,id desc", array('hinh-thuc-thanh-toan'));
-// $func->dump(,true);
 if (!empty($_POST['dataOrder']['fullname'])) {
 
     /* Check order */
@@ -30,6 +27,7 @@ if (!empty($_POST['dataOrder']['fullname'])) {
 
         $data_donhang = array();
         $data_donhang['fullname'] = $fullname;
+        $data_donhang['id_user'] = $userDetail['id'];
         $data_donhang['email'] = $email;
         $data_donhang['phone'] = $phone;
         $data_donhang['notes'] = $requirements;

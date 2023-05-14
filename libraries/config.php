@@ -29,8 +29,8 @@
 	define('ADMIN', 'admin');
 
 	// /* Cấu hình login */
-	// $loginAdmin = $config['login']['admin'];
-	// $loginMember = $config['login']['member'];
+	$loginAdmin = 'LoginAdmin25052001';
+	$loginMember = 'LoginMember25052001';
 
 	// // /* Cấu hình upload */
 	// // require_once LIBRARIES . "constant.php";

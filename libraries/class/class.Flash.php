@@ -83,7 +83,7 @@ class Flash
                 $str .= '</div>';
                 $str .= '</div>';
             } else if ($type == 'frontend') {
-                $str .= '<div class="alert alert-' . $class . '">';
+                $str .= '<div class="alert box-alert alert-' . $class . '">';
                 foreach ($messages as $v) {
                     $str .= '<p class="mb-1">- ' . $v . '</p>';
                 }
