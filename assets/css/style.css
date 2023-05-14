@@ -1006,13 +1006,14 @@ a.slideshow-image.scale-img img { object-fit: cover; }
 }
 label{display: inline-block;
     margin-bottom: 0.5rem;}
-.form-group .label {
+.form-group,.form-row,.contact-input .label {
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #000;
     font-weight: 700;
 }
+
 .forget-password{margin-bottom:  1rem; text-align: right;}
 
 .form-control {
