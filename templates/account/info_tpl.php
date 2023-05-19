@@ -1,3 +1,15 @@
+<nav aria-label="breadcrumb" id="bar_breadcrumb">
+    <div class="warp-content">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.php">Trang chủ</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="thong-tin-ca-nhan">Thông tin cá nhân</a>
+            </li>
+        </ol>
+    </div>
+</nav>
 <div class="wrap-user">
     
     <div class="title-user">
@@ -7,7 +19,7 @@
     <div class="box-user">
     <div class="items-info"><a href="thong-tin-ca-nhan" class="<?=$action=='thong-tin-ca-nhan' ? 'act' : ''?>">Thông tin cá nhân</a></div>
     <div class="items-info"><a href="don-hang-cua-ban" class="<?=$action=='don-hang-cua-ban' ? 'act' : ''?>">Đơn hàng của bạn</a></div>
-    <div class="items-info"><a href="doi-mat-khau">Đổi mật khẩu</a></div>
+    <div class="items-info"><a href="doi-mat-khau" class="<?=$action=='doi-mat-khau' ? 'act' : ''?>">Đổi mật khẩu</a></div>
     <div class="items-info"><a href="dang-xuat">Đăng xuất</a></div>
 </div>
 <div class="box-info">

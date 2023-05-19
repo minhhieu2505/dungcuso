@@ -853,6 +853,11 @@ a:hover { text-decoration: none; }
 .login-social a.login-facebook:hover { background: #055698; color: #fff; } 
 .login-social a.login-google { color: #eb4f38; border: 1px solid #eb4f38; } 
 .login-social a.login-google:hover { background: #eb4f38; color: #fff; } 
+
+.title-login{margin: 0;}
+/*order_user*/
+.box-info{width: 75%;}
+
 /* */
 .box-table { margin-bottom: 10px; } 
 .box-table:last-child { margin: 0; } 
@@ -1030,3 +1035,4 @@ label{display: inline-block;
     padding: 20px 0px;
 }
 .btn-primary{background-color: #34495e;}
+

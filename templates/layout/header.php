@@ -44,8 +44,9 @@
 			</a>
 		</div>
 		<div class="cart-header">
+			
 			<?php if ($_SESSION[$loginMember]['active'] == true) { ?>
-				<p class="title-login"><a href="account/thong-tin-ca-nhan">Hi.<?=$_SESSION[$loginMember]['fullname']?></a></p>
+				<p class="title-login"><a class="" href="account/thong-tin-ca-nhan"> Xin chào, <?=$_SESSION[$loginMember]['fullname']?></a></p>
 			<?php } else { ?>
 			<a href="<?=$configBase?>account/dang-nhap">
 				<div class="icon-hd">

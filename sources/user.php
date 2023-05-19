@@ -29,7 +29,12 @@ switch ($action) {
         if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
         orderMember();
         break;
-
+    case 'doi-mat-khau':
+        $titleMain = "Đổi mật khẩu";
+        $template = "account/change_password";
+        if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
+        orderMember();
+        break;
     case 'dang-xuat':
         if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
         logoutMember();
