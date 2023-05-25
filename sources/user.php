@@ -33,7 +33,7 @@ switch ($action) {
         $titleMain = "Đổi mật khẩu";
         $template = "account/change_password";
         if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
-        orderMember();
+        changepassword();
         break;
     case 'dang-xuat':
         if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
@@ -263,4 +263,52 @@ function orderMember()
 {
     global $d, $func, $loginMember, $configBase, $order_user;
     $order_user = $d->rawQuery("select * from `order` where id_user = ".$_SESSION[$loginMember]['id']);
+}
+/*Change pass word */
+function changepassword()
+{
+    global $d, $func, $flash, $rowDetail, $configBase, $loginMember;
+
+    $iduser = $_SESSION[$loginMember]['id'];
+
+    if ($iduser){
+        $rowDetail = $d->rawQueryOne("select password from #_user where id = ? limit 0,1", array($iduser));
+
+        if (!empty($_POST['info-user'])) {
+            $message = '';
+            $response = array();
+            $password = (!empty($_POST['password'])) ? htmlspecialchars($_POST['password']) : '';
+
+            /* Valid data */
+            if (!empty($password)) {
+                if (!$func->isEmail($password)) {
+                    $response['messages'][] = 'Mật khẩu không được trùng với mật khẩu cũ';
+                }
+
+            }
+
+            if (!empty($response)) {
+                /* Flash data */
+                $flash->set('password', $password);
+
+                /* Errors */
+                $response['status'] = 'danger';
+                $message = base64_encode(json_encode($response));
+                $flash->set('message', $message);
+                $func->redirect($configBase . "account/doi-mat-khau");
+            }
+
+            $data['password'] = $password;
+
+            $d->where('id', $iduser);
+            if ($d->update('user', $data)) {
+                $func->transfer("Cập nhật mật khẩu thành công", $configBase . "account/thong-tin-ca-nhan");
+            } else {
+                $func->transfer("Cập nhật mật khẩu thất bại", $configBase . "account/thong-tin-ca-nhan", false);
+            }
+        }
+    } else {
+        $func->transfer("Trang không tồn tại", $configBase, false);
+    }
+    
 }

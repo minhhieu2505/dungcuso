@@ -27,15 +27,15 @@
         <?= $flash->getMessages("frontend") ?>
         <label>Mật khẩu cũ</label>
         <div class="input-group input-user">
-            <input type="password" class="form-control text-sm" id="password" name="password" placeholder="" value="" required>
+            <input type="password" class="form-control text-sm" id="password-old" name="password-old" placeholder="" value="<?= (!empty($flash->has('password'))) ? $flash->get('password') : $rowDetail['password'] ?>" required>
         </div>
         <label>Mật khẩu mới</label>
         <div class="input-group input-user">
-            <input type="password" class="form-control text-sm" id="password" name="password" placeholder="" value="" required>
+            <input type="password" class="form-control text-sm" id="password-new" name="password-new" placeholder="" value="<?= (!empty($flash->has('password'))) ? $flash->get('password') : $rowDetail['password'] ?>" required>
         </div>
         <label>Nhập lại mật khẩu mới</label>
         <div class="input-group input-user">
-            <input type="password" class="form-control text-sm" id="password" name="password" placeholder="" value="" required>
+            <input type="password" class="form-control text-sm" id="password" name="password" placeholder="" value="<?= (!empty($flash->has('password'))) ? $flash->get('password') : $rowDetail['password'] ?>" required>
         </div>
         <div class="button-user">
             <input type="submit" class="btn btn-primary btn-block" name="info-user" value="Cập nhật">
