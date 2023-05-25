@@ -17,5 +17,5 @@
     $config['setting']['fanpage'] = true;
     $config['setting']['coords'] = true;
     $config['setting']['coords_iframe'] = true;
-
+    $config['setting']['name'] = true;
 ?>

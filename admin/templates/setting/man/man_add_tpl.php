@@ -32,6 +32,13 @@ $options = (isset($item['options']) && $item['options'] != '') ? json_decode($it
 			</div>
 			<div class="card-body">
 				<div class="row">
+				<div class="form-group col-md-4 col-sm-6">
+						<label for="name">Tên công ty:</label>
+						<input type="text" class="form-control text-sm" name="data[options][name]" id="name"
+							placeholder="Địa chỉ"
+							value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$options['name'] ?>"
+							required>
+					</div>
 					<div class="form-group col-md-4 col-sm-6">
 						<label for="address">Địa chỉ:</label>
 						<input type="text" class="form-control text-sm" name="data[options][address]" id="address"

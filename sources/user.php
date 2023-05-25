@@ -281,7 +281,7 @@ function changepassword()
 
             /* Valid data */
             if (!empty($password)) {
-                if (!$func->isEmail($password)) {
+                if (!$func==($password)) {
                     $response['messages'][] = 'Mật khẩu không được trùng với mật khẩu cũ';
                 }
 
