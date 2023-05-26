@@ -11,12 +11,11 @@
 
         <div class="right-pro-detail col-md-6 col-lg-7 mb-4">
             <p class="title-pro-detail mb-2"><?= $rowDetail['name'] ?></p>
-            <div class="desc-pro-detail"><?= htmlspecialchars_decode($rowDetail['description']) ?></div>
             <ul class="attr-pro-detail">
                 <?php if (!empty($rowDetail['code'])) { ?>
                 <li class="w-clear">
                     <label class="attr-label-pro-detail">Mã SP:</label>
-                    <div class="attr-content-pro-detail"><?= $rowDetail['code'] ?></div>
+                    <div class="attr-content-pro-detail"><?= $rowDetail['sku'] ?></div>
                 </li>
                 <?php } ?>
                 <li class="w-clear">
@@ -31,6 +30,8 @@
                         <?php } ?>
                     </div>
                 </li>
+                <strong>Đặc điểm nổi bật:</strong>
+                <div class="desc-pro-detail"><?= htmlspecialchars_decode($rowDetail['description']) ?></div>
                 <li class="w-clear">
                     <label class="attr-label-pro-detail d-block">Số lượng:</label>
                     <div class="attr-content-pro-detail d-block">
