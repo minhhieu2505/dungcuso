@@ -1,4 +1,6 @@
-<div class="grid-pro-detail w-clear">
+<div class="row">
+    <div class="col-lg-9">
+    <div class="grid-pro-detail w-clear">
     <div class="row">
         <div class="left-pro-detail col-md-6 col-lg-5 mb-4">
             <a id="Zoom-1" class="MagicZoom"
@@ -128,4 +130,16 @@
 <div class="col-12">
     <div class="pagination-home w-100"><?= (!empty($paging)) ? $paging : '' ?></div>
 </div>
+</div>
+    </div>
+    <div class="col-3 scroll-view">
+        <div class="table-criteria technology">
+            <div class="title">THÔNG TIN KỸ THUẬT</div>
+            <?=htmlspecialchars_decode($rowDetail['specifications'])?>
+        </div>
+        <div class="table-criteria">
+            <div class="title">CAM KẾT</div>
+            <?=htmlspecialchars_decode($rowDetail['commit'])?>
+        </div>
+    </div>
 </div>

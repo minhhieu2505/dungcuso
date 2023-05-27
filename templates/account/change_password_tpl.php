@@ -38,7 +38,7 @@
             <input type="password" class="form-control text-sm" id="password" name="password" placeholder="" value="" required>
         </div>
         <div class="button-user">
-            <input type="submit" class="btn btn-primary btn-block" name="info-user" value="Cập nhật">
+            <input type="submit" class="btn btn-primary btn-block" name="change_password" value="Cập nhật">
         </div>
     </form>
 </div>

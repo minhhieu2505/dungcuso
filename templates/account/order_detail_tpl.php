@@ -35,8 +35,9 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($order_detail as $key => $v) { 
+    <?php $temp = 0 ; foreach ($order_detail as $key => $v) { 
         $product_items = $d->rawQueryOne("select * from `product` where id = ".$v['id_product']); 
+        $temp += $product_items['sale_price'] * $v['quantity'] ;
     ?>
         <tr>
             <th scope="row"><?=$key+1?></th>
@@ -47,7 +48,9 @@
             <td><?=$func->formatMoney($product_items['sale_price'] * $v['quantity']);?></td>
         </tr>
     <?php } ?>
-  </tbody>
+    <tr>
+    <td colspan="6" class="text-end"><b class="text-danger">Tổng giá trị đơn hàng:</b> <?=$func->formatMoney($temp)?></td>
+  </tr>
 </table>
 </div>
     </div>

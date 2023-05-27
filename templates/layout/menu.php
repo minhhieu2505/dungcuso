@@ -3,15 +3,13 @@
         <div class="category">
             <span class="title-category">DANH MỤC SẢN PHẨM <i class="fas fa-caret-right ml-2"></i></span>
             <div class="caterogy-table">
-                <ul class="p-0 m-0 list-unstyled scrrol-view active-menu" id="box">
+                <ul class="p-0 m-0 list-unstyled scrrol-view <?=($source == 'index' ? 'active-menu' : '')?>" id="box">
                     <?php foreach ($splist as $vlist): ?>
                         <li>
                             <a href="<?=$configBase?><?= $vlist['slug'] ?>" title="<?= $vlist['name'] ?>">
                                 <span>
                                     <?= $vlist['name'] ?>
                                 </span>
-                                <?php if ($spcat): ?><i class="fas fa-angle-right"></i>
-                                <?php endif ?>
                             </a>
                         </li>
                     <?php endforeach ?>

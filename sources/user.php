@@ -272,19 +272,23 @@ function changepassword()
     $iduser = $_SESSION[$loginMember]['id'];
 
     if ($iduser){
-        $rowDetail = $d->rawQueryOne("select password from #_user where id = ? limit 0,1", array($iduser));
-
-        if (!empty($_POST['info-user'])) {
+        $rowDetail = $d->rawQueryOne("select * from #_user where id = ? limit 0,1", array($iduser));
+        $password_old = (!empty($_POST['password-old'])) ? $_POST['password-old'] : '';
+        $password_new = (!empty($_POST['password-new'])) ? $_POST['password-new'] : '';
+        $password = (!empty($_POST['password'])) ? $_POST['password'] : '';
+        $passwordMD5 = md5($password);
+        if (!empty($_POST['change_password'] != "")) {
             $message = '';
             $response = array();
             $password = (!empty($_POST['password'])) ? htmlspecialchars($_POST['password']) : '';
 
             /* Valid data */
-            if (!empty($password)) {
-                if (!$func==($password)) {
-                    $response['messages'][] = 'Mật khẩu không được trùng với mật khẩu cũ';
-                }
+            if($rowDetail['password'] != md5($password_old)){
+                $response['messages'][] = 'Mật khẩu không đúng';
+            }
 
+            if($password_new != $password){
+                $response['messages'][] = 'Mật khẩu không trùng khớp';
             }
 
             if (!empty($response)) {
@@ -298,7 +302,7 @@ function changepassword()
                 $func->redirect($configBase . "account/doi-mat-khau");
             }
 
-            $data['password'] = $password;
+            $data['password'] = $passwordMD5;
 
             $d->where('id', $iduser);
             if ($d->update('user', $data)) {

@@ -208,6 +208,7 @@ $(document).ready(function () {
 function LoadFilter() {
 	var id_category = "";
 	var start = 0;
+	var id_sort = 0;
 	$('.filter-category.active').each(function () {
 		var id = $(this).data('idcategory');
 		id_category += id + ",";

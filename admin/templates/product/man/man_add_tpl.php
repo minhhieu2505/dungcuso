@@ -105,6 +105,24 @@
                                                 placeholder="Nội dung"><?=htmlspecialchars_decode((!empty($flash->has('content'))) ? $flash->get('content') : @$item['content'])?></textarea>
                                         </div>
                                         <?php } ?>
+                                        <?php if(isset($config['product']['specifications']) && $config['product']['specifications'] == true) { ?>
+                                        <div class="form-group">
+                                            <label for="specifications">Thông số kỹ thuật</label>
+                                            <textarea
+                                                class="form-control for-seo text-sm <?=(isset($config['product']['specifications_cke']) && $config['product']['specifications_cke'] == true)?'form-control-ckeditor':''?>"
+                                                name="data[specifications]" id="specifications" rows="5"
+                                                placeholder="Nội dung"><?=htmlspecialchars_decode((!empty($flash->has('specifications'))) ? $flash->get('specifications') : @$item['specifications'])?></textarea>
+                                        </div>
+                                        <?php } ?>
+                                        <?php if(isset($config['product']['commit']) && $config['product']['commit'] == true) { ?>
+                                        <div class="form-group">
+                                            <label for="commit">Cam kết</label>
+                                            <textarea
+                                                class="form-control for-seo text-sm <?=(isset($config['product']['commit_cke']) && $config['product']['commit_cke'] == true)?'form-control-ckeditor':''?>"
+                                                name="data[commit]" id="commit" rows="5"
+                                                placeholder="Nội dung"><?=htmlspecialchars_decode((!empty($flash->has('commit'))) ? $flash->get('commit') : @$item['commit'])?></textarea>
+                                        </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

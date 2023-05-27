@@ -8,7 +8,10 @@
    <?php
       include TEMPLATE.LAYOUT."header.php"; 
       include TEMPLATE.LAYOUT."menu.php";
-      include TEMPLATE.LAYOUT."slide.php";
+      
+      if ($source == 'index'){
+         include TEMPLATE.LAYOUT."slide.php";
+      }
       include TEMPLATE.LAYOUT."breadCumb.php";
    ?>
    <div class="<?=($source == 'index') ? 'wrap-home' : 'wrap-main'?>">

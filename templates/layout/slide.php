@@ -6,7 +6,7 @@
                 <div>
                     <div class="slideshow-item">
                         <a class="slideshow-image scale-img" href="<?=$v['link']?>" title="<?=$v['name']?>">
-                            <img src="<?=$configBase?>upload/photo/<?=$v['photo']?>" alt="" width="990" height="375">
+                            <img src="<?=$configBase?>upload/photo/<?=$v['photo']?>" alt="" width="1069" height="541">
                         </a>
                     </div>
                 </div>

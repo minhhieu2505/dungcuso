@@ -10,7 +10,7 @@
                         <?php foreach ($social as $k => $v) { ?>
                             <li class="d-inline-block align-top mt-1 mr-1">
                                 <a href="<?= $v['link'] ?>" target="_blank">
-                                    <img src="upload/photo/<?= $v['photo'] ?>" alt="">
+                                    <img src="<?=$configBase?>upload/photo/<?= $v['photo'] ?>" alt="">
                                 </a>
                             </li>
                         <?php } ?>

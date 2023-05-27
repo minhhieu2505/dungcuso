@@ -16,6 +16,10 @@
     $config['product']['desc_cke'] = true;
     $config['product']['content'] = true;
     $config['product']['content_cke'] = true;
+    $config['product']['specifications'] = true;
+    $config['product']['specifications_cke'] = true;
+    $config['product']['commit'] = true;
+    $config['product']['commit_cke'] = true;
     $config['product']['width'] = 270;
     $config['product']['height'] = 270;
     $config['product']['thumb'] = '100x100x1';
