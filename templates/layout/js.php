@@ -13,8 +13,8 @@
 <script type="text/javascript" src="<?=$configBase?>assets/slick/slick.js"></script>
 <script type="text/javascript" src="<?=$configBase?>assets/js/functions.js"></script>
 <script type="text/javascript" src="<?=$configBase?>assets/confirm/confirm.js"></script>
+<script type="text/javascript" src="<?=$configBase?>assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<?=$configBase?>assets/magiczoomplus/magiczoomplus.js"></script>
-<!-- <script type="text/javascript" src="<?=$configBase?>assets/owlcarousel2/owl.carousel.js"></script> -->
 <script type="text/javascript" src="<?=$configBase?>assets/ion.rangeSlider/ion.rangeSlider.js"></script>
 <script type="text/javascript" src="<?=$configBase?>assets/js/apps.js?v=1.1"></script>
 

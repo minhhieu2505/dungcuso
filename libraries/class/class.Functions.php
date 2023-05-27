@@ -791,7 +791,6 @@
 			if($lastpage > 1)
 			{
 				$pagination .= "<ul class='pagination flex-wrap justify-content-center mb-0'>";
-				$pagination .= "<li class='page-item'><a class='page-link'>Page {$page} / {$lastpage}</a></li>";
 
 				if($page > 1)
 				{
@@ -849,12 +848,6 @@
 							else $pagination.= "<li class='page-item'><a class='page-link' href='{$url}p={$counter}'>{$counter}</a></li>";
 						}
 					}
-				}
-
-				if($page < $counter - 1)
-				{
-					$pagination.= "<li class='page-item'><a class='page-link' href='{$url}p={$next}'>{$nextlabel}</a></li>";
-					$pagination.= "<li class='page-item'><a class='page-link' href='{$url}p=$lastpage'>{$lastlabel}</a></li>";
 				}
 
 				$pagination.= "</ul>";
