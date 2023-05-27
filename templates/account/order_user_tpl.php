@@ -28,9 +28,6 @@
     <tr>
       <th scope="col">STT</th>
       <th scope="col">Mã đơn hàng</th>
-      <th scope="col">Họ tên</th>
-      <th scope="col">Số điện thoại</th>
-      <th scope="col">Địa chỉ</th>
       <th scope="col">Email</th>
       <th scope="col">Tổng tiền</th>
       <th scope="col">Ngày đặt</th>
@@ -40,10 +37,7 @@
     <?php foreach ($order_user as $key => $v) { ?>
         <tr>
             <th scope="row"><?=$key+1?></th>
-            <td><?=$v['code']?></td>
-            <td><a href="chi-tiet-don-hang?id=<?=$v['id']?>"><?=$v['fullname']?></a></td>
-            <td><?=$v['phone']?></td>
-            <td><?=$v['address']?></td>
+            <td><a href="chi-tiet-don-hang?id=<?=$v['id']?>"><?=$v['code']?></a></td>
             <td><?=$v['email']?></td>
             <td><?=$func->formatMoney($v['total_price']);?></td>
             <td><?=date('d/m/Y',$v['total_price']);?></td>

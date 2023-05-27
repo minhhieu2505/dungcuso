@@ -20,9 +20,13 @@
         <?php }
     } else { ?>
         <div class="col-12">
-            <div class="alert alert-warning w-100" role="alert">
-                <strong>Không tìm thấy kết quả</strong>
+            <div class="title-main" >
+                <span>HƯỚNG DẪN MUA HÀNG</span>
             </div>
+            <div class="content-main content-ck w-clear">
+                
+            </div>
+
         </div>
     <?php } ?>
     <div class="clear"></div>
