@@ -9,27 +9,27 @@
                     </div>
                     <div class="check-box"><i></i></div>
                 </div>
-                <div class="items-filter-sort" data-sort="1">
+                <div class="items-filter-sort <?=($id_sort == 1) ? 'active' : '' ?>" data-sort="1">
                     <div class="name-filter">
                         Giá tăng dần
                     </div>
-                    <div class="check-box"><i></i></div>
+                    <div class="check-box"><i class="<?=($id_sort == 1) ? 'fa-duotone fa-check' : '' ?>"></i></div>
                 </div>
-                <div class="items-filter-sort" data-sort="2">
+                <div class="items-filter-sort <?=($id_sort == 2) ? 'active' : '' ?>" data-sort="2">
                     <div class="name-filter">
                         Giá giảm dần
                     </div>
-                    <div class="check-box"><i></i></div>
+                    <div class="check-box"><i class="<?=($id_sort == 2) ? 'fa-duotone fa-check' : '' ?>"></i></div>
                 </div>
             </div>
             <div class="filter-items">
                 <div class="filter-items-name"> Danh mục sản phẩm</div>
                 <?php foreach ($splist as $key => $v) { ?>
-                    <div class="items-filter-child filter-category" data-idcategory="<?= $v['id'] ?>">
+                    <div class="items-filter-child filter-category <?php if (in_array($v['id'], $cate_act)) {echo "active";}?>" data-idcategory="<?= $v['id'] ?>">
                         <div class="name-filter">
                             <?= $v['name'] ?>
                         </div>
-                        <div class="check-box"><i></i></div>
+                        <div class="check-box"><i class="<?php if (in_array($v['id'], $cate_act)) {echo "fa-duotone fa-check";}?>"></i></div>
                     </div>
                 <?php } ?>
             </div>
@@ -47,7 +47,7 @@
         <div class="title-main"><span>
                 <?= (!empty($titleCate)) ? $titleCate : @$titleMain ?>
             </span></div>
-        <div class="content-main  w-clear">
+        <div class="content-main content-product  w-clear">
             <?php if (!empty($product)) { ?>
                 <div class="grid-products grid-4">
                     <?php foreach ($product as $k => $v) { ?>
