@@ -227,12 +227,12 @@ function LoadFilter() {
 
 	$.ajax({
 		url: "api/filter.php",
-		type: "POST",
+		type: "GET",
 		data: {
 			id_category, from, to, id_sort
 		},
 		success: function (result) {
-			$('.grid-products').html(result);
+			$('.content-product').html(result);
 		}
 	});
 }

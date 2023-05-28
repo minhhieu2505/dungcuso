@@ -776,14 +776,7 @@
 			$url = ($urlpos) ? $url."&" : $url."?";
 			$total = $totalq;
 			$adjacents = "2";
-			$firstlabel = "First";
-			$prevlabel = "Prev";
-			$nextlabel = "Next";
-			$lastlabel = "Last";
 			$page = ($page == 0 ? 1 : $page);
-			$start = ($page - 1) * $perPage;
-			$prev = $page - 1;
-			$next = $page + 1;
 			$lastpage = ceil($total/$perPage);
 			$lpm1 = $lastpage - 1;
 			$pagination = "";
@@ -791,13 +784,6 @@
 			if($lastpage > 1)
 			{
 				$pagination .= "<ul class='pagination flex-wrap justify-content-center mb-0'>";
-
-				if($page > 1)
-				{
-					$pagination.= "<li class='page-item'><a class='page-link' href='{$this->getCurrentPageURL()}'>{$firstlabel}</a></li>";
-					$pagination.= "<li class='page-item'><a class='page-link' href='{$url}p={$prev}'>{$prevlabel}</a></li>";
-				}
-
 				if($lastpage < 7 + ($adjacents * 2))
 				{
 					for($counter = 1; $counter <= $lastpage; $counter++)
