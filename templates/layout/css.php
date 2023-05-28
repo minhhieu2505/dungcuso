@@ -6,6 +6,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/owlcarousel2/owl.carousel.css">
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/owlcarousel2/owl.theme.default.css"> -->
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/css/cart.css">
+<link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/css/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/confirm/confirm.css">
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/ion.rangeSlider/ion.rangeSlider.css">
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/css/bootstrap.min.css?v=1.1">

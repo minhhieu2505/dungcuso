@@ -248,4 +248,36 @@ $(document).ready(function () {
 		LoadFilter();
 	})
 });
+$(document).ready(function () {
+
+    $(function(){
+        $( "#keyword" ).autocomplete({  
+            source: function( request, response ) {  
+                $.ajax({  
+                    url: "api/load_product.php", 
+                    type:'POST', 
+                    dataType: "json",  
+                    data: {term: $('#keyword').val() },
+                    success: function( dataRs ) {  
+                        response( $.map( dataRs, function( result ) { 
+                            return {  
+                                label: result.name,  
+                                slug: result.slug,
+                                photo: result.photo,
+                                price: result.price,
+                            }
+                        }));  
+                    }  
+                });  
+            }
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {  
+            return $( "<li></li>" )  
+            .data( "item.autocomplete", item )  
+            .append( "<a href='"+ item.slug +"' class='item_search'>" + "<div class='img_search'><img src='"+ item.photo +"' class='w100' /></div><div class='nd_search'><p class='name_search'>" + item.label + "</p><div class='gia_search'> Giá: <b>"+item.price+"</b></div></div></a>" )
+            .appendTo( ul );   
+        };
+    });
+});
+
+
 
