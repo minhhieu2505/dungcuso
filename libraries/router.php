@@ -75,10 +75,6 @@ if (!empty($com) && !in_array($com, ['tim-kiem','account', 'san-pham-moi'])) {
 		}
 	}
 }
-
-var_dump($com);
-
-
 /* Switch coms */
 switch ($com) {
 	case 'san-pham':

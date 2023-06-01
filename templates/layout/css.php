@@ -10,5 +10,5 @@
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/confirm/confirm.css">
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/ion.rangeSlider/ion.rangeSlider.css">
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/css/bootstrap.min.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/css/style.css?v=1.1">
+<link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/css/style.css?v=<?=time()?>">
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/slick/slick.css?v=1.1"/>

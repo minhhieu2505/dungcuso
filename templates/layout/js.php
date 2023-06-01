@@ -16,5 +16,5 @@
 <script type="text/javascript" src="<?=$configBase?>assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<?=$configBase?>assets/magiczoomplus/magiczoomplus.js"></script>
 <script type="text/javascript" src="<?=$configBase?>assets/ion.rangeSlider/ion.rangeSlider.js"></script>
-<script type="text/javascript" src="<?=$configBase?>assets/js/apps.js?v=1.1"></script>
+<script type="text/javascript" src="<?=$configBase?>assets/js/apps.js?v=<?=time()?>"></script>
 
