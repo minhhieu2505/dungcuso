@@ -247,9 +247,20 @@ $(document).ready(function () {
 	$('body').on('click', '.items-filter-sort', function () {
 		LoadFilter();
 	})
+
+	$(".xemthem-noidung").click(function() {
+		if ($(".xemthem-noidung").hasClass('active')) {
+			$(".mota_product").removeClass("active");
+			$(".load-title").html("Đọc thêm");
+			$(this).removeClass('active');
+		} else {
+			$(".mota_product").addClass("active");
+			$(".load-title").html("Thu gọn");
+			$(this).addClass('active');
+		}
+	});
 });
 $(document).ready(function () {
-
     $(function(){
         $( "#keyword" ).autocomplete({  
             source: function( request, response ) {  

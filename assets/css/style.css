@@ -1079,3 +1079,102 @@ li.page-item {
 .ui-autocomplete .ui-menu-item{display: block;border-bottom: 1px solid #ddd;}
 .ui-autocomplete .ui-menu-item a{padding: 5px;display: flex;justify-content: space-between;}
 .ui-autocomplete .ui-menu-item a:hover{background: #F5F5F5;}
+
+.mota_product {
+    position: relative;
+}
+.mota_product:before { height: 55px; margin-top: -45px; content: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#fff), color-stop(.2, #fff), to(rgba(255, 255, 255, 0))); position: absolute; bottom: 0; left: 0; right: 0; }
+.mota_product.active { height: auto; transition: all 0.4s; }
+.mota_product.active::before { display: none; }
+.mota_product {margin-bottom: 10px;max-height: 300px;overflow: hidden;transition: all 0.4s;position: relative;}
+
+.btn-views-more.btn-product a {
+    transition: all 0.4s;
+    width: 126px;
+    height: 36px;
+    display: inline-block;
+    text-align: center;
+    line-height: 36px;
+    border-radius: 0;
+    background: #c90403;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    text-shadow: -1px -1px 1px rgb(255 255 255 / 10%), 1px 1px 1px rgb(255 255 255 / 50%);
+}
+.btn-views-more { margin-bottom: 15px; margin-top: 10px; text-align: center; }
+
+.title-product-detail {
+    font-weight: 700;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.box-hoidap {
+    padding: 10px;
+    box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+    background: #f9fafb;
+}
+
+textarea#question_member {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {}
+
+input#sumbit_question_member {
+    width: 5%;
+    width: 100px;
+    line-height: 30px;
+    color: #fff;
+    font-weight: 700;
+    background: #34495e;
+    border: none;
+    border-radius: 5px;
+}
+
+input#name_member {
+    width: 30%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.box-question {
+    margin-top: 20px;
+}
+
+.name_member_q {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.name_member_q span:nth-child(1) {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 2;
+    margin: 0;
+    text-transform: capitalize;
+    color: #4a4a4a;
+}
+
+.name_member_q span:nth-child(2) {
+    color: #726b6b;
+    font-weight: 700;
+}
+
+.content_question {
+    padding: 15px;
+    box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+    margin-left: 30px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background: #fff;
+}

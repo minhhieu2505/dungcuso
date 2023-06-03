@@ -4,7 +4,6 @@ if (!defined('SOURCES'))
 
 @$id = htmlspecialchars($_GET['id']);
 @$idl = htmlspecialchars($_GET['idl']);
-
 if ($id != '') {
 	/* Lấy sản phẩm detail */
 	$rowDetail = $d->rawQueryOne("select * from #_product where id = ? and find_in_set('hienthi',status) limit 0,1", array($id));
@@ -22,6 +21,19 @@ if ($id != '') {
 	$sql = "select * from #_product where $where order by id desc $limit";
 	$product = $d->rawQuery($sql, $params);
 
+	$namemember = (!empty($_POST['name_member']) ? $_POST['name_member'] : ""); 
+	$contentmember = (!empty($_POST['question_member']) ? $_POST['question_member'] : ""); 
+	$id_pro = (!empty($_POST['id_pro_question']) ? $_POST['id_pro_question'] : ""); 
+	$sumbit_question_member = (!empty($_POST['sumbit_question_member']) ? $_POST['sumbit_question_member'] : ""); 
+	$dquestion = array();
+	if ($sumbit_question_member != "") {
+		$dquestion['id_product'] = $id_pro;
+		$dquestion['name'] = $namemember;
+		$dquestion['content'] = $contentmember;
+		$dquestion['type'] = 1;
+		$dquestion['date_created'] = time();
+	}
+	$question_member = $d->rawQuery("select * from comment where type = '1' and id_product = '".$rowDetail['id']."'");
 	$breadCumb = array($titleMain, $productList['name'], $rowDetail['name']);
 } elseif ($idl != '') {
 	/* Lấy tất cả sản phẩm */
