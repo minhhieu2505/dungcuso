@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="col-lg-9">
     <div class="grid-pro-detail w-clear">
@@ -68,6 +69,10 @@
                 <a class="nav-link active" id="info-pro-detail-tab" data-toggle="tab" href="#info-pro-detail"
                     role="tab">Thông tin sản phẩm</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="comment-pro-detail-tab" data-toggle="tab" href="#comment-pro-detail"
+                    role="tab">Bình luận</a>
+            </li>
         </ul>
         <div class="tab-content pt-4 pb-4" id="tabsProDetailContent">
             <div class="tab-pane fade show active content-ck" id="info-pro-detail" role="tabpanel">
@@ -75,8 +80,29 @@
                 <?= htmlspecialchars_decode($rowDetail['content']) ?>
                 </div>
                 <div class="btn-views-more btn-product">
-			<a title="Đọc thêm" class="xemthem-noidung"><span class="load-title">Đọc thêm ...</span></a>
-		</div>
+                    <a title="Đọc thêm" class="xemthem-noidung"><span class="load-title">Đọc thêm ...</span></a>
+                </div>
+            </div>
+            <div class="tab-pane fade tab-product" id="comment-pro-detail" role="tabpanel">
+                <div class="comment-form">
+                    <div class="title-product-detail">Bình luận</div>
+                        <form action="" method="POST" name="comment_product">
+                            <textarea name="comment_product" class="p-2" id="question_member"></textarea>
+                            <input type="submit" value="Gửi" name="sumbit_comment_product" id="sumbit_comment_product">
+                        </form>
+                        <div class="box-question">
+    <?php foreach($comment_member as $v) { ?>
+            <div class="name_member_q">
+                <span><?=$v['name']?></span>
+                <span><?=date('d/m/Y',$v['date_created'])?></span>
+            </div>
+            <div class="content_question">
+                <?=$v['content']?>
+            </div>
+        <?php }?>
+    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -168,7 +194,8 @@
         </div>
         <div class="table-criteria">
             <div class="title">CAM KẾT</div>
-            <?=htmlspecialchars_decode($rowDetail['commit'])?>
+            <?=htmlspecialchars_decode($commit[0]['content'])?>
         </div>
     </div>
 </div>
+

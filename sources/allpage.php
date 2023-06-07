@@ -6,6 +6,7 @@
     $social = $d->rawQuery("select name,id,link,photo from multi_media where type = 'social'");
     $slider = $d->rawQuery("select name,id,link,photo from multi_media where type = 'slide'");
     $policy = $d->rawQuery("select name,id,slug from news where type = 'chinh-sacha'");
+    $commit = $d->rawQuery("select name,id,slug,content from news where type = 'cam-ket'");
     $minPrice = $d->rawQueryOne("select sale_price from product where id<>0 order by sale_price asc");
     $maxPrice = $d->rawQueryOne("select sale_price from product where id<>0 order by sale_price desc");
     if($_SESSION[$loginMember]['active'] == true){

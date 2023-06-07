@@ -5,6 +5,7 @@ if (!defined('SOURCES'))
 @$id = htmlspecialchars($_GET['id']);
 @$idl = htmlspecialchars($_GET['idl']);
 if ($id != '') {
+	
 	/* Lấy sản phẩm detail */
 	$rowDetail = $d->rawQueryOne("select * from #_product where id = ? and find_in_set('hienthi',status) limit 0,1", array($id));
 	/* Lấy danh mục sản phẩm */
@@ -25,15 +26,46 @@ if ($id != '') {
 	$contentmember = (!empty($_POST['question_member']) ? $_POST['question_member'] : ""); 
 	$id_pro = (!empty($_POST['id_pro_question']) ? $_POST['id_pro_question'] : ""); 
 	$sumbit_question_member = (!empty($_POST['sumbit_question_member']) ? $_POST['sumbit_question_member'] : ""); 
+	$comment_product = (!empty($_POST['comment_product']) ? $_POST['comment_product'] : ""); 
 	$dquestion = array();
 	if ($sumbit_question_member != "") {
-		$dquestion['id_product'] = $id_pro;
+		$dquestion['id_product'] = $rowDetail['id'];
 		$dquestion['name'] = $namemember;
 		$dquestion['content'] = $contentmember;
 		$dquestion['type'] = 1;
 		$dquestion['date_created'] = time();
+		if($d->insert('comment',$dquestion))
+		{
+			$func->transfer("Cám ơn bạn đã phản hồi", $configBase.$rowDetail['slug']);
+		} else {
+			$func->transfer("Hệ thống đang gặp lỗi.", $configBase.$rowDetail['slug']);
+		}
+	}
+	$commnent_product = (!empty($_POST['comment']) ? $_POST['comment'] : ""); 
+	$dcomment = array();
+	
+	if ($_POST['comment_product'] != "") {
+		if ($_SESSION[$loginMember]['active'] == true) {
+			$contentcomment = (!empty($_POST['comment_product']) ? $_POST['comment_product'] : ""); 
+			$dcomment['id_product'] = $rowDetail['id'];
+			$dcomment['name'] = $_SESSION[$loginMember]['fullname'];
+			$dcomment['id_user'] = $_SESSION[$loginMember]['id'];
+			$dcomment['email'] = $_SESSION[$loginMember]['email'];
+			$dcomment['content'] = $contentcomment;
+			$dcomment['type'] = 2;
+			$dcomment['date_created'] = time();
+			if($d->insert('comment',$dcomment))
+			{
+				$func->transfer("Cám ơn bạn đã phản hồi", $configBase.$rowDetail['slug']);
+			} else {
+				$func->transfer("Hệ thống đang gặp lỗi.", $configBase.$rowDetail['slug']);
+			}
+		} else {
+			$func->transfer("Bạn vui lòng đăng nhập", $configBase."account/dang-nhap", false);
+		}
 	}
 	$question_member = $d->rawQuery("select * from comment where type = '1' and id_product = '".$rowDetail['id']."'");
+	$comment_member = $d->rawQuery("select * from comment where type = '2' and id_product = '".$rowDetail['id']."'");
 	$breadCumb = array($titleMain, $productList['name'], $rowDetail['name']);
 } elseif ($idl != '') {
 	/* Lấy tất cả sản phẩm */

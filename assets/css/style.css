@@ -53,6 +53,7 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; marg
 .promotion .box { border-color: #34495e; } 
 .producthot .title-index { background-color: #d3041e; } 
 .producthot .box { border-color: #d3041e; } 
+.footer{padding-top: 20px;}
 .footer-article { background-color: #34495e; } 
 .footer-powered { background-color: #27589a; } 
 .box-splist-1 .head-product { background-color: #34495e; } 
@@ -1112,7 +1113,7 @@ li.page-item {
 }
 
 .box-hoidap {
-    padding: 10px;
+    padding: 20px 10px;
     box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
     background: #f9fafb;
 }
@@ -1177,4 +1178,15 @@ input#name_member {
     border-radius: 10px;
     margin-bottom: 20px;
     background: #fff;
+}
+
+input#sumbit_comment_product {
+    width: 5%;
+    width: 100px;
+    line-height: 30px;
+    color: #fff;
+    font-weight: 700;
+    background: #34495e;
+    border: none;
+    border-radius: 5px;
 }

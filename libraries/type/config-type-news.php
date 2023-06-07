@@ -17,6 +17,12 @@
     $config['news'][$nametype]['height'] = 270;
     $config['news'][$nametype]['thumb'] = '100x100x1';
     $config['news'][$nametype]['img_type'] = '.jpg|.gif|.png|.jpeg|.gif';
+    /** Cam kết */
+    $nametype = "cam-ket";
+    $config['news'][$nametype]['title_main'] = "Cam kết";
+    $config['news'][$nametype]['content'] = true;
+    $config['news'][$nametype]['content_cke'] = true;
+    
 
     /* Hướng dẫn mua hàng */
     $nametype = "huong-dan-mua-hang";

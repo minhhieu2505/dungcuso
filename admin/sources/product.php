@@ -8,6 +8,7 @@
 			viewMans();
 			$template = "product/man/mans";
 			break;
+
 		case "add":
 			$category = $d->rawQuery("select * from category order by id desc");
 			$template = "product/man/man_add";

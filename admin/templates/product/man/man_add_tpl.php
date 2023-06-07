@@ -114,15 +114,7 @@
                                                 placeholder="Nội dung"><?=htmlspecialchars_decode((!empty($flash->has('specifications'))) ? $flash->get('specifications') : @$item['specifications'])?></textarea>
                                         </div>
                                         <?php } ?>
-                                        <?php if(isset($config['product']['commit']) && $config['product']['commit'] == true) { ?>
-                                        <div class="form-group">
-                                            <label for="commit">Cam kết</label>
-                                            <textarea
-                                                class="form-control for-seo text-sm <?=(isset($config['product']['commit_cke']) && $config['product']['commit_cke'] == true)?'form-control-ckeditor':''?>"
-                                                name="data[commit]" id="commit" rows="5"
-                                                placeholder="Nội dung"><?=htmlspecialchars_decode((!empty($flash->has('commit'))) ? $flash->get('commit') : @$item['commit'])?></textarea>
-                                        </div>
-                                        <?php } ?>
+                                        
                                     </div>
                                 </div>
                             </div>
