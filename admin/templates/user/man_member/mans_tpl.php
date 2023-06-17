@@ -1,8 +1,8 @@
 <?php
-	$linkMan = "index.php?com=user&act=man_member";
-    $linkAdd = "index.php?com=user&act=add_member";
-	$linkEdit = "index.php?com=user&act=edit_member";
-	$linkDelete = "index.php?com=user&act=delete_member";
+	$linkMan = "index.php?source=user&act=man_member";
+    $linkAdd = "index.php?source=user&act=add_member";
+	$linkEdit = "index.php?source=user&act=edit_member";
+	$linkDelete = "index.php?source=user&act=delete_member";
 ?>
 
 <!-- Content Header -->
@@ -20,8 +20,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="card-footer text-sm sticky-top">
-        <a class="btn btn-sm bg-gradient-primary text-white" href="<?=$linkAdd?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
-        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?=$linkDelete?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
+        
         <div class="form-inline form-search d-inline-block align-middle ml-3">
             <div class="input-group input-group-sm">
                 <input class="form-control form-control-navbar text-sm" type="search" id="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="<?=(isset($_GET['keyword'])) ? $_GET['keyword'] : ''?>" onkeypress="doEnter(event,'keyword','<?=$linkMan?>')">
@@ -70,7 +69,7 @@
                                     </div>
                                 </td>
                                 <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$items[$i]['numb']?>" data-id="<?=$items[$i]['id']?>" data-table="member">
+                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$i+1?>" data-id="<?=$items[$i]['id']?>" data-table="member">
                                 </td>
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['username']?>"><?=$items[$i]['username']?></a>
@@ -107,7 +106,6 @@
         </div>
     <?php } ?>
     <div class="card-footer text-sm">
-        <a class="btn btn-sm bg-gradient-primary text-white" href="<?=$linkAdd?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
-        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?=$linkDelete?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
+        
     </div>
 </section>

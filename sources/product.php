@@ -67,6 +67,12 @@ if ($id != '') {
 	$question_member = $d->rawQuery("select * from comment where type = '1' and id_product = '".$rowDetail['id']."'");
 	$comment_member = $d->rawQuery("select * from comment where type = '2' and id_product = '".$rowDetail['id']."'");
 	$breadCumb = array($titleMain, $productList['name'], $rowDetail['name']);
+	$func->daxem($rowDetail['id']);
+	$prodaxem = array_column($_SESSION['daxem'], 'productid');
+    if ($prodaxem) {
+        $sqlprodaxem = $d->rawQuery("select * from #_product where id in(".implode(',',$prodaxem).") and find_in_set('hienthi',status)");
+    }
+	
 } elseif ($idl != '') {
 	/* Lấy tất cả sản phẩm */
 	$productList = $d->rawQueryOne("select name from category where id = ? and find_in_set('hienthi',status) limit 0,1", array($idl));

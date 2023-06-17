@@ -2403,5 +2403,30 @@
 
 	    	return $str;
 	    }
+		
+		public function daxem($pid){
+			if($pid<1) return;
+			if(is_array($_SESSION['daxem'])){
+				if($this->daxem_exists($pid)) return;
+				$max=count($_SESSION['daxem']);
+				$_SESSION['daxem'][$max]['productid']=$pid;
+			}
+			else{
+				$_SESSION['daxem']=array();
+				$_SESSION['daxem'][0]['productid']=$pid;
+			}
+		}
+		public function daxem_exists($pid){
+			$pid=intval($pid);
+			$max=count($_SESSION['daxem']);
+			$flag=0;
+			for($i=0;$i<$max;$i++){
+				if($pid==$_SESSION['daxem'][$i]['productid']){
+					$flag=1;
+					break;
+				}
+			}
+			return $flag;
+		} 
 	}
 ?>

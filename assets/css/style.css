@@ -285,7 +285,7 @@ img:not([src]) { visibility: hidden; }
 .comment-pro-detail { display: flex; align-items: center; justify-content: flex-start; } 
 .social-plugin-pro-detail { margin-bottom: 1rem; margin-top: 0px !important; } 
 .desc-pro-detail { margin-bottom: 1rem; } 
-.attr-pro-detail { list-style: none; padding: 0px; } 
+.attr-pro-detail {list-style: none;padding: 0px;margin-top: 12px;} 
 .attr-pro-detail li { margin-bottom: 0.5rem; } 
 .attr-label-pro-detail { margin: 0px 5px 0px 0px; } 
 .attr-label-pro-detail.d-block { display: block; margin: 0px 0px 5px 0px; } 

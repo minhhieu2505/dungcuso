@@ -65,6 +65,16 @@
                         } ?>
                     </ul>
                 </li>
+                <!-- Tài khoản -->
+                <li class="nav-item has-treeview ">
+                    <a class="nav-link" href="index.php?source=user&act=man_member" title="Quản lý tài khoản">
+                        <i class="nav-icon text-sm far fa-newspaper"></i>
+                        <p>
+                            Quản lý tài khoản
+                            <i class="fa-regular fa-user-group"></i>
+                        </p>
+                    </a>
+                </li>
                 <!-- Multi -->
                 <li class="nav-item has-treeview">
                     <a class="nav-link" href="#" title="Quản lý hình ảnh - video">
