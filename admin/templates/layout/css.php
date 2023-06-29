@@ -16,5 +16,8 @@
 <link href="assets/holdon/HoldOn-style.css" rel="stylesheet">
 <link href="assets/simplenotify/simple-notify.css" rel="stylesheet">
 <link href="assets/comment/comment.css" rel="stylesheet">
+<link href="assets/fileuploader/fileuploader-theme-dragdrop.css" rel="stylesheet">
+<link href="assets/fileuploader/fileuploader.css" rel="stylesheet">
+<link href="assets/fileuploader/fileuploader.min.css" rel="stylesheet">
 <link href="assets/css/adminlte.css" rel="stylesheet">
 <link href="assets/css/adminlte-style.css" rel="stylesheet">

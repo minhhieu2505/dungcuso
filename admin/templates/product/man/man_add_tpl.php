@@ -246,6 +246,25 @@
                     </div>
                     <?php } ?>
                 </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="d-block" for="gallery">Album ảnh sản phẩm:</label>
+                        <div class="review-file-uploader">
+							<input type="file" id="review-file-photo" name="review-file-photo">
+						</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <?php 
+                        foreach($gallery as $v){ ?>
+                            <div class="form-group col-2">
+                                <div class="img-review-file-uploader">
+                                    <img src="../upload/product/<?=$v['photo']?>" class="w-100" alt="" onerror="this.src='../assets/images/No-Image.png'">
+                                </div>
+                            </div>
+                        <?php }
+                    ?>
+                </div>
             </div>
         </div>
         <div class="card-footer text-sm">

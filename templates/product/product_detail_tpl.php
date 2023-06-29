@@ -10,8 +10,21 @@
                         title="<?= $rowDetail['name'] ?>">
                         <img src="upload/product/<?=$rowDetail['photo']?>" alt="" width="600" height="600">
                     </a>
+                    <div class="gallery-thumb-pro">
+                <div class="slick-product-detail slick-initialized slick-slider">
+                    <div class="slick-list draggable">
+                        <div class="slick-product-detail">
+                            <div class="slick-track" style="opacity: 1;width: 100px;transform: translate3d(0px, 0px, 0px);">
+                                <a href="" class="thumb-pro-detail" data-zoom-id="Zoom-1">
+                                    <img src="upload/product/<?=$rowDetail['photo']?>" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
+            </div>
+                </div>
+                
                 <div class="right-pro-detail col-md-6 col-lg-7 mb-4">
                     <p class="title-pro-detail mb-2"><?= $rowDetail['name'] ?></p>
                     <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
@@ -70,6 +83,8 @@
                     </div>
                 </div>
             </div>
+            
+            
         </div>
     
         <div class="tabs-pro-detail">

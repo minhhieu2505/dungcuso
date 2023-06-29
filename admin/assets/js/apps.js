@@ -1649,335 +1649,7 @@ $(document).ready(function(){
 	$("form.validation-form").append('<input type="hidden" name="hash" value="'+HASH+'" />');
 	$("#filer-gallery").attr({'data-params':BASE64_QUERY_STRING,'data-hash':HASH});
 
-    /* Change info filer */
-    $('body').on('change','.my-jFiler-item-info', function(){
-		var id = $(this).data("id");
-		var info = $(this).data("info");
-		var value = $(this).val();
-		var id_parent = ID;
-		var com = COM;
-		var kind = ACT;
-		var type = TYPE;
-		var colfiler = $(".col-filer").val();
-		var actfiler = $(".act-filer").val();
-		var cmd = 'info';
 
-		$.ajax({
-			type: 'POST',
-			dataType: 'html',
-			url: 'api/filer.php',
-			async: false,
-			data: {
-				id: id,
-				id_parent: id_parent,
-				info: info,
-				value: value,
-				com: com,
-				kind: actfiler,
-				type: type,
-				colfiler: colfiler,
-				cmd: cmd,
-				hash: HASH
-			},
-			success: function(result)
-			{
-				destroySortFiler();
-				$("#jFilerSortable").html(result);
-				createSortFiler();
-			}
-		});
-
-		return false;
-    });
-
-	/* Filer */
-	if($("#filer-gallery").length)
-	{
-		$("#filer-gallery").filer({
-	        limit: null,
-	        maxSize: null,
-	        extensions: ["jpg","png","jpeg","JPG","PNG","JPEG","Png"],
-	        changeInput: '<div class="jFiler-input-dragDrop"><div class="jFiler-input-inner"><div class="jFiler-input-icon"><i class="icon-jfi-cloud-up-o"></i></div><div class="jFiler-input-text"><h3>Kéo và thả hình vào đây</h3> <span style="display:inline-block; margin: 15px 0">hoặc</span></div><a class="jFiler-input-choose-btn blue">Chọn hình</a></div></div>',
-			theme: "dragdropbox",
-	        showThumbs: true,
-	        addMore: true,
-	        allowDuplicates: false,
-	        clipBoardPaste: false,
-	        dragDrop: {
-				dragEnter: null,
-				dragLeave: null,
-				drop: null,
-				dragContainer: null
-	        },
-	        captions: {
-	            button: "Thêm hình",
-	            feedback: "Vui lòng chọn hình ảnh",
-	            feedback2: "Những hình đã được chọn",
-	            drop: "Kéo hình vào đây để upload",
-	            removeConfirmation: "Bạn muốn loại bỏ hình ảnh này ?",
-	            errors: {
-	                filesLimit: "Chỉ được upload mỗi lần {{fi-limit}} hình ảnh",
-	                filesType: "Chỉ hỗ trợ tập tin là hình ảnh có định dạng: {{fi-extensions}}",
-	                filesSize: "Hình {{fi-name}} có kích thước quá lớn. Vui lòng upload hình ảnh có kích thước tối đa {{fi-maxSize}} MB.",
-	                filesSizeAll: "Những hình ảnh bạn chọn có kích thước quá lớn. Vui lòng chọn những hình ảnh có kích thước tối đa {{fi-maxSize}} MB."
-	            }
-	        },
-	        afterShow: function(){
-	        	var jFilerItems = $(".my-jFiler-items .jFiler-items-list li.jFiler-item");
-	        	var jFilerItemsLength = 0;
-	        	var jFilerItemsLast = 0;
-	        	if(jFilerItems.length)
-	        	{
-	        		jFilerItemsLength = jFilerItems.length;
-	        		jFilerItemsLast = parseInt(jFilerItems.last().find("input[type=number]").val());
-	        	}
-	        	$(".jFiler-items-list li.jFiler-item").each(function(index){
-	        		var colClass = $(".col-filer").val();
-	        		var parent = $(this).parent();
-	        		if(!parent.is("#jFilerSortable"))
-	        		{
-	        			jFilerItemsLast += 1;
-	            		$(this).find("input[type=number]").val(jFilerItemsLast);
-	        		}
-	            	if(!$(this).hasClass(colClass)) $("li.jFiler-item").addClass(colClass);
-	        	});
-	        },
-	        uploadFile: {
-				url: "api/upload.php",
-				data: $("#filer-gallery").data(),
-				type: 'POST',
-				enctype: 'multipart/form-data',
-				dataType: 'json',
-				async: false,
-				beforeSend: function(){
-					holdonOpen();
-				},
-				success: function(data, el){
-					data = JSON.parse(data);
-					if(data['success'] == true)
-					{
-						var parent = el.find(".jFiler-jProgressBar").parent();
-						el.find(".jFiler-jProgressBar").fadeOut("slow", function(){
-							$("<div class = \"jFiler-item-others text-success\"><i class = \"icon-jfi-check-circle\"></i> Success</div>").hide().appendTo(parent).fadeIn("slow");
-						});
-					}
-					else
-					{
-						var parent = el.find(".jFiler-jProgressBar").parent();
-						el.find(".jFiler-jProgressBar").fadeOut("slow", function(){
-							$("<div class = \"jFiler-item-others text-error\"><i class = \"icon-jfi-minus-circle\"></i> Error</div>").hide().appendTo(parent).fadeIn("slow");
-						});
-					}
-				},
-				error: function(el){
-					var parent = el.find(".jFiler-jProgressBar").parent();
-					el.find(".jFiler-jProgressBar").fadeOut("slow", function(){
-						$("<div class = \"jFiler-item-others text-error\"><i class = \"icon-jfi-minus-circle\"></i> Error</div>").hide().appendTo(parent).fadeIn("slow");
-					});
-				},
-				onComplete: function(){
-					refreshFiler();
-					if($(".my-jFiler-item-info").length)
-					{
-						$(".jFiler-items-list").first().find(".jFiler-item").remove();
-						$(".my-jFiler-item-info").trigger("change");
-					}
-					else
-					{
-						refreshFilerIfEmpty();
-					}
-					holdonClose();
-				},
-				statusCode: {},
-				onProgress: function(){},
-			},
-	        templates: {
-	            box: '<ul class="jFiler-items-list jFiler-items-grid row scroll-bar"></ul>',
-	            item: '<li class="jFiler-item">\
-	                        <div class="jFiler-item-container">\
-	                            <div class="jFiler-item-inner">\
-	                                <div class="jFiler-item-thumb">\
-	                                    <div class="jFiler-item-status"></div>\
-	                                    <div class="jFiler-item-thumb-overlay">\
-	                                        <div class="jFiler-item-info">\
-	                                            <div style="display:table-cell;vertical-align: middle;">\
-	                                                <span class="jFiler-item-title"><b title="{{fi-name}}">{{fi-name}}</b></span>\
-	                                                <span class="jFiler-item-others">{{fi-size2}}</span>\
-	                                            </div>\
-	                                        </div>\
-	                                    </div>\
-	                                    {{fi-image}}\
-	                                </div>\
-	                                <div class="jFiler-item-assets jFiler-row">\
-	                                    <ul class="list-inline pull-left">\
-	                                        <li>{{fi-progressBar}}</li>\
-	                                    </ul>\
-	                                    <ul class="list-inline pull-right">\
-	                                        <li><a class="icon-jfi-trash jFiler-item-trash-action"></a></li>\
-	                                    </ul>\
-	                                </div>\
-	                                <input type="number" class="form-control form-control-sm mb-1" name="numb-filer[]" placeholder="Số thứ tự"/>\
-	                                <input type="text" class="form-control form-control-sm" name="name-filer[]" placeholder="Tiêu đề"/>\
-	                            </div>\
-	                        </div>\
-	                    </li>',
-	            itemAppend: '<li class="jFiler-item">\
-	                            <div class="jFiler-item-container">\
-	                                <div class="jFiler-item-inner">\
-	                                    <div class="jFiler-item-thumb">\
-	                                        <div class="jFiler-item-status"></div>\
-	                                        <div class="jFiler-item-thumb-overlay">\
-	                                            <div class="jFiler-item-info">\
-	                                                <div style="display:table-cell;vertical-align: middle;">\
-	                                                    <span class="jFiler-item-title"><b title="{{fi-name}}">{{fi-name}}</b></span>\
-	                                                    <span class="jFiler-item-others">{{fi-size2}}</span>\
-	                                                </div>\
-	                                            </div>\
-	                                        </div>\
-	                                        {{fi-image}}\
-	                                    </div>\
-	                                    <div class="jFiler-item-assets jFiler-row">\
-	                                        <ul class="list-inline pull-left">\
-	                                            <li><span class="jFiler-item-others">{{fi-icon}}</span></li>\
-	                                        </ul>\
-	                                        <ul class="list-inline pull-right">\
-	                                            <li><a class="icon-jfi-trash jFiler-item-trash-action"></a></li>\
-	                                        </ul>\
-	                                    </div>\
-	                                    <input type="number" class="form-control form-control-sm mb-1" name="numb-filer[]" placeholder="Số thứ tự"/>\
-	                                	<input type="text" class="form-control form-control-sm" name="name-filer[]" placeholder="Tiêu đề"/>\
-	                                </div>\
-	                            </div>\
-	                        </li>',
-	            progressBar: '<div class="bar"></div>',
-	            itemAppendToEnd: true,
-	            canvasImage: false,
-	            removeConfirmation: true,
-	            _selectors: {
-	                list: '.jFiler-items-list',
-	                item: '.jFiler-item',
-	                progressBar: '.bar',
-	                remove: '.jFiler-item-trash-action'
-	            }
-	        }
-	    });
-	}
-
-	/* Filer import */
-	if($("#filer-import").length)
-	{
-		$("#filer-import").filer({
-	        limit: null,
-	        maxSize: null,
-	        extensions: ["jpg","png","jpeg","JPG","PNG","JPEG","Png"],
-	        changeInput: '<a class="jFiler-input-choose-btn border-primary btn btn-sm bg-gradient-primary text-white mb-3"><i class="fas fa-cloud-upload-alt mr-2"></i>Upload hình ảnh</a>',
-			theme: "default",
-	        showThumbs: true,
-	        addMore: true,
-	        allowDuplicates: false,
-	        clipBoardPaste: false,
-	        captions: {
-	            button: "Thêm hình",
-	            feedback: "Vui lòng chọn hình ảnh",
-	            feedback2: "Những hình đã được chọn",
-	            drop: "Kéo hình vào đây để upload",
-	            removeConfirmation: "Bạn muốn loại bỏ hình ảnh này ?",
-	            errors: {
-	                filesLimit: "Chỉ được upload mỗi lần {{fi-limit}} hình ảnh",
-	                filesType: "Chỉ hỗ trợ tập tin là hình ảnh có định dạng: {{fi-extensions}}",
-	                filesSize: "Hình {{fi-name}} có kích thước quá lớn. Vui lòng upload hình ảnh có kích thước tối đa {{fi-maxSize}} MB.",
-	                filesSizeAll: "Những hình ảnh bạn chọn có kích thước quá lớn. Vui lòng chọn những hình ảnh có kích thước tối đa {{fi-maxSize}} MB."
-	            }
-	        },
-	        afterShow: function(){
-	        	var jFilerItems = $(".my-jFiler-items .jFiler-items-list li.jFiler-item");
-	        	var jFilerItemsLength = 0;
-	        	var jFilerItemsLast = 0;
-	        	if(jFilerItems.length)
-	        	{
-	        		jFilerItemsLength = jFilerItems.length;
-	        		jFilerItemsLast = parseInt(jFilerItems.last().find("input[type=number]").val());
-	        	}
-	        	$(".jFiler-items-list li.jFiler-item").each(function(index){
-	        		var colClass = $(".col-filer").val();
-	        		var parent = $(this).parent();
-	        		if(!parent.is("#jFilerSortable"))
-	        		{
-	        			jFilerItemsLast += 1;
-	            		$(this).find("input[type=number]").val(jFilerItemsLast);
-	        		}
-	            	if(!$(this).hasClass(colClass)) $("li.jFiler-item").addClass(colClass);
-	        	});
-	        },
-	        templates: {
-	            box: '<ul class="jFiler-items-list jFiler-items-grid row scroll-bar"></ul>',
-	            item: '<li class="jFiler-item">\
-	                        <div class="jFiler-item-container">\
-	                            <div class="jFiler-item-inner">\
-	                                <div class="jFiler-item-thumb">\
-	                                    <div class="jFiler-item-status"></div>\
-	                                    <div class="jFiler-item-thumb-overlay">\
-	                                        <div class="jFiler-item-info">\
-	                                            <div style="display:table-cell;vertical-align: middle;">\
-	                                                <span class="jFiler-item-title"><b title="{{fi-name}}">{{fi-name}}</b></span>\
-	                                                <span class="jFiler-item-others">{{fi-size2}}</span>\
-	                                            </div>\
-	                                        </div>\
-	                                    </div>\
-	                                    {{fi-image}}\
-	                                </div>\
-	                                <div class="jFiler-item-assets jFiler-row">\
-	                                    <ul class="list-inline pull-left">\
-	                                        <li>{{fi-progressBar}}</li>\
-	                                    </ul>\
-	                                    <ul class="list-inline pull-right">\
-	                                        <li><a class="icon-jfi-trash jFiler-item-trash-action"></a></li>\
-	                                    </ul>\
-	                                </div>\
-	                                <input type="number" class="form-control form-control-sm mb-1" name="numb-filer[]" placeholder="Số thứ tự"/>\
-	                            </div>\
-	                        </div>\
-	                    </li>',
-	            itemAppend: '<li class="jFiler-item">\
-	                            <div class="jFiler-item-container">\
-	                                <div class="jFiler-item-inner">\
-	                                    <div class="jFiler-item-thumb">\
-	                                        <div class="jFiler-item-status"></div>\
-	                                        <div class="jFiler-item-thumb-overlay">\
-	                                            <div class="jFiler-item-info">\
-	                                                <div style="display:table-cell;vertical-align: middle;">\
-	                                                    <span class="jFiler-item-title"><b title="{{fi-name}}">{{fi-name}}</b></span>\
-	                                                    <span class="jFiler-item-others">{{fi-size2}}</span>\
-	                                                </div>\
-	                                            </div>\
-	                                        </div>\
-	                                        {{fi-image}}\
-	                                    </div>\
-	                                    <div class="jFiler-item-assets jFiler-row">\
-	                                        <ul class="list-inline pull-left">\
-	                                            <li><span class="jFiler-item-others">{{fi-icon}}</span></li>\
-	                                        </ul>\
-	                                        <ul class="list-inline pull-right">\
-	                                            <li><a class="icon-jfi-trash jFiler-item-trash-action"></a></li>\
-	                                        </ul>\
-	                                    </div>\
-	                                    <input type="number" class="form-control form-control-sm mb-1" name="numb-filer[]" placeholder="Số thứ tự"/>\
-	                                </div>\
-	                            </div>\
-	                        </li>',
-	            progressBar: '<div class="bar"></div>',
-	            itemAppendToEnd: true,
-	            canvasImage: false,
-	            removeConfirmation: true,
-	            _selectors: {
-	                list: '.jFiler-items-list',
-	                item: '.jFiler-item',
-	                progressBar: '.bar',
-	                remove: '.jFiler-item-trash-action'
-	            }
-	        }
-	    });
-	}
 
 	/* Ckeditor */
 	if($(".form-control-ckeditor").length)
@@ -2083,59 +1755,68 @@ $(document).ready(function(){
 		CKEDITOR.config.protectedSource = [/<i[^>]*><\/i>/g];
 	}
 
-	/* apexMixedChart */
-	if($("#apexMixedChart").length)
-	{
-		var apexMixedChart;
-	    var options = {
-	        colors: ['#3c8dbc'],
-	        chart:
-	        {
-	            id: 'apexMixedChart',
-	            height: 450,
-	            type: 'line',
-	            dropShadow:
-	            {
-	                enabled: true,
-	                color: '#000',
-	                top: 18,
-	                left: 7,
-	                blur: 20,
-	                opacity: 0.2
-	            }
-	        },
-	        series: [{
-	            name: 'Thống kê truy cập tháng ' + CHARTS['month'],
-	            type: 'line',
-	            data: CHARTS['series']
-	        }],
-	        stroke: {
-	          curve: 'smooth'
-	        },
-	        grid: {
-	            borderColor: '#e7e7e7',
-	            row: {
-	                colors: ['#f3f3f3', 'transparent'],
-	                opacity: 0.5
-	            },
-	        },
-	        markers: {
-	            size: 1
-	        },
-	        dataLabels: {
-	            enabled: false
-	        },
-	        labels: CHARTS['labels'],
-	        legend: {
-	            position: 'top',
-	            horizontalAlign: 'right',
-	            floating: true,
-	            offsetY: -25,
-	            offsetX: -5
-	        }
-	    };
+	$('#review-file-photo').getEvali({
+		limit: 10,
+		maxSize: 30,
+		extensions: ["jpg","png","jpeg","JPG","PNG","JPEG","Png"],
+		editor: false,
+		addMore: true,
+		enableApi: false,
+		dragDrop: true,
+		changeInput: 
+		'<div class="review-fileuploader">' + 
+		'<div class="review-fileuploader-caption"><strong>${captions.feedback}</strong></div>' + 
+		'<div class="review-fileuploader-text mx-3">${captions.or}</div>' + 
+		'<div class="review-fileuploader-button btn btn-sm btn-primary text-capitalize font-weight-500 py-2 px-3">${captions.button}</div>' + 
+		'</div>',
+		theme: 'dragdrop',
+		captions: {
+			feedback: '(Kéo thả ảnh)',
+			or: '-hoặc-',
+			button: 'Chọn ảnh',
+		},
+		thumbnails: {
+			popup: false,
+			canvasImage: false
+		},
+		dialogs: {
+			alert: function(e){
+				return notifyDialog(e);
+			},
+			confirm: function(e,t){
+				$.confirm({
+					title: 'Thông báo',
+					icon: 'fas fa-exclamation-triangle',
+					type: 'orange',
+					content: e,
+					backgroundDismiss: true,
+					animationSpeed: 600,
+					animation: 'zoom',
+					closeAnimation: 'scale',
+					typeAnimated: true,
+					animateFromElement: false,
+					autoClose: 'cancel|3000',
+					escapeKey: 'cancel',
+					buttons: {
+						success: {
+							text: 'Đồng ý',
+							btnClass: 'btn-sm btn-warning',
+							action: function(){
+								t()
+							}
+						},
+						cancel: {
+							text: 'Hủy',
+							btnClass: 'btn-sm btn-danger'
+						}
+					}
+				});
+			}
+		},
+		afterSelect: function(){},
+		onEmpty: function(){},
+		onRemove: function(){}
+	});
 
-	    apexMixedChart = new ApexCharts(document.querySelector("#apexMixedChart"), options);
-	    apexMixedChart.render();
-	}
+
 });
