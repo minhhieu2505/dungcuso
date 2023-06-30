@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2023 at 07:32 PM
+-- Generation Time: Jun 30, 2023 at 07:14 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -47,7 +47,7 @@ INSERT INTO `category` (`id`, `slug`, `name`, `photo`, `status`, `date_created`,
 (7, 'may-cua', 'Máy Cưa', 'cuaxichacz-100x100-6595.png', '', 1681391364, 0),
 (8, 'may-cat', 'Máy Cắt', 'may-cat-sat-oshima-modos2-5-100x100-8529.png', '', 1681391381, 0),
 (9, 'may-mai', 'Máy Mài', 'may-mai-goc-100x100-5379.jpg', '', 1681391396, 0),
-(10, 'may-bao', 'Máy Bào', 'may-bao-100x100-4902.png', '', 1681391410, 1681568761);
+(10, 'may-bao', 'Máy Bào', 'may-bao-100x100-4902.png', '', 1681391410, 1688142620);
 
 -- --------------------------------------------------------
 
@@ -97,6 +97,14 @@ CREATE TABLE `contact` (
   `address` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `id_user`, `fullname`, `email`, `phone`, `content`, `address`, `date_created`) VALUES
+(1, 0, 'minhhieu', 'hieu@gmail.com', '00367591865', 'aa', 'hh', 1688141034),
+(2, 0, 'minhhieu', 'hieu@gmail.com', '0303030303', 'a', 'a', 1688141080);
 
 -- --------------------------------------------------------
 
@@ -210,7 +218,7 @@ CREATE TABLE `order` (
   `total_price` double DEFAULT 0,
   `notes` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
-  `order_status` int(11) DEFAULT 0
+  `order_status` int(11) DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -218,12 +226,13 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`id`, `id_user`, `code`, `fullname`, `phone`, `address`, `email`, `order_payment`, `total_price`, `notes`, `date_created`, `order_status`) VALUES
-(7, 143, 'CCABRS', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 260000, '', 1684468724, 0),
-(8, 143, 'VGQ8FY', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 260000, '', 1684468734, 0),
-(9, 143, '9BBBYL', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 260000, '', 1684468779, 0),
-(10, 143, 'FBBBJS', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 260000, '', 1684468904, 0),
-(11, 143, '2KBTNC', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 260000, '', 1684636100, 0),
-(12, 143, 'LNQUDA', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 0, '', 1685015112, 0);
+(7, 143, 'CCABRS', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 260000, '', 1684468724, 1),
+(8, 143, 'VGQ8FY', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 260000, '', 1684468734, 2),
+(9, 143, '9BBBYL', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 260000, '', 1684468779, 1),
+(10, 143, 'FBBBJS', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 260000, '', 1684468904, 1),
+(11, 143, '2KBTNC', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 260000, '', 1684636100, 1),
+(12, 143, 'LNQUDA', 'Nguyễn Quốc Anh', '0988920598', NULL, 'quocanhnguyen1532@gmail.com', 0, 0, '', 1685015112, 1),
+(13, 144, 'NTW9N6', '12', '0367591865', NULL, 'minhhieu222@gmail.com', 0, 11955000, '', 1688143441, 4);
 
 -- --------------------------------------------------------
 
@@ -246,7 +255,8 @@ INSERT INTO `order_detail` (`id`, `id_order`, `id_product`, `quantity`) VALUES
 (7, 10, 62, 1),
 (8, 11, 62, 1),
 (9, 11, 61, 1),
-(10, 12, 59, 1);
+(10, 12, 59, 1),
+(11, 13, 105, 1);
 
 -- --------------------------------------------------------
 
@@ -321,7 +331,7 @@ INSERT INTO `product` (`id`, `id_category`, `photo`, `slug`, `content`, `descrip
 (102, 8, 'stct1830-kr-5163.jpg', 'than-may-da-nang-pin-18v-stanley-stct1830-kr', '&lt;h2&gt;&lt;b&gt;Thân máy đa năng pin 18V Stanley STCT1830-KR – Dụng Cụ Số&lt;/b&gt;&lt;/h2&gt;\r\n\r\n&lt;p&gt;Dụng Cụ Số 1 chuyên cung cấp sỉ &amp; lẻ Thân máy đa năng pin 18V Stanley STCT1830-KR ✓Hàng chất lượng, Chính hãng ✓Giá rẻ nhất ✓Giao hàng nhanh chóng&lt;/p&gt;\r\n\r\n&lt;p&gt;Stanley được biết đến là thương hiệu cung cấp dụng cụ cầm tay nổi tiếng đến từ Mỹ. Với lịch sử phát triển lâu đời, chất lượng sản phẩm tốt, độ bền cao giúp sản phẩm đến từ thương hiệu này luôn được người tiêu dùng ưu ái lựa chọn. Hiện tại dụng cụ vật tư Stanley cung cấp tại thị trường Việt Nam gồm: dụng cụ cầm tay, dụng cụ điện cầm tay, dụng cụ đo lường,… vì vậy người dùng sẽ có thể dễ dàng lựa chọn được cho mình một sản phẩm ưng ý.&lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Thân máy đa năng pin 18V Stanley STCT1830-KR&lt;/strong&gt; là một loại máy hoạt động mạnh mẽ với các thiết kế ưu việt được tích hợp cùng máy giúp máy sở hữu các yếu tố của một thiết bị khoan chuyên nghiệp nhưng với trọng lượng vừa phải đủ để thực hiện các công việc sửa chữa lắp đặt trong gia đình.&lt;/p&gt;\r\n\r\n&lt;p&gt;Thiết kế mới cải tiến vững chắc, hệ thống bảo vệ tối ưu và giảm rung hiệu quả giúp máy hoạt động êm ái và kéo dài tuổi thọ, đảm bảo an toàn trong suốt quá trình làm việc.&lt;/p&gt;\r\n\r\n&lt;p&gt;Sản phẩm dùng để cắt các vật liệu khác nhau như gỗ, sắt…. Máy gần tương tự như máy mài góc tuy nhiên máy cắt đa năng cưa xẻ vật liệu theo kiểu rung đục.&lt;/p&gt;\r\n\r\n&lt;p&gt;Sản phẩm được bảo hành chính hãng &lt;strong&gt;6 tháng&lt;/strong&gt; của Stanley.&lt;/p&gt;\r\n', '&lt;ul&gt;\r\n	&lt;li&gt;Là một sản phẩm chất lượng cao của thương hiệu Được chế tạo từ những công nghệ tiên tiến hàng đầu, giúp người dùng có thể sử dụng thoải mái sản phẩm mà không lo về độ bền chất lượng.&lt;/li&gt;\r\n	&lt;li&gt;Thiết kế và sản xuất chính xác mang lại độ chính xác hoàn hảo. Động cơ bền bỉ giúp sử dụng ứng dụng công việc chịu tải lâu dài&lt;/li&gt;\r\n	&lt;li&gt;Tuổi thọ cao hơn các dòng máy khác cùng phân khúc trên thị trường&lt;/li&gt;\r\n	&lt;li&gt;Máy thay thế lưỡi cắt và các đầu phụ kiện khác nhanh chóng, đáp ứng được hầu hết yêu cầu công việc của bạn.&lt;/li&gt;\r\n	&lt;li&gt;Máy có chức năng kiểm soát tốc độ, phía đầu máy có trang bị đèn Led chiếu sáng, làm việc hiệu quả ở khu vực thiếu ánh sáng.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Thân Máy Đa Năng Pin 18V Stanley STCT1830-KR', NULL, NULL, 'STCT1830-KR', 1714000, 0, 1714000, 'banchay,hot,hienthi', 1685171043, 0, 0),
 (103, 8, 'makitatm30dzmain0b24d089c1f243fb9b76e8ee3de0ae37-3-4114.jpg', 'than-may-da-nang-pin-12v-makita-tm30dz', '&lt;h2&gt;&lt;b&gt;Thân máy đa năng pin 12V Makita TM30DZ – Dụng Cụ Số&lt;/b&gt;&lt;/h2&gt;\r\n\r\n&lt;p&gt;Thân máy đa năng pin 12V Makita TM30DZ của Makita – một thương hiệu đến từ đất nước mặt trời mọc Nhật Bản. Nhắc đến Makita người ta sẽ nghĩ ngay đến những dụng cụ điện cầm tay hiện đại, bền bỉ, thân thiện môi trường và đặc biệt là hiệu suất công việc rất cao.&lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;Makita TM30DZ được sản xuất dựa trên công nghệ tiên tiến nhất, chất liệu chọn lọc mang đến độ bền cao. Ngoài ra, chế độ vận hành thông minh cùng với tốc độ định mức vô cùng cao, sản phẩm sẽ hỗ trợ người dùng nâng cao công suất thực hiện công việc mà vẫn đảm bảo an toàn, chính xác tuyệt đối. &lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;Thân máy cực kỳ nhẹ gọn, chỉ nhỉnh hơn 0.5kg một chút nên đặc biệt tiện dùng trong các không gian hẹp. Điểm cộng khác là máy áp dụng công nghệ không dây nên không gây nên vướng víu hay phụ thuộc vào vị trí ổ điện. Khi hoạt động trong môi trường thiếu ánh sáng, người dùng có thể tận dụng đèn Led thông minh được tích hợp trên thân máy để nhìn thấy rõ hơn khu vực di chuyển. &lt;/p&gt;\r\n', '&lt;ul&gt;\r\n	&lt;li&gt;Là một sản phẩm chất lượng cao của thương hiệu &lt;strong&gt;Makita&lt;/strong&gt;, một thương hiệu hàng đầu Nhật Bản.&lt;/li&gt;\r\n	&lt;li&gt;Được chế tạo từ những công nghệ tiên tiến hàng đầu, giúp người dùng có thể sử dụng thoải mái sản phẩm mà không lo về độ bền chất lượng.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Thân Máy Đa Năng Pin 12V Makita TM30DZ', NULL, NULL, 'TM30DZ', 2264000, 10, 2048000, 'banchay,hot,hienthi', 1685171134, 0, 0),
 (104, 8, 'makitadjn161zmain6002184f952b38e4e4ca17f30abefd634b6-1-7382.jpg', 'than-may-cat-ton-pin-18v-makita-djn161z', '&lt;p&gt;&lt;strong&gt;Thân máy cắt tôn pin 18V Makita DJN161Z &lt;/strong&gt;là một sản phẩm chất lượng cao của thương hiệu Makita, một thương hiệu hàng đầu Việt Nam. Hiện nay, Makita cũng là một trong những nhà sản xuất hàng đầu về uy tín và chất lượng, những sản phẩm của Makita luôn mang lại cho người dùng độ hoàn thiện tuyệt đối.&lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Thân máy cắt tôn pin 18V Makita DJN161Z &lt;/strong&gt;được sản xuất theo một quy trình nghiêm ngặt và chất lượng của Việt Nam nên sản phẩm đem lại khả năng hoạt động bền bỉ, mạnh mẽ, an toàn, cùng năng suất làm việc cao, chắc chắn sẽ đem đến cho người sử dụng những hiệu quả cao nhất trong nhu cầu công việc của mình.&lt;/p&gt;\r\n', '&lt;ul&gt;\r\n	&lt;li&gt;Được chế tạo từ những công nghệ tiên tiến hàng đầu, giúp người dùng có thể sử dụng thoải mái sản phẩm mà không lo về độ bền chất lượng.&lt;/li&gt;\r\n	&lt;li&gt;Là một sản phẩm chất lượng cao của thương hiệu &lt;strong&gt;Makita&lt;/strong&gt;, một thương hiệu hàng đầu Nhật Bản.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Thân Máy Cắt Tôn Pin 18V Makita DJN161Z', NULL, NULL, 'DJN161Z', 7211000, 10, 6525000, 'banchay,hot,hienthi', 1685171211, 0, 22),
-(105, 8, 'm18bltrc0cmain-7514.jpg', 'than-may-cat-thanh-ren-pin-18v-m18-bltrc-0c', '&lt;h2&gt;&lt;b&gt;Thân máy cắt thanh ren pin 18V M18 BLTRC-0C – Dụng Cụ Số&lt;/b&gt;&lt;/h2&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;Thân máy cắt thanh ren pin 18V M18 BLTRC-0C là một trong những sản phẩm chủ lực của Milwaukee. Nếu bạn chưa biết, Milwaukee là thương hiệu chuyên sản xuất các thiết bị cầm tay hạng nặng dành cho những người thợ chuyên nghiệp đến từ Mỹ.&lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;Thân máy cắt thanh ren pin 18V M18 BLTRC-0C của Milwaukee có tính năng chính được dùng để cắt những thanh ren đến độ dài vừa đủ với lỗ vặn. Với mô tơ mạnh mẽ ở bên trong, thiết bị này có thể cắt những thanh ren 1/4″, 3/8″ và 1/2″ một cách nhẹ nhàng. Là thiết bị sử dụng pin và có cân nặng chưa đến 4kg, người dùng có thể dễ dàng vận chuyển và sử dụng M18 BLTRC-0C tại nhiều vị trí.&lt;br /&gt;\r\nVới cơ chế vận hành đơn giản, người dùng không mất quá nhiều thời gian để học cách vận hành thân máy cắt thanh ren pin 18V M18 BLTRC-0C. Không những vậy, thiết kế chính xác giúp thiết bị này đạt được độ cân bằng cao ngay cả khi sử dụng ở những vị trí bất lợi, giúp người dùng tránh được những nguy cơ mất an toàn lao động. Sản phẩm có độ bền tốt và dễ dàng vệ sinh, bảo quản.&lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Máy cắt thanh ren không chổi than M18 BLTRC mang đến một giải pháp nhanh chóng và dễ dàng để cắt thanh ren&lt;/li&gt;\r\n	&lt;li&gt;Mô tơ không chổi than bên trong cung cấp cho người dùng khả năng cắt thanh ren 1/4″, 3/8″ và 1/2″ bằng thép nhẹ cũng như thanh ren 1/4″, 3/8″ bằng thép không gỉ, với thời gian vận hành lên tới hơn 400 lần cắt với pin 2.0 Ah&lt;/li&gt;\r\n	&lt;li&gt;Khuôn cắt đi kèm có thể xử lý các kích cỡ thanh ren phổ biến nhất: 1/4″, 3/8″ và 1/2″, các kích cỡ có thể được chuyển đổi bằng cách vặn khuôn&lt;/li&gt;\r\n	&lt;li&gt;Cách vận hành công cụ được tối ưu hóa để cho phép tầm nhìn rõ hơn, đảm bảo việc căn chỉnh dễ dàng và cắt chính xác&lt;/li&gt;\r\n	&lt;li&gt;Thiết kế thông minh mang lại sự cân bằng tối ưu để cắt trên không, cũng như sự ổn định tuyệt vời cho các ứng dụng được đúc sẵn&lt;/li&gt;\r\n	&lt;li&gt;Công cụ được cân bằng hoàn toàn, với thiết kế tay cầm ở chính giữa, giúp thao tác hoàn hảo bằng một tay&lt;/li&gt;\r\n	&lt;li&gt;Tự động mở khuôn cắt sau khi cắt xong để cho phép người dùng thực hiện nhanh chóng các thao tác cắt lặp lại&lt;/li&gt;\r\n	&lt;li&gt;Công cụ này cung cấp khả năng cắt các đoạn ngắn với độ dài tối thiểu 1-1/2″&lt;/li&gt;\r\n	&lt;li&gt;Các linh kiện điện tử chống quá tải REDLINK™ trong công cụ và bộ pin mang lại độ bền tốt nhất cho hệ thống&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '&lt;ul&gt;\r\n	&lt;li&gt;Máy cắt thanh ren không chổi than M18 BLTRC mang đến một giải pháp nhanh chóng và dễ dàng để cắt thanh ren&lt;/li&gt;\r\n	&lt;li&gt;Mô tơ không chổi than bên trong cung cấp cho người dùng khả năng cắt thanh ren 1/4″, 3/8″ và 1/2″ bằng thép nhẹ cũng như thanh ren 1/4″, 3/8″ bằng thép không gỉ, với thời gian vận hành lên tới hơn 400 lần cắt với pin 2.0 Ah&lt;/li&gt;\r\n	&lt;li&gt;Khuôn cắt đi kèm có thể xử lý các kích cỡ thanh ren phổ biến nhất: 1/4″, 3/8″ và 1/2″, các kích cỡ có thể được chuyển đổi bằng cách vặn khuôn&lt;/li&gt;\r\n	&lt;li&gt;Cách vận hành công cụ được tối ưu hóa để cho phép tầm nhìn rõ hơn, đảm bảo việc căn chỉnh dễ dàng và cắt chính xác&lt;/li&gt;\r\n	&lt;li&gt;Thiết kế thông minh mang lại sự cân bằng tối ưu để cắt trên không, cũng như sự ổn định tuyệt vời cho các ứng dụng được đúc sẵn&lt;/li&gt;\r\n	&lt;li&gt;Công cụ được cân bằng hoàn toàn, với thiết kế tay cầm ở chính giữa, giúp thao tác hoàn hảo bằng một tay&lt;/li&gt;\r\n	&lt;li&gt;Tự động mở khuôn cắt sau khi cắt xong để cho phép người dùng thực hiện nhanh chóng các thao tác cắt lặp lại&lt;/li&gt;\r\n	&lt;li&gt;Công cụ này cung cấp khả năng cắt các đoạn ngắn với độ dài tối thiểu 1-1/2″&lt;/li&gt;\r\n	&lt;li&gt;Các linh kiện điện tử chống quá tải REDLINK™ trong công cụ và bộ pin mang lại độ bền tốt nhất cho hệ thống&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Thân Máy Cắt Thanh Ren Pin 18V M18 BLTRC-0C', '', '', 'M18_BLTRC-0C', 12553000, 5, 11955000, 'banchay,hot,hienthi', 1685171304, 1685637123, 48),
+(105, 8, 'm18bltrc0cmain-7514.jpg', 'than-may-cat-thanh-ren-pin-18v-m18-bltrc-0c', '&lt;h2&gt;&lt;b&gt;Thân máy cắt thanh ren pin 18V M18 BLTRC-0C – Dụng Cụ Số&lt;/b&gt;&lt;/h2&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;Thân máy cắt thanh ren pin 18V M18 BLTRC-0C là một trong những sản phẩm chủ lực của Milwaukee. Nếu bạn chưa biết, Milwaukee là thương hiệu chuyên sản xuất các thiết bị cầm tay hạng nặng dành cho những người thợ chuyên nghiệp đến từ Mỹ.&lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;Thân máy cắt thanh ren pin 18V M18 BLTRC-0C của Milwaukee có tính năng chính được dùng để cắt những thanh ren đến độ dài vừa đủ với lỗ vặn. Với mô tơ mạnh mẽ ở bên trong, thiết bị này có thể cắt những thanh ren 1/4″, 3/8″ và 1/2″ một cách nhẹ nhàng. Là thiết bị sử dụng pin và có cân nặng chưa đến 4kg, người dùng có thể dễ dàng vận chuyển và sử dụng M18 BLTRC-0C tại nhiều vị trí.&lt;br /&gt;\r\nVới cơ chế vận hành đơn giản, người dùng không mất quá nhiều thời gian để học cách vận hành thân máy cắt thanh ren pin 18V M18 BLTRC-0C. Không những vậy, thiết kế chính xác giúp thiết bị này đạt được độ cân bằng cao ngay cả khi sử dụng ở những vị trí bất lợi, giúp người dùng tránh được những nguy cơ mất an toàn lao động. Sản phẩm có độ bền tốt và dễ dàng vệ sinh, bảo quản.&lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Máy cắt thanh ren không chổi than M18 BLTRC mang đến một giải pháp nhanh chóng và dễ dàng để cắt thanh ren&lt;/li&gt;\r\n	&lt;li&gt;Mô tơ không chổi than bên trong cung cấp cho người dùng khả năng cắt thanh ren 1/4″, 3/8″ và 1/2″ bằng thép nhẹ cũng như thanh ren 1/4″, 3/8″ bằng thép không gỉ, với thời gian vận hành lên tới hơn 400 lần cắt với pin 2.0 Ah&lt;/li&gt;\r\n	&lt;li&gt;Khuôn cắt đi kèm có thể xử lý các kích cỡ thanh ren phổ biến nhất: 1/4″, 3/8″ và 1/2″, các kích cỡ có thể được chuyển đổi bằng cách vặn khuôn&lt;/li&gt;\r\n	&lt;li&gt;Cách vận hành công cụ được tối ưu hóa để cho phép tầm nhìn rõ hơn, đảm bảo việc căn chỉnh dễ dàng và cắt chính xác&lt;/li&gt;\r\n	&lt;li&gt;Thiết kế thông minh mang lại sự cân bằng tối ưu để cắt trên không, cũng như sự ổn định tuyệt vời cho các ứng dụng được đúc sẵn&lt;/li&gt;\r\n	&lt;li&gt;Công cụ được cân bằng hoàn toàn, với thiết kế tay cầm ở chính giữa, giúp thao tác hoàn hảo bằng một tay&lt;/li&gt;\r\n	&lt;li&gt;Tự động mở khuôn cắt sau khi cắt xong để cho phép người dùng thực hiện nhanh chóng các thao tác cắt lặp lại&lt;/li&gt;\r\n	&lt;li&gt;Công cụ này cung cấp khả năng cắt các đoạn ngắn với độ dài tối thiểu 1-1/2″&lt;/li&gt;\r\n	&lt;li&gt;Các linh kiện điện tử chống quá tải REDLINK™ trong công cụ và bộ pin mang lại độ bền tốt nhất cho hệ thống&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '&lt;ul&gt;\r\n	&lt;li&gt;Máy cắt thanh ren không chổi than M18 BLTRC mang đến một giải pháp nhanh chóng và dễ dàng để cắt thanh ren&lt;/li&gt;\r\n	&lt;li&gt;Mô tơ không chổi than bên trong cung cấp cho người dùng khả năng cắt thanh ren 1/4″, 3/8″ và 1/2″ bằng thép nhẹ cũng như thanh ren 1/4″, 3/8″ bằng thép không gỉ, với thời gian vận hành lên tới hơn 400 lần cắt với pin 2.0 Ah&lt;/li&gt;\r\n	&lt;li&gt;Khuôn cắt đi kèm có thể xử lý các kích cỡ thanh ren phổ biến nhất: 1/4″, 3/8″ và 1/2″, các kích cỡ có thể được chuyển đổi bằng cách vặn khuôn&lt;/li&gt;\r\n	&lt;li&gt;Cách vận hành công cụ được tối ưu hóa để cho phép tầm nhìn rõ hơn, đảm bảo việc căn chỉnh dễ dàng và cắt chính xác&lt;/li&gt;\r\n	&lt;li&gt;Thiết kế thông minh mang lại sự cân bằng tối ưu để cắt trên không, cũng như sự ổn định tuyệt vời cho các ứng dụng được đúc sẵn&lt;/li&gt;\r\n	&lt;li&gt;Công cụ được cân bằng hoàn toàn, với thiết kế tay cầm ở chính giữa, giúp thao tác hoàn hảo bằng một tay&lt;/li&gt;\r\n	&lt;li&gt;Tự động mở khuôn cắt sau khi cắt xong để cho phép người dùng thực hiện nhanh chóng các thao tác cắt lặp lại&lt;/li&gt;\r\n	&lt;li&gt;Công cụ này cung cấp khả năng cắt các đoạn ngắn với độ dài tối thiểu 1-1/2″&lt;/li&gt;\r\n	&lt;li&gt;Các linh kiện điện tử chống quá tải REDLINK™ trong công cụ và bộ pin mang lại độ bền tốt nhất cho hệ thống&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Thân Máy Cắt Thanh Ren Pin 18V M18 BLTRC-0C', '', '', 'M18_BLTRC-0C', 12553000, 5, 11955000, 'banchay,hot,hienthi', 1685171304, 1685637123, 55),
 (106, 8, 'makitadsd180zmain60062ae0ff94b7a4e459ab36f8ecc256767-1-4012.jpg', 'than-may-cat-thach-cao-pin-18v-makita-dsd180z', '&lt;h2&gt;&lt;b&gt;Thân máy cắt thạch cao pin 18V Makita DSD180Z – Dụng Cụ Số&lt;/b&gt;&lt;/h2&gt;\r\n\r\n&lt;p&gt;Nhằm đáp ứng nhu cầu cắt thạch cao phục vụ cho việc lắp đặt các đèn trần, lỗ thông khí hay ổ điện, nhà sản xuất Nhật Bản Makita đã cho ra sản phẩm Makita 18V Makita DSD180Z vô cùng tiện lợi và hữu ích. Người dùng có thể hoàn toàn an tâm về độ bền và tính an toàn khi sử dụng.&lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;Chiếc máy này cực kỳ nhỏ gọn với thiết kế thông minh có khả năng tích hợp với máy hút bụi giúp sàn nhà sạch sẽ và giúp người dùng không phải hít phải bột mịn trong quá trình sử dụng. Được sản xuất bằng công nghệ tiên tiến, sản phẩm cho tốc độ cắt lên đến 6000 lần/phút. Người dùng có thể tùy chỉnh tốc độ sao cho tối ưu nhất việc cắt và sửa chữa của mình mà không cần lo lắng về tính thẩm mỹ của đường cắt. &lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;Ngoài ra khi hoạt động trong môi trường thiếu ánh sáng, người dùng có thể tận dụng ngay chiếc đèn led chiếu sáng được tích hợp vào máy. Để có thể nắm được tình trạng pin đã tiêu thụ, mức pin cũng sẽ hiển thị để nạp thêm khi cần thiết. &lt;/p&gt;\r\n', '&lt;ul&gt;\r\n	&lt;li&gt;Được chế tạo từ những công nghệ tiên tiến hàng đầu, giúp người dùng có thể sử dụng thoải mái sản phẩm mà không lo về độ bền chất lượng.&lt;/li&gt;\r\n	&lt;li&gt;Là một sản phẩm chất lượng cao của thương hiệu &lt;strong&gt;Makita&lt;/strong&gt;, một thương hiệu hàng đầu Nhật Bản.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Thân Máy Cắt Thạch Cao Pin 18V Makita DSD180Z', NULL, NULL, 'DSD180Z', 4674000, 10, 4228000, 'banchay,hot,hienthi', 1685171391, 0, 0),
 (107, 7, 'main556b631ebb094d98aff94dd7321c571a-1-7370.jpg', 'may-cua-kiem-pin-18v-dca-adjf28b', '&lt;h2&gt;&lt;strong&gt;Máy cưa kiếm pin 18V DCA ADJF28B – Dụng Cụ Số&lt;/strong&gt;&lt;/h2&gt;\r\n\r\n&lt;p&gt;Là một sản phẩm đến từ thương hiệu DCA, máy cưa kiếm pin 18V DCA ADJF28B đang rất phổ biến, được rất người tiêu dùng ưu ái lựa chọn mua và sử dụng. Có tác dụng rất lớn trong việc cưa, cắt thép, kim loại,… đây là dụng cụ không thể thiếu trong các ngành công nghiệp, làm mộc, thi công nội thất,…&lt;/p&gt;\r\n\r\n&lt;p&gt;Máy cưa kiếm pin 18V DCA ADJF28B được trang bị dây dẫn điện dài 2.5m để hỗ trợ người sử dụng làm việc cách xa ổ cắm điện, được gia công từ chất liệu nhựa cao cấp nên có thể chịu lực, chịu nhiệt tốt. Hơn nữa sản phẩm còn sở hữu công nghệ XPT chống nước và bụi vô cùng hiệu quả, đảm bảo an toàn cho động cơ của máy.&lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;Sở hữu nguồn điện 18V cùng khả năng cắt tối đa 250mm nên máy hoạt động rất mạnh mẽ và cho hiệu suất công việc cao. Ngoài ra máy còn có thiết kế gọn nhẹ với trọng lượng chỉ 3.2kg giúp người dùng có thể dễ dàng sử dụng và di chuyển máy sao cho phù hợp với công việc.&lt;/p&gt;\r\n', '&lt;ul&gt;\r\n	&lt;li&gt;Sản phẩm làm từ chất liệu cao cấp cho độ bền cao cũng như hoạt động ổn định, cho tuổi thọ sản phẩm cao.&lt;/li&gt;\r\n	&lt;li&gt;Sản phẩm đến từ thương hiệu DCA là thương hiệu nổi tiếng chuyên cung cấp các dụng cụ dân dụng chất lượng cao giá thành phù hợp với người tiêu dùng.&lt;/li&gt;\r\n	&lt;li&gt;Trọng lượng tương đối, thao tác linh hoạt.&lt;/li&gt;\r\n	&lt;li&gt;Được làm từ chất liệu hợp kim rắn chắc, chống va chạm và không hoen gỉ.&lt;/li&gt;\r\n	&lt;li&gt;Hoạt động mạnh mẽ, lực đập lớn, sử dụng với hiệu suất cao.&lt;/li&gt;\r\n	&lt;li&gt;Năng suất vận hành tốc độ cao, dễ điều khiển và kiểm soát.&lt;/li&gt;\r\n	&lt;li&gt;Tay cầm bằng nhựa vừa vặn với vỏ ngoài cách điện tốt.&lt;/li&gt;\r\n	&lt;li&gt;Sử dụng nguồn điện bằng pin dễ dàng thao tác và di chuyển.&lt;/li&gt;\r\n	&lt;li&gt;Thuận tiện bảo quản và cất giữ.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Máy Cưa Kiếm Pin 18V DCA ADJF28B', NULL, NULL, 'ADJF28B', 4189000, 2, 4105000, 'banchay,hot,hienthi', 1685171946, 0, 0),
 (108, 7, 'dewaltdcs391m1main600e3896f4848f44d04ad0da1d240603cdb-1-8318.jpg', 'may-cua-pin-18v-dewalt-dcs391m1', '&lt;p&gt;Máy cưa pin 18V Dewalt DCS391M1 là sản phẩm nổi tiếng đến từ thương hiệu Dewalt. Được sản xuất bằng công nghệ hiện đại mang lại độ bền cao mà giá thành vô cùng hợp lý. &lt;br /&gt;\r\n &lt;/p&gt;\r\n\r\n&lt;p&gt;Sản phẩm bao gồm pin 18V/ 4.0Ah và túi vải. Máy dùng pin 18V kết hợp với tốc độ không tải là 3.700 vòng/phút giúp cho bạn có thể cắt nhẹ nhàng không lo mỏi tay. Ngoài ra máy còn trang bị thêm đèn Led có chức năng chiếu sáng trong đêm, cho phép nhìn rõ đường cắt và đảm bảo độ chính xác. &lt;/p&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;\r\n\r\n&lt;p&gt;Đặc biệt với khả năng điều chỉnh dễ dàng qua các khớp nối giữa thân máy và tấm đế nền có thể cắt đường chéo tối đa 45 độ dễ dàng. Tay cầm máy được được thiết kế có độ ma sát cao giúp chống trơn trượt. Vị trí lưỡi cắt còn trang bị vành chắn bảo vệ bằng nhựa giúp đảm bảo an toàn trong quá trình làm việc. Máy cưa pin 18V Dewalt DCS391M1 có chất lượng tốt, an toàn, luôn được người dùng ưu ái lựa chọn. &lt;/p&gt;\r\n', '&lt;ul&gt;\r\n	&lt;li&gt;Là một sản phẩm chất lượng cao của thương hiệu &lt;strong&gt;Dewalt&lt;/strong&gt;, một thương hiệu hàng đầu của Mỹ, được bảo hành đến &lt;strong&gt;03 năm.&lt;/strong&gt;&lt;/li&gt;\r\n	&lt;li&gt;Được chế tạo từ những công nghệ tiên tiến hàng đầu, giúp người dùng có thể sử dụng thoải mái sản phẩm mà không lo về độ bền chất lượng.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Máy Cưa Pin 18V Dewalt DCS391M1', NULL, NULL, 'DCS391M1', 6000000, 0, 6000000, 'banchay,hot,hienthi', 1685172062, 0, 0);
@@ -343,7 +353,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`id`, `options`, `logo`) VALUES
-(2, '{\"address\":\"223\\/6 L\\u00ea T\\u1ea5n B\\u00ea, KP2, P. An L\\u1ea1c, Qu\\u1eadn B\\u00ecnh T\\u00e2n, TP.HCM\",\"email\":\"sale2.dungcuso1@gmail.com\",\"hotline\":\"0367591865\",\"phone\":\"0868960694\",\"zalo\":\"0367591865\",\"website\":\"https:\\/\\/dungcuso1.vn\\/\",\"fanpage\":\"https:\\/\\/www.facebook.com\\/LienquanMobile\",\"coords_iframe\":\"\",\"name\":\"CTY TNHH D\\u1ecaCH V\\u1ee4 C\\u00d4NG NGH\\u1ec6 \\u0110\\u1ee8C KHANG\"}', '');
+(2, '{\"address\":\"223\\/6 L\\u00ea T\\u1ea5n B\\u00ea, KP2, P. An L\\u1ea1c, Qu\\u1eadn B\\u00ecnh T\\u00e2n, TP.HCM\",\"email\":\"hieuminhtruong2505@gmail.com\",\"hotline\":\"0367591865\",\"phone\":\"0868960694\",\"zalo\":\"0367591865\",\"website\":\"https:\\/\\/dungcuso1.vn\\/\",\"fanpage\":\"https:\\/\\/www.facebook.com\\/LienquanMobile\",\"coords_iframe\":\"\",\"name\":\"CTY TNHH D\\u1ecaCH V\\u1ee4 C\\u00d4NG NGH\\u1ec6 \\u0110\\u1ee8C KHANG\"}', '');
 
 -- --------------------------------------------------------
 
@@ -370,8 +380,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `phone`, `email`, `address`, `gender`, `status`, `role`, `birthday`) VALUES
-(142, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Minh Hiếu', NULL, NULL, NULL, 0, NULL, 1, 0),
-(143, 'quocanhnguyen', 'bb67ccb42ce1b2ca897d0260e2fcc27d', 'Nguyễn Quốc Anh', '0988920598', 'quocanhnguyen1532@gmail.com', '59 Đường 48 Hiệp Bình Chánh', 0, '', 0, 0);
+(142, 'admin', 'c20ad4d76fe97759aa27a0c99bff6710', 'Minh Hiếu', NULL, NULL, NULL, 0, NULL, 1, 0),
+(143, 'quocanhnguyen', 'bb67ccb42ce1b2ca897d0260e2fcc27d', 'Nguyễn Quốc Anh', '0988920598', 'quocanhnguyen1532@gmail.com', '59 Đường 48 Hiệp Bình Chánh', 0, '', 0, 0),
+(144, 'admin22', 'c20ad4d76fe97759aa27a0c99bff6710', '12', '0367591865', 'minhhieu222@gmail.com', '12', 0, '', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -460,6 +471,12 @@ ALTER TABLE `comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `multi_media`
 --
 ALTER TABLE `multi_media`
@@ -475,13 +492,13 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -499,7 +516,7 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
