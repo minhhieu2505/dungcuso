@@ -144,15 +144,8 @@
                         <th class="align-middle">Mã đơn hàng</th>
                         <th class="align-middle" style="width:15%">Họ tên</th>
                         <th class="align-middle">Ngày đặt</th>
-                        <th class="align-middle">Hình thức thanh toán</th>
                         <th class="align-middle">Tổng giá</th>
                         <th class="align-middle">Tình trạng</th>
-                        <?php if(
-                            (isset($config['order']['excel']) && $config['order']['excel'] == true) || 
-                            (isset($config['order']['word']) && $config['order']['word'] == true)
-                        ) { ?>
-                            <th class="align-middle">Export</th>
-                        <?php } ?>
                         <th class="align-middle text-center">Thao tác</th>
                     </tr>
                 </thead>
@@ -181,21 +174,11 @@
                                 </td>
                                 <td class="align-middle"><?=date("h:i:s A - d/m/Y", $items[$i]['date_created'])?></td>
                                 <td class="align-middle">
-                                    <?php $order_payment = $func->getInfoDetail('namevi', 'news', $items[$i]['order_payment']); ?>
-                                    <span class="text-info"><?=$order_payment['namevi']?></span>
-                                </td>
-                                <td class="align-middle">
                                     <span class="text-danger font-weight-bold"><?=$func->formatMoney($items[$i]['total_price'])?></span>
                                 </td>
                                 <td class="align-middle">
-                                    <?php
-                                        if(isset($items[$i]['order_status']) && $items[$i]['order_status'] > 0)
-                                        {
-                                            $id_order_status = $items[$i]['order_status'];
-                                            $order_status = $d->rawQueryOne("select namevi, class_order from #_order_status where id = ?",array($id_order_status));
-                                        }
-                                    ?>
-                                    <span class="<?=$order_status['class_order']?> text-capitalize"><?=$order_status['namevi']?></span>
+                                    <?php $arr_status = array("Mới đặt","Đã Xác Nhận","Đã Giao","Đã Hủy"); ?>
+                                    <span class="text-capitalize"><?=$arr_status[$items[$i]['order_status'] - 1]?></span>
                                 </td>
                                 <?php if(
                                     (isset($config['order']['excel']) && $config['order']['excel'] == true) || 

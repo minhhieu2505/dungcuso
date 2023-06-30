@@ -32,14 +32,6 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="form-group col-12">
-                        <label class="d-inline-block align-middle mb-1 mr-2">Tập tin:</label>
-                        <?php if(isset($item['file_attach']) && ($item['file_attach'] != '')) { ?>
-                            <a class="btn btn-sm bg-gradient-primary text-white d-inline-block align-middle p-2 rounded mb-1" href="<?=UPLOAD_FILE.@$item['file_attach']?>" title="Download tập tin hiện tại"><i class="fas fa-download mr-2"></i>Download tập tin hiện tại</a>
-                        <?php } else { ?>
-                            <a class="bg-gradient-secondary text-white d-inline-block p-2 rounded mb-1" href="#" title="Tập tin trống"><i class="fas fa-download mr-2"></i>Tập tin trống</a>
-                        <?php } ?>
-                    </div>
                     <div class="form-group col-md-4">
                         <label for="fullname">Họ tên:</label>
                         <input type="text" class="form-control text-sm" name="data[fullname]" id="fullname" placeholder="Họ tên" value="<?=(!empty($flash->has('fullname'))) ? $flash->get('fullname') : @$item['fullname']?>" required>
@@ -56,18 +48,10 @@
                         <label for="address">Địa chỉ:</label>
                         <input type="text" class="form-control text-sm" name="data[address]" id="address" placeholder="Địa chỉ" value="<?=(!empty($flash->has('address'))) ? $flash->get('address') : @$item['address']?>" required>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="subject">Chủ đề:</label>
-                        <input type="text" class="form-control text-sm" name="data[subject]" id="subject" placeholder="Chủ đề" value="<?=(!empty($flash->has('subject'))) ? $flash->get('subject') : @$item['subject']?>" required>
-                    </div>
                 </div>
                 <div class="form-group">
                     <label for="content">Nội dung:</label>
                     <textarea class="form-control text-sm" name="data[content]" id="content" rows="5" placeholder="Nội dung" required><?=(!empty($flash->has('content'))) ? $flash->get('content') : @$item['content']?></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Ghi chú:</label>
-                    <textarea class="form-control text-sm" name="data[notes]" id="notes" rows="5" placeholder="Ghi chú"><?=(!empty($flash->has('notes'))) ? $flash->get('notes') : @$item['notes']?></textarea>
                 </div>
                 <div class="form-group">
                     <?php $status_array = (!empty($item['status'])) ? explode(',', $item['status']) : array(); ?>

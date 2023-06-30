@@ -1,7 +1,7 @@
 <?php
-	$linkMan = "index.php?com=contact&act=man";
-	$linkEdit = "index.php?com=contact&act=edit";
-	$linkDelete = "index.php?com=contact&act=delete";
+	$linkMan = "index.php?source=contact&act=man";
+	$linkEdit = "index.php?source=contact&act=edit";
+	$linkDelete = "index.php?source=contact&act=delete";
 ?>
 
 <!-- Content Header -->
@@ -68,7 +68,7 @@
                                     </div>
                                 </td>
                                 <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$items[$i]['numb']?>" data-id="<?=$items[$i]['id']?>" data-table="contact">
+                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$i+1?>" data-id="<?=$i+1?>" data-table="contact">
                                 </td>
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['fullname']?>"><?=$items[$i]['fullname']?></a>

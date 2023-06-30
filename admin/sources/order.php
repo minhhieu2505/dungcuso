@@ -171,7 +171,7 @@
 		if($id)
 		{
 			$d->where('id', $id);
-			if($d->update('order',$data))
+			if($d->update('`order`',$data))
 			{
 				$func->transfer("Cập nhật dữ liệu thành công", "index.php?source=order&act=man&p=".$curPage);
 			}
@@ -199,7 +199,7 @@
 
 			if(!empty($row))
 			{
-				$d->rawQuery("delete from `order_detail` where i`order` = ?",array($id));
+				$d->rawQuery("delete from `order_detail` where `order` = ?",array($id));
 				$d->rawQuery("delete from `order` where id = ?",array($id));
 				$func->transfer("Xóa dữ liệu thành công", "index.php?source=order&act=man&p=".$curPage);
 			}

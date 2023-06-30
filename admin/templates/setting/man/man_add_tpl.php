@@ -73,29 +73,6 @@ $options = (isset($item['options']) && $item['options'] != '') ? json_decode($it
 							placeholder="Zalo"
 							value="<?= (!empty($flash->has('zalo'))) ? $flash->get('zalo') : @$options['zalo'] ?>">
 					</div>
-					<div class="form-group col-md-4 col-sm-6">
-						<label for="website">Website:</label>
-						<input type="text" class="form-control text-sm" name="data[options][website]" id="website"
-							placeholder="Website"
-							value="<?= (!empty($flash->has('website'))) ? $flash->get('website') : @$options['website'] ?>"
-							required>
-					</div>
-					<div class="form-group col-md-4 col-sm-6">
-						<label for="fanpage">Fanpage:</label>
-						<input type="text" class="form-control text-sm" name="data[options][fanpage]" id="fanpage"
-							placeholder="Fanpage"
-							value="<?= (!empty($flash->has('fanpage'))) ? $flash->get('fanpage') : @$options['fanpage'] ?>">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="coords_iframe">
-						<span>Tọa độ google map iframe:</span>
-						<a class="text-sm font-weight-normal ml-1" href="https://www.google.com/maps" target="_blank"
-							title="Lấy mã nhúng google map">(Lấy mã nhúng)</a>
-					</label>
-					<textarea class="form-control text-sm" name="data[options][coords_iframe]" id="coords_iframe"
-						rows="5"
-						placeholder="Tọa độ google map iframe"><?= htmlspecialchars_decode((!empty($flash->has('coords_iframe'))) ? $flash->get('coords_iframe') : @$options['coords_iframe']) ?></textarea>
 				</div>
 			</div>
 		</div>

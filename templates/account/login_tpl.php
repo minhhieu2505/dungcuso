@@ -16,6 +16,7 @@
             <span>ĐĂNG NHẬP</span>
             
         </div>
+        <?=$flash->getMessages("frontend")?>    
         <form action="" name="login-user" method="post" class="login-form">
             <div class="form-group mb-3">
             
