@@ -32,6 +32,32 @@ function onSearch(obj) {
 	}
 }
 
+function updateCart(id = 0, code = '', quantity = 1) {
+	if (id) {
+		var formCart = $('.form-cart');
+		var ward = formCart.find('.select-ward-cart').val();
+
+		$.ajax({
+			type: 'POST',
+			url: 'api/cart.php',
+			dataType: 'json',
+			data: {
+				cmd: 'update-cart',
+				id: id,
+				code: code,
+				quantity: quantity
+			},
+			success: function (result) {
+				if (result) {
+					formCart.find('.load-price-' + code).html(result.regularPrice);
+					formCart.find('.load-price-new-' + code).html(result.salePrice);
+					formCart.find('.load-price-temp').html(result.tempText);
+					formCart.find('.load-price-total').html(result.totalText);
+				}
+			}
+		});
+	}
+}
 
 function deleteCart(obj) {
 	var formCart = $('.form-cart');

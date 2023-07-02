@@ -10,6 +10,4 @@
     $d = new PDODb($config['database']);
     $cache = new Cache($d);
     $func = new Functions($d, $cache);
-
-    if($func->checkLoginAdmin()==false) { die(); }
 ?>

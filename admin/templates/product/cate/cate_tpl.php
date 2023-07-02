@@ -21,7 +21,6 @@
 <section class="content">
     <div class="card-footer text-sm sticky-top">
     	<a class="btn btn-sm bg-gradient-primary text-white" href="<?=$linkAdd?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
-        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?=$linkDelete?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
         <div class="form-inline form-search d-inline-block align-middle ml-3">
             <div class="input-group input-group-sm">
                 <input class="form-control form-control-navbar text-sm" type="search" id="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="<?=(isset($_GET['keyword'])) ? $_GET['keyword'] : ''?>" onkeypress="doEnter(event,'keyword','<?=$linkMan?>')">
@@ -41,12 +40,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle" width="5%">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
                         <th class="align-middle text-center" width="10%">STT</th>
 						<th class="align-middle">Hình</th>
 						<th class="align-middle" style="width:30%">Tiêu đề</th>
@@ -61,12 +54,6 @@
                         <?php for($i=0;$i<count($items);$i++) { ?>
                             <tr>
                                 <td class="align-middle">
-                                    <div class="custom-control custom-checkbox my-checkbox">
-                                        <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?=$items[$i]['id']?>" value="<?=$items[$i]['id']?>">
-                                        <label for="select-checkbox-<?=$items[$i]['id']?>" class="custom-control-label"></label>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
                                     <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$i+1?>" data-id="<?=$items[$i]['id']?>" data-table="product_list">
                                 </td>
                                 <td class="align-middle">
@@ -77,10 +64,9 @@
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>"><?=$items[$i]['name']?></a>
                                 </td>
-                                <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
                                 <td class="align-middle text-center">
                                         <div class="custom-control custom-checkbox my-checkbox">
-                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?=$key?>-<?=$items[$i]['id']?>" data-table="product_list" data-id="<?=$items[$i]['id']?>" data-attr="<?=$key?>" <?=(in_array($key, $status_array)) ? 'checked' : ''?>>
+                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?=$key?>-<?=$items[$i]['id']?>" data-table="category" data-id="<?=$items[$i]['id']?>" data-attr="hienthi" <?=($items[$i]['status'] == 'hienthi') ? 'checked' : ''?>>
                                             <label for="show-checkbox-<?=$key?>-<?=$items[$i]['id']?>" class="custom-control-label"></label>
                                         </div>
                                     </td>
@@ -102,6 +88,5 @@
     <?php } ?>
     <div class="card-footer text-sm">
     	<a class="btn btn-sm bg-gradient-primary text-white" href="<?=$linkAdd?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
-        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?=$linkDelete?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
     </div>
 </section>

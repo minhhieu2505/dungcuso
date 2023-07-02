@@ -271,7 +271,7 @@ img:not([src]) { visibility: hidden; }
 /* Product Detail */
 .grid-pro-detail { margin-bottom: 3rem; } 
 .left-pro-detail { position: relative; text-align: center; } 
-.left-pro-detail .MagicZoom { border: 1px solid #eee; padding: 7px; border-radius: 5px; background-color: #ffffff; } 
+.left-pro-detail .MagicZoom {border: 1px solid #eee;padding: 7px;border-radius: 5px;background-color: #ffffff;height: 385px;} 
 .gallery-thumb-pro { position: relative; margin-top: 10px; } 
 .owl-pro-detail { padding: 0px 30px; } 
 .control-pro-detail button { background-color: transparent; color: #222222; opacity: 1; width: 25px; font-size: 23px; } 

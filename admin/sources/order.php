@@ -199,7 +199,7 @@
 
 			if(!empty($row))
 			{
-				$d->rawQuery("delete from `order_detail` where `order` = ?",array($id));
+				$d->rawQuery("delete from `order_detail` where `id_order` = ?",array($id));
 				$d->rawQuery("delete from `order` where id = ?",array($id));
 				$func->transfer("Xóa dữ liệu thành công", "index.php?source=order&act=man&p=".$curPage);
 			}
@@ -207,24 +207,6 @@
 			{
 				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?source=order&act=man&p=".$curPage, false);
 			}
-		}
-		elseif(isset($_GET['listid']))
-		{
-			$listid = explode(",",$_GET['listid']);
-			
-			for($i=0;$i<count($listid);$i++)
-			{
-				$id = htmlspecialchars($listid[$i]);
-				$row = $d->rawQueryOne("select id from `order` where id = ? limit 0,1",array($id));
-
-				if(!empty($row))
-				{
-					$d->rawQuery("delete from `order_detail` where i`order` = ?",array($id));
-					$d->rawQuery("delete from `order` where id = ?",array($id));
-				}
-			}
-			
-			$func->transfer("Xóa dữ liệu thành công", "index.php?source=order&act=man&p=".$curPage);
 		}
 		else
 		{

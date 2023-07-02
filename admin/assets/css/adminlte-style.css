@@ -373,7 +373,23 @@ select.form-control option:disabled{color:#b8babb;font-style:italic;}
 .select2-container--default .select2-selection--single{height:calc(2.25rem + 2px)!important;}
 .select2-container--default .select2-selection--single .select2-selection__rendered{margin-top:-3px!important;}
 .select2-container--default .select2-selection--single .select2-selection__arrow b{margin-top:3px!important;}
-
+.delete-img {
+    color: #fff;
+    font-size: 14px;
+    background: #fe7676;
+    box-shadow: -1px 1px 6px rgba(254,118,118,.8);
+    text-shadow: none;
+    width: 20px;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 50%;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+}
 /* Pagination */
 .pagination{flex-wrap:wrap;}
 

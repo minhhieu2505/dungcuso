@@ -206,7 +206,18 @@ function deleteColor(id){
 		});
 	} 
 }
-
+function deleteGallery(id){
+	if(id){
+		$.ajax({
+			url: "api/gallery.php",
+			type: "GET",
+			data: {
+				id: id
+			}
+		});
+	}
+	$('.gallery-item-'+id).remove();
+}
 /* Create sort filer */
 var sortable;
 function createSortFiler()
@@ -513,6 +524,7 @@ function confirmDialog(action, text, value, title='Thông báo', icon='fas fa-ex
 	            	if(action == "delete-item") deleteItem(value);
 	            	if(action == "delete-all") deleteAll(value);
 	            	if(action == "delete-product") deleteColor(value);
+	            	if(action == "delete-gallery") deleteGallery(value);
 	            }
 	        },
 	        cancel: {
@@ -1816,6 +1828,21 @@ $(document).ready(function(){
 		afterSelect: function(){},
 		onEmpty: function(){},
 		onRemove: function(){}
+	});
+
+
+	/* Delete Gallery */
+	$('body').on('click','.delete-img',function(){
+		var id = $(this).data('id');
+		confirmDialog("delete-gallery","Bạn có chắc muốn xóa hình ảnh này ?",id);
+	});
+
+	/* Select Category */
+	$('body').on("change",".select-prolist",function() {
+		var id = $(this).val();
+		if(id > 0){
+			window.location.href = CONFIG_BASE + "admin/" +LINK_FILTER  +"&id_cate="+id;
+		}
 	});
 
 

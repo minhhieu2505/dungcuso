@@ -245,6 +245,15 @@
                         </div>
                     </div>
                     <?php } ?>
+                    <div class="form-group col-md-4">
+                        <label class="d-block" for="inventory">Số lượng tồn kho:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control inventory text-sm" name="data[inventory]" id="inventory"
+                                placeholder="Chiết khấu"
+                                value="<?=(!empty($flash->has('inventory'))) ? $flash->get('inventory') : @$item['inventory']?>"
+                                >
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">
@@ -257,10 +266,11 @@
                 <div class="row">
                     <?php 
                         foreach($gallery as $v){ ?>
-                            <div class="form-group col-2">
+                            <div class="form-group col-2 gallery-item-<?=$v['id']?> position-relative">
                                 <div class="img-review-file-uploader">
                                     <img src="../upload/product/<?=$v['photo']?>" class="w-100" alt="" onerror="this.src='../assets/images/No-Image.png'">
                                 </div>
+                                <div class="delete-img"  data-id="<?=$v['id']?>">X</div>
                             </div>
                         <?php }
                     ?>

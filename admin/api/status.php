@@ -8,7 +8,7 @@
 
 	if($id)
 	{
-		$status_detail = $d->rawQueryOne("select status from #_$table where id = $id limit 0,1");
+		$status_detail = $d->rawQueryOne("select status from $table where id = $id limit 0,1");
 		$status_array = (!empty($status_detail['status'])) ? explode(',', $status_detail['status']) : array();
 
 		if(array_search($attr, $status_array) !== false)
@@ -20,7 +20,7 @@
 		{
 			array_push($status_array, $attr);
 		}
-
+		var_dump($status_array);
 		$data = array();
 		$data['status'] = (!empty($status_array)) ? implode(',', $status_array) : "";
 		$d->where('id', $id);

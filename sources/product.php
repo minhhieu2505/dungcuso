@@ -22,6 +22,7 @@ if ($id != '') {
 	$sql = "select * from #_product where $where order by id desc $limit";
 	$product = $d->rawQuery($sql, $params);
 
+	/* Comment */
 	$namemember = (!empty($_POST['name_member']) ? $_POST['name_member'] : ""); 
 	$contentmember = (!empty($_POST['question_member']) ? $_POST['question_member'] : ""); 
 	$id_pro = (!empty($_POST['id_pro_question']) ? $_POST['id_pro_question'] : ""); 
@@ -70,9 +71,11 @@ if ($id != '') {
 	$func->daxem($rowDetail['id']);
 	$prodaxem = array_column($_SESSION['daxem'], 'productid');
     if ($prodaxem) {
-        $sqlprodaxem = $d->rawQuery("select * from #_product where id in(".implode(',',$prodaxem).") and find_in_set('hienthi',status)");
+        $sqlprodaxem = $d->rawQuery("select * from product where id in(".implode(',',$prodaxem).") and find_in_set('hienthi',status)");
     }
-	
+
+	/* Gallery */
+	$gallery = $d->rawQuery("select * from gallery where id_product = '".$rowDetail['id']."'");
 } elseif ($idl != '') {
 	/* Lấy tất cả sản phẩm */
 	$productList = $d->rawQueryOne("select name from category where id = ? and find_in_set('hienthi',status) limit 0,1", array($idl));

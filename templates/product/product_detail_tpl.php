@@ -11,18 +11,21 @@
                         <img src="upload/product/<?=$rowDetail['photo']?>" alt="" width="600" height="600">
                     </a>
                     <div class="gallery-thumb-pro">
-                <div class="slick-product-detail slick-initialized slick-slider">
-                    <div class="slick-list draggable">
-                        <div class="slick-product-detail">
-                            <div class="slick-track" style="opacity: 1;width: 100px;transform: translate3d(0px, 0px, 0px);">
+                    <div class="slick-product-detail">
+                            <div>
                                 <a href="" class="thumb-pro-detail" data-zoom-id="Zoom-1">
                                     <img src="upload/product/<?=$rowDetail['photo']?>" alt="">
                                 </a>
                             </div>
+                            <?php foreach($gallery as $v){ ?>
+                                <div>
+                                        <a href="" class="thumb-pro-detail" data-zoom-id="Zoom-1">
+                                            <img src="upload/product/<?=$v['photo']?>" alt="">
+                                        </a>
+                                </div>
+                                <?php } ?>
                         </div>
                     </div>
-                </div>
-            </div>
                 </div>
                 
                 <div class="right-pro-detail col-md-6 col-lg-7 mb-4">
@@ -44,13 +47,19 @@
                         <li class="w-clear">
                             <label class="attr-label-pro-detail">Giá:</label>
                             <div class="attr-content-pro-detail">
-                                <?php if ($rowDetail['sale_price']) { ?>
+                                <?php if ($rowDetail['discount'] > 0) { ?>
                                 <span class="price-new-pro-detail"><?= $func->formatMoney($rowDetail['sale_price']) ?></span>
                                 <span class="price-old-pro-detail"><?= $func->formatMoney($rowDetail['regular_price']) ?></span>
                                 <?php } else { ?>
                                 <span
                                     class="price-new-pro-detail"><?= ($rowDetail['regular_price']) ? $func->formatMoney($rowDetail['regular_price']) : "Liên hệ" ?></span>
                                 <?php } ?>
+                            </div>
+                        </li>
+                        <li class="w-clear">
+                            <label class="attr-label-pro-detail">Số lượng tồn kho:</label>
+                            <div class="attr-content-pro-detail">
+                                <b><?= $rowDetail['inventory'] ?></b>
                             </div>
                         </li>
                         <strong>Đặc điểm nổi bật:</strong>

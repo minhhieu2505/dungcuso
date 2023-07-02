@@ -45,7 +45,7 @@
                             <div class="form-group d-inline-block mb-2 mr-2">
                                     <label for="<?=$key?>-checkbox" class="d-inline-block align-middle mb-0 mr-2"><?=$value?>:</label>
                                     <div class="custom-control custom-checkbox d-inline-block align-middle">
-                                        <input type="checkbox" class="custom-control-input <?=$key?>-checkbox" name="status[<?=$key?>]" id="<?=$key?>-checkbox" <?=(empty($status_array) && empty($item['id']) ? 'checked' : in_array($key, $status_array)) ? 'checked' : ''?> value="<?=$key?>">
+                                        <input type="checkbox" class="custom-control-input -checkbox" name="status['hienthi']" id="-checkbox" <?=(@$item['status'] == 'hienthi') ? 'checked' : ''?> value="hienthi">
                                         <label for="<?=$key?>-checkbox" class="custom-control-label"></label>
                                     </div>
                                 </div>

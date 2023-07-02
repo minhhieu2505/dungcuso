@@ -34,6 +34,12 @@
                 </div>
             </div>
         </div>
+        <select name="" id="select-prolist" class="select-prolist select2 w-50">
+            <option value="">Danh mục sản phẩm</option>
+            <?php foreach($category as $v) { ?>
+                <option value="<?=$v['id']?>" <?=($v['id'] == $id_category ? 'selected' : '')?> ><?=$v['name']?></option>
+            <?php }?>
+        </select>
     </div>
     <?php if(
         (isset($config['product']['dropdown']) && $config['product']['dropdown'] == true)

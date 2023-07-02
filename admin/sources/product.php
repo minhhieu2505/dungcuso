@@ -49,7 +49,7 @@
 	function viewMans()
 	{
 		
-		global $d, $func, $comment, $strUrl, $curPage, $items, $paging, $type, $category;
+		global $d, $func, $comment, $strUrl, $curPage, $items, $paging, $type, $category, $id_category;
 
 		$where = "";
 
@@ -57,6 +57,12 @@
 		{
 			$keyword = htmlspecialchars($_REQUEST['keyword']);
 			$where .= " and (name LIKE '%$keyword%')";
+		}
+
+		if(isset($_REQUEST['id_cate']))
+		{
+			$id_category = htmlspecialchars($_REQUEST['id_cate']);
+			$where .= " and id_category = $id_category";
 		}
 
 		$category = $d->rawQuery("select * from category order by id desc");
@@ -628,30 +634,6 @@
 			} else {
 				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?source=product&act=category&p=" . $curPage . $strUrl, false);
 			}
-		} elseif (isset($_GET['listid'])) {
-			$listid = explode(",", $_GET['listid']);
-
-			for ($i = 0; $i < count($listid); $i++) {
-				$id = htmlspecialchars($listid[$i]);
-
-				/* Lấy dữ liệu */
-				$row = $d->rawQueryOne("select id, photo from category where id = ? and type = ? limit 0,1", array($id, $type));
-
-				if (!empty($row)) {
-					/* Xóa chính */
-					$func->deleteFile("../upload/product/" . $row['photo']);
-					$d->rawQuery("delete from category where id = ?", array($id));
-
-					if (count($row)) {
-						foreach ($row as $v) {
-							$func->deleteFile("../upload/product/" . $v['photo']);
-						}
-
-					}
-				}
-			}
-
-			$func->transfer("Xóa dữ liệu thành công", "index.php?source=product&act=category&p=" . $curPage . $strUrl);
 		} else {
 			$func->transfer("Không nhận được dữ liệu", "index.php?source=product&act=category&p=" . $curPage . $strUrl, false);
 		}

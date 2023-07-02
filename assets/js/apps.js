@@ -47,6 +47,12 @@ $(document).ready(function () {
 		arrows: false,
 		fade: false,
 	});
+	$('.slick-product-detail').slick({
+		slidesToShow: 4,
+		slidesToScroll: 1,
+		arrows: false,
+		fade: false,
+	});
 	$("#range_price").ionRangeSlider({
 		skin: "sharp",
 		min: MIN_PRICE,
