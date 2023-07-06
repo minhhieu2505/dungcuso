@@ -234,3 +234,6 @@
 ::1(admin)--insert--`order`(61) (14:22:34 02/07/2023)
 ::1(admin)--insert--order_detail(49) (14:22:34 02/07/2023)
 ::1(admin)--update--product([["","id","=","106"]]) (14:22:34 02/07/2023)
+::1(admin)--insert--`order`(62) (14:35:50 02/07/2023)
+::1(admin)--insert--order_detail(50) (14:35:50 02/07/2023)
+::1(admin)--update--product([["","id","=","106"]]) (14:35:50 02/07/2023)
