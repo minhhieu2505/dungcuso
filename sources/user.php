@@ -1,48 +1,62 @@
 <?php
-if (!defined('SOURCES')) die("Error");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+if (!defined('SOURCES'))
+    die("Error");
 
 $action = htmlspecialchars($match['params']['action']);
 switch ($action) {
     case 'dang-nhap':
         $titleMain = "Đăng nhập";
         $template = "account/login";
-        if (!empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
-        if (!empty($_POST['login-user'])) loginMember();
+        if (!empty($_SESSION[$loginMember]['active']))
+            $func->transfer("Trang không tồn tại", $configBase, false);
+        if (!empty($_POST['login-user']))
+            loginMember();
         break;
 
     case 'dang-ky':
         $titleMain = "Đăng ký";
         $template = "account/registration";
-        if (!empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
-        if (!empty($_POST['register-user'])) signupMember();
+        if (!empty($_SESSION[$loginMember]['active']))
+            $func->transfer("Trang không tồn tại", $configBase, false);
+        if (!empty($_POST['register-user']))
+            signupMember();
         break;
 
     case 'thong-tin-ca-nhan':
         $titleMain = "Thông tin cá nhân";
         $template = "account/info";
-        if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
+        if (empty($_SESSION[$loginMember]['active']))
+            $func->transfer("Trang không tồn tại", $configBase, false);
         infoMember();
         break;
     case 'don-hang-cua-ban':
         $titleMain = "Đơn hàng của bạn";
         $template = "account/order_user";
-        if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
+        if (empty($_SESSION[$loginMember]['active']))
+            $func->transfer("Trang không tồn tại", $configBase, false);
         orderMember();
         break;
     case 'doi-mat-khau':
         $titleMain = "Đổi mật khẩu";
         $template = "account/change_password";
-        if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
+        if (empty($_SESSION[$loginMember]['active']))
+            $func->transfer("Trang không tồn tại", $configBase, false);
         changepassword();
         break;
     case 'dang-xuat':
-        if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
+        if (empty($_SESSION[$loginMember]['active']))
+            $func->transfer("Trang không tồn tại", $configBase, false);
         logoutMember();
     case 'chi-tiet-don-hang':
-        if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
+        if (empty($_SESSION[$loginMember]['active']))
+            $func->transfer("Trang không tồn tại", $configBase, false);
         $template = "account/order_detail";
         $titleMain = "Chi tiết đơn hàng";
-        $order_detail = $d->rawQuery("select * from `order_detail` where id_order = ".$_GET['id']);
+        $order_detail = $d->rawQuery("select * from `order_detail` where id_order = " . $_GET['id']);
         break;
     default:
         header('HTTP/1.0 404 Not Found', true, 404);
@@ -188,7 +202,7 @@ function signupMember()
     $address = (!empty($_POST['address'])) ? htmlspecialchars($_POST['address']) : '';
 
     /* Valid data */
-    
+
     if (!empty($username)) {
         if (!$func->isAlphaNum($username)) {
             $response['messages'][] = 'Tài khoản chỉ được nhập chữ thường và số (chữ thường không dấu, ghi liền nhau, không khoảng trắng)';
@@ -221,7 +235,7 @@ function signupMember()
         $response['messages'][] = 'Số điện thoại không hợp lệ';
     }
     var_dump($_POST);
-    
+
     if (!empty($response)) {
         /* Flash data */
         $flash->set('fullname', $fullname);
@@ -247,7 +261,49 @@ function signupMember()
     $data['status'] = '';
     $data['role'] = 0;
     if ($d->insert('user', $data)) {
-        $func->transfer("Đăng ký thành viên thành công. Vui lòng đăng nhập", $configBase . "account/dang-nhap");
+        require 'vendor/autoload.php';
+                $mail = new PHPMailer(true);
+                try {
+                    //Server settings
+                    $mail->SMTPDebug = 0; //Enable verbose debug output
+                    $mail->isSMTP(); //Send using SMTP
+                    $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+                    $mail->SMTPAuth = true; //Enable SMTP authentication
+                    $mail->Username = 'hieuminhtruong2505@gmail.com'; //SMTP username
+                    $mail->Password = 'yjdhzuiuesqsmmrp'; //SMTP password
+                    $mail->SMTPSecure = 'tls'; //Enable implicit TLS encryption
+                    $mail->Port = 587;
+                    $mail->CharSet = "utf-8"; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                    //Recipients
+                    $mail->setFrom('from@example.com', 'Mailer'); //Add a recipient
+                    $mail->addAddress($email); //Name is optional
+
+                    // Body
+                    $body = '<table border="0" width="100%">';
+                    $body .= '
+				<tr>
+					<th align="left" colspan="2">
+					<table width="100%">
+					<tr>
+					<td><font size="4">Đăng ký tài khoản từ website <a href="http://' . $configUrl . '">' . $configUrl . '</a></font> 
+					</td>
+					</table>
+					</th>
+				</tr>
+                <div>Chúc mừng bạn đã đăng ký tài khoản thành công</div>
+				';
+                    //Content
+                    $mail->isHTML(true); //Set email format to HTML
+                    $mail->Subject = 'Đăng ký tài khoản thành công';
+                    $mail->Body = $body;
+                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                    $mail->send();
+                    $func->transfer("Đăng ký thành viên thành công. Vui lòng đăng nhập", $configBase . "account/dang-nhap");
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
+        
     } else {
         $func->transfer("Đăng ký thành viên thất bại. Vui lòng thử lại sau.", $configBase, false);
     }
@@ -262,7 +318,7 @@ function logoutMember()
 function orderMember()
 {
     global $d, $func, $loginMember, $configBase, $order_user;
-    $order_user = $d->rawQuery("select * from `order` where id_user = ".$_SESSION[$loginMember]['id']);
+    $order_user = $d->rawQuery("select * from `order` where id_user = " . $_SESSION[$loginMember]['id']);
 }
 /*Change pass word */
 function changepassword()
@@ -271,7 +327,7 @@ function changepassword()
 
     $iduser = $_SESSION[$loginMember]['id'];
 
-    if ($iduser){
+    if ($iduser) {
         $rowDetail = $d->rawQueryOne("select * from #_user where id = ? limit 0,1", array($iduser));
         $password_old = (!empty($_POST['password-old'])) ? $_POST['password-old'] : '';
         $password_new = (!empty($_POST['password-new'])) ? $_POST['password-new'] : '';
@@ -283,11 +339,11 @@ function changepassword()
             $password = (!empty($_POST['password'])) ? htmlspecialchars($_POST['password']) : '';
 
             /* Valid data */
-            if($rowDetail['password'] != md5($password_old)){
+            if ($rowDetail['password'] != md5($password_old)) {
                 $response['messages'][] = 'Mật khẩu không đúng';
             }
 
-            if($password_new != $password){
+            if ($password_new != $password) {
                 $response['messages'][] = 'Mật khẩu không trùng khớp';
             }
 
@@ -314,5 +370,5 @@ function changepassword()
     } else {
         $func->transfer("Trang không tồn tại", $configBase, false);
     }
-    
+
 }

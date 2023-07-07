@@ -45,7 +45,7 @@
 		</div>
 		<div class="cart-header">
 			
-			<?php if ($_SESSION[$loginMember]['active'] == true) { ?>
+			<?php if (!empty($_SESSION[$loginMember]) && $_SESSION[$loginMember]['active'] == true) { ?>
 				<p class="title-login"><a class="" href="<?=$configBase?>account/thong-tin-ca-nhan"> Xin chào, <?=$_SESSION[$loginMember]['fullname']?></a></p>
 			<?php } else { ?>
 			<a href="<?=$configBase?>account/dang-nhap">

@@ -9,7 +9,7 @@
     $commit = $d->rawQuery("select name,id,slug,content from news where type = 'cam-ket'");
     $minPrice = $d->rawQueryOne("select sale_price from product where id<>0 order by sale_price asc");
     $maxPrice = $d->rawQueryOne("select sale_price from product where id<>0 order by sale_price desc");
-    if($_SESSION[$loginMember]['active'] == true){
+    if(!empty($_SESSION[$loginMember]) &&   $_SESSION[$loginMember]['active'] == true){
         $userDetail = $d->rawQueryOne("select * from user where id = ".$_SESSION[$loginMember]['id']); 
     }
     /* Setting */

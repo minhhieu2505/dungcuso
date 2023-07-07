@@ -1,4 +1,4 @@
-<?php if($breadCumb){ ?>
+<?php if(!empty($breadCumb)){ ?>
 <nav aria-label="breadcrumb" id="bar_breadcrumb">
   <div class="wrap-content">
   <ol class="breadcrumb">

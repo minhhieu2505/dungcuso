@@ -21,9 +21,6 @@
                         for ($i = 0; $i < $max; $i++) {
                             $pid = $_SESSION['cart'][$i]['productid'];
                             $quantity = $_SESSION['cart'][$i]['qty'];
-                            $color = ($_SESSION['cart'][$i]['color']) ? $_SESSION['cart'][$i]['color'] : 0;
-                            $size = ($_SESSION['cart'][$i]['size']) ? $_SESSION['cart'][$i]['size'] : 0;
-                            $code = ($_SESSION['cart'][$i]['code']) ? $_SESSION['cart'][$i]['code'] : '';
                             $proinfo = $cart->getProductInfo($pid);
                             $pro_price = $proinfo['regular_price'];
                             $pro_price_new = $proinfo['sale_price'];
@@ -32,7 +29,7 @@
                             <div class="procart procart-<?= $code ?>">
                                 <div class="form-row row">
                                     <div class="pic-procart col-3 col-md-2">
-                                        <a class="text-decoration-none" href="<?= $proinfo[$sluglang] ?>" target="_blank" title="<?= $proinfo['name' . $lang] ?>">
+                                        <a class="text-decoration-none" href="<?= $proinfo[$sluglang] ?>" target="_blank" title="<?= $proinfo['name'] ?>">
                                            <img src="upload/product/<?=$proinfo['photo']?>" alt="" width="85" height="85">
                                         </a>
                                         <a class="del-procart text-decoration-none" data-code="<?= $code ?>">
@@ -41,7 +38,7 @@
                                         </a>
                                     </div>
                                     <div class="info-procart col-6 col-md-5">
-                                        <h3 class="name-procart"><a class="text-decoration-none" href="<?= $proinfo[$sluglang] ?>" target="_blank" title="<?= $proinfo['name' . $lang] ?>"><?= $proinfo['name' . $lang] ?></a></h3>
+                                        <h3 class="name-procart"><a class="text-decoration-none" href="<?= $proinfo['slug'] ?>" target="_blank" title="<?= $proinfo['name'] ?>"><?= $proinfo['name'] ?></a></h3>
                                     
                                     </div>
                                     <div class="quantity-procart col-3 col-md-2">
@@ -96,7 +93,7 @@
                         <div class="information-cart">
                             <div class="form-row row">
                                 <div class="input-cart col-md-6">
-                                    <input type="text" class="form-control text-sm" id="fullname" name="dataOrder[fullname]" placeholder="Nhập họ tên" value="<?= (!empty($flash->has('fullname'))) ? $flash->get('fullname') : $userDetail['fullname'] ?>" required />
+                                    <input type="text" class="form-control text-sm" id="fullname" name="dataOrder[fullname]" placeholder="Nhập họ tên" value="<?= (!empty($flash->has('fullname'))) ? $flash->get('fullname') : (!empty($userDetail['fullname']) ? $userDetail['fullname'] : '') ?>" required />
                                 </div>
                                 <div class="input-cart col-md-6">
                                     <input type="number" class="form-control text-sm" id="phone" name="dataOrder[phone]" placeholder="Số điện thoại" value="<?= (!empty($flash->has('phone'))) ? $flash->get('phone') : $userDetail['phone'] ?>" required />
