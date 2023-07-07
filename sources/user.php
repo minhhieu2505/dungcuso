@@ -234,7 +234,6 @@ function signupMember()
     if (!empty($phone) && !$func->isPhone($phone)) {
         $response['messages'][] = 'Số điện thoại không hợp lệ';
     }
-    var_dump($_POST);
 
     if (!empty($response)) {
         /* Flash data */
