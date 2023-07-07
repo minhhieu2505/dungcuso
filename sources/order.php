@@ -24,6 +24,7 @@ if (!empty($_POST['dataOrder']['fullname'])) {
         $phone = (!empty($dataOrder['phone'])) ? htmlspecialchars($dataOrder['phone']) : '';
         $address = (!empty($dataOrder['address'])) ? htmlspecialchars($dataOrder['address']) : '';
         $requirements = (!empty($dataOrder['requirements'])) ? htmlspecialchars($dataOrder['requirements']) : '';
+        $order_payment = (!empty($dataOrder['order_payment'])) ? htmlspecialchars($dataOrder['order_payment']) : '';
         $error = false;
 
         /* Price */
@@ -40,6 +41,7 @@ if (!empty($_POST['dataOrder']['fullname'])) {
         $data_donhang['notes'] = $requirements;
         $data_donhang['code'] = $code;
         $data_donhang['total_price'] = $total_price;
+        $data_donhang['order_payment'] = $order_payment;
         $data_donhang['date_created'] = time();
         $insert_order = $d->insert('`order`', $data_donhang);
         /* Cart */

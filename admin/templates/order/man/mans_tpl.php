@@ -74,52 +74,6 @@
             </div>
         </div>
     </div>
-    <?php if(isset($config['order']['search']) && $config['order']['search'] == true) { ?>
-        <div class="card card-primary card-outline text-sm">
-            <div class="card-header">
-                <h3 class="card-title">Tìm kiếm đơn hàng</h3>
-            </div>
-            <div class="card-body row">
-                <div class="form-group col-md-3 col-sm-3">
-                    <label>Ngày đặt:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                        </div>
-                        <input type="text" class="form-control float-right text-sm" name="order_date" id="order_date" value="<?=(isset($_GET['order_date'])) ? $_GET['order_date'] : ''?>" readonly>
-                    </div>
-                </div>
-                <div class="form-group col-md-3 col-sm-3">
-                    <label>Tình trạng:</label>
-                    <?=$func->orderStatus()?>
-                </div>
-                <div class="form-group col-md-3 col-sm-3">
-                    <label>Hình thức thanh toán:</label>
-                    <?=$func->orderPayments()?>
-                </div>
-                <div class="form-group col-md-3 col-sm-3">
-                    <label>Tỉnh thành:</label>
-                    <?=$func->getAjaxPlace("city")?>
-                </div>
-                <div class="form-group col-md-3 col-sm-3">
-                    <label>Quận huyện:</label>
-                    <?=$func->getAjaxPlace("district")?>
-                </div>
-                <div class="form-group col-md-3 col-sm-3">
-                    <label>Phường xã:</label>
-                    <?=$func->getAjaxPlace("ward")?>
-                </div>
-                <div class="form-group col-md-6 col-sm-6">
-                    <label>Khoảng giá:</label>
-                    <input type="text" class="primary" id="range_price" name="range_price">
-                </div>
-                <div class="form-group text-center mt-2 mb-0 col-12">
-                    <a class="btn btn-sm bg-gradient-success text-white" onclick="actionOrder('<?=$linkFilter?>')" title="Tìm kiếm"><i class="fas fa-search mr-1"></i>Tìm kiếm</a>
-                    <a class="btn btn-sm bg-gradient-danger text-white ml-1" href="<?=$linkMan?>" title="Hủy lọc"><i class="fas fa-times mr-1"></i>Hủy lọc</a>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
             <h3 class="card-title card-title-order d-inline-block align-middle float-none">Danh sách đơn hàng</h3>
@@ -145,6 +99,7 @@
                         <th class="align-middle" style="width:15%">Họ tên</th>
                         <th class="align-middle">Ngày đặt</th>
                         <th class="align-middle">Tổng giá</th>
+                        <th class="align-middle">HÌnh thức thanh toán</th>
                         <th class="align-middle">Tình trạng</th>
                         <th class="align-middle text-center">Thao tác</th>
                     </tr>
@@ -177,22 +132,12 @@
                                     <span class="text-danger font-weight-bold"><?=$func->formatMoney($items[$i]['total_price'])?></span>
                                 </td>
                                 <td class="align-middle">
+                                    <span class="text-danger font-weight-bold"><?=$items[$i]['order_payment']?></span>
+                                </td>
+                                <td class="align-middle">
                                     <?php $arr_status = array("Mới đặt","Đã Xác Nhận","Đã Giao","Đã Hủy"); ?>
                                     <span class="text-capitalize"><?=$arr_status[$items[$i]['order_status'] - 1]?></span>
                                 </td>
-                                <?php if(
-                                    (isset($config['order']['excel']) && $config['order']['excel'] == true) || 
-                                    (isset($config['order']['word']) && $config['order']['word'] == true)
-                                ) { ?>
-                                    <td class="align-middle text-center text-lg text-nowrap">
-                                        <?php if(isset($config['order']['excel']) && $config['order']['excel'] == true) { ?>
-                                            <a class="text-primary mr-2" href="index.php?source=excel&id=<?=$items[$i]['id']?>" title="Xuất file excel"><i class="far fa-file-excel"></i></a>
-                                        <?php } ?>
-                                        <?php if(isset($config['order']['word']) && $config['order']['word'] == true) { ?>
-                                            <a class="text-primary" href="index.php?source=word&id=<?=$items[$i]['id']?>" title="Xuất file word"><i class="far fa-file-word"></i></a>
-                                        <?php } ?>
-                                    </td>
-                                <?php } ?>
                                 <td class="align-middle text-center text-md text-nowrap">
                                     <a class="text-primary mr-2" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
                                     <a class="text-danger" id="delete-item" data-url="<?=$linkDelete?>&id=<?=$items[$i]['id']?>" title="Xóa"><i class="fas fa-trash-alt"></i></a>
