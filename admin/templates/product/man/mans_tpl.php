@@ -14,7 +14,7 @@
         <div class="row">
             <ol class="breadcrumb float-sm-left">
                 <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý <?=$config['product']['title_main']?></li>
+                <li class="breadcrumb-item active">Quản lý sản phẩm</li>
             </ol>
         </div>
     </div>
@@ -41,32 +41,18 @@
             <?php }?>
         </select>
     </div>
-    <?php if(
-        (isset($config['product']['dropdown']) && $config['product']['dropdown'] == true)
-    ) { ?>
-	    <div class="card-footer form-group-category text-sm bg-light row">
-			<?php if(isset($config['product']['list']) && $config['product']['list'] == true) { ?>
-				<div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?=$func->getLinkCategory('product', 'list', $type)?></div>
-			<?php } ?>
-			<?php if(isset($config['product']['cat']) && $config['product']['cat'] == true) { ?>
-				<div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?=$func->getLinkCategory('product', 'cat', $type)?></div>
-			<?php } ?>
-	    </div>
-	<?php } ?>
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
-            <h3 class="card-title">Danh sách <?=$config['product']['title_main']?></h3>
+            <h3 class="card-title">Danh sách sản phẩm</h3>
         </div>
         <div class="card-body table-responsive p-0">
-            <table class="table table-hover">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th class="align-middle text-center" width="10%">STT</th>
-						<?php if(isset($config['product']['show_images']) && $config['product']['show_images'] == true) { ?>
-							<th class="align-middle">Hình</th>
-						<?php } ?>
+						<th class="align-middle">Hình</th>
 						<th class="align-middle" style="width:30%">Tiêu đề</th>
-						<?php if(isset($config['product']['check'])) { foreach($config['product']['check'] as $key => $value) { ?>
+						<?php $config['product']['check'] = array( "hienthi" => "Hiển thị"); if(isset($config['product']['check'])) { foreach($config['product']['check'] as $key => $value) { ?>
 							<th class="align-middle text-center"><?=$value?></th>
 						<?php } } ?>
                         <th class="align-middle text-center">Thao tác</th>
@@ -84,13 +70,11 @@
                                 <td class="align-middle">
                                     <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$i+1?>" data-id="<?=$items[$i]['id']?>" data-table="product">
                                 </td>
-                                <?php if(isset($config['product']['show_images']) && $config['product']['show_images'] == true) { ?>
-                                    <td class="align-middle">
+                                <td class="align-middle">
                                     	<a href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>">
                                             <img src="../upload/product/<?=$items[$i]['photo']?>" width="100" height="100" alt="" onerror="this.src='../assets/images/No-Image.png'">
                                         </a>
                                     </td>
-                                <?php } ?>
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>"><?=$items[$i]['name']?></a>
                                 </td>
@@ -104,8 +88,8 @@
 	                                </td>
 								<?php } } ?>
                                 <td class="align-middle text-center text-md text-nowrap">
-                                    <a class="text-primary mr-2" href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                                    <a class="text-danger" id="delete-item" data-url="<?=$linkDelete?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                                    <a class="mr-2 btn btn-success me-2" href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-danger" id="delete-item" data-url="<?=$linkDelete?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="Xóa"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>

@@ -2,7 +2,6 @@
     /* Config type - Group */
 
     /* Config type - Product */
-    require_once LIBRARIES.'type/config-type-product.php';
     require_once LIBRARIES.'type/config-type-news.php';
     require_once LIBRARIES.'type/config-type-photo.php';
 

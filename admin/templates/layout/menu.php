@@ -5,7 +5,7 @@
         <img class="brand-image" src="assets/images/logo.png" alt="Logo">
     </a>
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar slide-toggle">
         <nav class="mt-3">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent text-sm" data-widget="treeview"
                 role="menu" data-accordion="false">
@@ -18,8 +18,7 @@
                 </li>
 
                 <!-- Sản phẩm -->
-                <?php if (isset($config['product'])) { ?>
-                    <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview">
                         <a class="nav-link" href="#" title="Quản lý sản phẩm">
                             <i class="nav-icon text-sm fas fa-boxes"></i>
                             <p>
@@ -38,7 +37,6 @@
                                 </a></li>
                         </ul>
                     </li>
-                <?php } ?>
 
                 <!-- Bài viết (Theo Type) -->
                 <li class="nav-item has-treeview ">

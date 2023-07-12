@@ -29,7 +29,6 @@ if (!empty($_POST['dataOrder']['fullname'])) {
 
         /* Price */
         $total_price = $cart->getOrderTotal();
-
         $data_donhang = array();
         $data_donhang['fullname'] = $fullname;
         if(!empty($_SESSION[$loginMember])){
@@ -43,6 +42,80 @@ if (!empty($_POST['dataOrder']['fullname'])) {
         $data_donhang['total_price'] = $total_price;
         $data_donhang['order_payment'] = $order_payment;
         $data_donhang['date_created'] = time();
+        
+
+        
+        if($order_payment == "Thanh toán Online"){
+            $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+            $vnp_Returnurl = "http://localhost/vnpay_php/vnpay_return.php";
+            $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
+
+            $vnp_TmnCode = "BE46UBB8";//Mã website tại VNPAY 
+            $vnp_HashSecret = "RTLTXVGXFERTSOKUPBYAMOITBBXZNXAC"; //Chuỗi bí mật
+            
+            $startTime = date("YmdHis");
+            $expire = date('YmdHis',strtotime('+15 minutes',strtotime($startTime)));
+
+            $vnp_TxnRef = $code; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+            $vnp_OrderInfo = "Thanh toán đơn hàng ảo";
+            $vnp_OrderType = 'billpayment';
+            $vnp_Amount = $total_price * 100;
+            $vnp_Locale = "vn";
+            $vnp_BankCode = "NCB";
+            $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+            //Add Params of 2.0.1 Version
+            //Billing
+            
+            $inputData = array(
+                "vnp_Version" => "2.1.0",
+                "vnp_TmnCode" => $vnp_TmnCode,
+                "vnp_Amount" => $vnp_Amount,
+                "vnp_Command" => "pay",
+                "vnp_CreateDate" => date('YmdHis'),
+                "vnp_CurrCode" => "VND",
+                "vnp_IpAddr" => $vnp_IpAddr,
+                "vnp_Locale" => $vnp_Locale,
+                "vnp_OrderInfo" => $vnp_OrderInfo,
+                "vnp_OrderType" => $vnp_OrderType,
+                "vnp_ReturnUrl" => $vnp_Returnurl,
+                "vnp_TxnRef" => $vnp_TxnRef,
+                "vnp_ExpireDate"=>$expire,
+            );
+
+            if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+                $inputData['vnp_BankCode'] = $vnp_BankCode;
+            }
+
+            //var_dump($inputData);
+            ksort($inputData);
+            $query = "";
+            $i = 0;
+            $hashdata = "";
+            foreach ($inputData as $key => $value) {
+                if ($i == 1) {
+                    $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+                } else {
+                    $hashdata .= urlencode($key) . "=" . urlencode($value);
+                    $i = 1;
+                }
+                $query .= urlencode($key) . "=" . urlencode($value) . '&';
+            }
+
+            $vnp_Url = $vnp_Url . "?" . $query;
+            if (isset($vnp_HashSecret)) {
+                $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
+                $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+            }
+            $returnData = array('code' => '00'
+                , 'message' => 'success'
+                , 'data' => $vnp_Url);
+                if (isset($order_payment)) {
+                    header('Location: ' . $vnp_Url);
+                    die();
+                } else {
+                    echo json_encode($returnData);
+                }
+        }
         $insert_order = $d->insert('`order`', $data_donhang);
         /* Cart */
         $order_detail = '';
@@ -157,7 +230,6 @@ if (!empty($_POST['dataOrder']['fullname'])) {
 
 					if($q==0) continue;
             		$body.='<tr><td>'.($i+1).'</td>';
-					$body.='<td> <a href="http://'.$configUrl.$pDetail['slug'].'" target="_blank"><img src="http://'.$configUrl.'upload/product/'.$pDetail['photo'].'" width="70" /></a></td>';
             		$body.='<td>';
             		$body.='	<p><a href="http://'.$configUrl.$pDetail['slug'].'" target="_blank">'.$pDetail['name'].'</a></p>';
             		$body.='</td>';
@@ -168,7 +240,7 @@ if (!empty($_POST['dataOrder']['fullname'])) {
 				}
 				$body.='<tr><td colspan="6">
 				  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-
+                    Tổng giá trị đơn hàng: '.$total_price.'
 				 </table>
                 </td></tr>';
             }

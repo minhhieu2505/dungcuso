@@ -1,7 +1,7 @@
 <?php
 	$config = array(
 		'database' => array(
-			'server-name' => $_SERVER["SERVER_NAME"].":8081",
+			'server-name' => $_SERVER["SERVER_NAME"],
 			'url' => '/dungcuso/',
 			'type' => 'mysql',
 			'host' => 'localhost',

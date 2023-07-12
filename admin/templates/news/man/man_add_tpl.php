@@ -9,7 +9,7 @@ else if ($act == 'edit') $linkFilter = "index.php?source=news&act=edit&type=" . 
 if ($act == "copy") $linkSave = "index.php?source=news&act=save_copy&type=" . $type;
 else $linkSave = "index.php?source=news&act=save&type=" . $type;
 
-$colLeft = "col-xl-8";
+    $colLeft = "col-xl-8";
     $colRight = "col-xl-4";
 ?>
 <!-- Content Header -->
@@ -47,6 +47,7 @@ $colLeft = "col-xl-8";
                 <div class="card card-primary card-outline text-sm">
                     <div class="card-header">
                         <h3 class="card-title">Nội dung <?= $config['news'][$type]['title_main'] ?></h3>
+                        
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
@@ -133,30 +134,6 @@ $colLeft = "col-xl-8";
                         </div>
                     </div>
                 <?php } ?>
-            </div>
-        </div>
-        <div class="card card-primary card-outline text-sm">
-            <div class="card-header">
-                <h3 class="card-title">Thông tin <?= $config['news'][$type]['title_main'] ?></h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <?php $status_array = (!empty($item['status'])) ? explode(',', $item['status']) : array(); ?>
-                    <?php if (isset($config['news'][$type]['check'])) {
-                        foreach ($config['news'][$type]['check'] as $key => $value) { ?>
-                            <div class="form-group d-inline-block mb-2 mr-2">
-                                <label for="<?= $key ?>-checkbox" class="d-inline-block align-middle mb-0 mr-2"><?= $value ?>:</label>
-                                <div class="custom-control custom-checkbox d-inline-block align-middle">
-                                    <input type="checkbox" class="custom-control-input <?= $key ?>-checkbox" name="status[<?= $key ?>]" id="<?= $key ?>-checkbox" <?= (empty($status_array) && empty($item['id']) ? 'checked' : in_array($key, $status_array)) ? 'checked' : '' ?> value="<?= $key ?>">
-                                    <label for="<?= $key ?>-checkbox" class="custom-control-label"></label>
-                                </div>
-                            </div>
-                    <?php }
-                    } ?>
-                </div>
             </div>
         </div>
         <div class="card-footer text-sm">

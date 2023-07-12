@@ -1,4 +1,4 @@
-<div class="card card-primary card-outline text-sm">
+<div class="card card-primary card-outline text-sm d-none">
     <div class="card-header">
         <h3 class="card-title">Đường dẫn</h3>
         <span class="pl-2 text-danger">(Vui lòng không nhập trùng tiêu đề)</span>

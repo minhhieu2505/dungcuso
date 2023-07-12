@@ -1045,44 +1045,6 @@ $(document).ready(function(){
 		}
 	}
 
-	/* Order */
-	if(ORDER_ADVANCED_SEARCH)
-	{
-		/* Date range picker */
-		$('#order_date').daterangepicker({
-			callback: this.render,
-			autoUpdateInput: false,
-			timePicker: false,
-			timePickerIncrement: 30,
-			locale: {
-				format: 'DD/MM/YYYY'
-                // format: 'DD/MM/YYYY hh:mm A'
-            }
-        });
-
-		$('#order_date').on('apply.daterangepicker', function(ev, picker) {
-			$(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-		});
-
-		$('#order_date').on('cancel.daterangepicker', function(ev, picker) {
-			$(this).val('');
-		});
-
-		/* rangeSlider */
-		$('#range_price').ionRangeSlider({
-			skin: "flat",
-			min     : ORDER_MIN_TOTAL,
-			max     : ORDER_MAX_TOTAL,
-			from    : ORDER_PRICE_FROM,
-			to      : ORDER_PRICE_TO,
-			type    : 'double',
-			step    : 1,
-            // prefix  : 'đ ',
-            postfix : ' đ',
-            prettify: true,
-            hasGrid : true
-        });
-	}
 
 	/* Product */
 	if($(".regular_price").length && $(".sale_price").length)
@@ -1566,12 +1528,6 @@ $(document).ready(function(){
 			slugChange($(this));
 		});
 	}
-	/* Sort filer */
-	if(ACTIVE_GALLERY)
-	{
-		createSortFiler();
-	}
-
 	/* Check all filer */
 	$('body').on('click','.check-all-filer', function(){
 		var parentFiler = $(".my-jFiler-items .jFiler-items-list");
@@ -1656,11 +1612,6 @@ $(document).ready(function(){
 		var folder = $(".folder-filer").val();
 		confirmDialog("delete-all-filer","Bạn có chắc muốn xóa các hình ảnh đã chọn ?",folder);
     });
-
-    /* Hash upload multi filer */
-	$("form.validation-form").append('<input type="hidden" name="hash" value="'+HASH+'" />');
-	$("#filer-gallery").attr({'data-params':BASE64_QUERY_STRING,'data-hash':HASH});
-
 
 
 	/* Ckeditor */

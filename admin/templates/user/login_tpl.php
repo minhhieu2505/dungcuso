@@ -1,23 +1,15 @@
-<div class="login-view-website text-sm"><a href="../" target="_blank" title="Xem website"><i class="fas fa-reply mr-2"></i>Xem website</a></div>
 <div class="login-box">
 	<div class="card">
 		<div class="card-body login-card-body">
-			<p class="login-box-msg">Đăng nhập hệ thống</p>
+			<a href="../" class="logo_login"></a>
 			<form enctype="multipart/form-data">
+				<label for="">Tên người dùng hoặc Địa chỉ Email</label>
 				<div class="input-group mb-3">
-					<div class="input-group-append login-input-group-append">
-						<div class="input-group-text">
-							<span class="fas fa-user"></span>
-						</div>
-					</div>
+					
 					<input type="text" class="form-control text-sm" name="username" id="username" placeholder="Tài khoản *" autocomplete="off">
 				</div>
+				<label for="">Mật khẩu</label>
 				<div class="input-group mb-3">
-					<div class="input-group-append login-input-group-append">
-						<div class="input-group-text">
-							<span class="fas fa-lock"></span>
-						</div>
-					</div>
 					<input type="password" class="form-control text-sm" name="password" id="password" placeholder="Mật khẩu *" autocomplete="off">
 					<div class="input-group-append">
 						<div class="input-group-text show-password">
@@ -36,6 +28,7 @@
 					</div>
 					<span>Đăng nhập</span>
 				</button>
+				<a href="../" target="_blank" title="Xem website" class="return-web"><i class="fas fa-reply mr-2"></i>Quay lại Website</a>
 				<div class="alert my-alert alert-login d-none text-center text-sm p-2 mb-0 mt-2" role="alert"></div>
 			</form>
 		</div>

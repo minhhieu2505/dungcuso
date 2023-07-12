@@ -250,29 +250,6 @@
 </div>
 <?php } ?>
 
-<!-- Hỏi và đáp -->
-<div class="box-hoidap">
-    <div class="title-product-detail">Hỏi và đáp</div>
-    <form action="" method="POST">
-        <label for="" class="d-block"><b>Họ tên</b></label>
-        <input type="text" name="name_member" class="p-2" id="name_member">
-        <label for="" class="d-block"><b>Nội dung câu hỏi</b></label>
-        <textarea name="question_member" class="p-2" id="question_member"></textarea>
-        <input type="submit" value="Gửi" name="sumbit_question_member" id="sumbit_question_member">
-        <input type="hidden" name="id_pro_question" class="p-2" id="id_pro_question" value="<?=$rowDetail['id']?>">
-    </form>
-    <div class="box-question">
-    <?php foreach($question_member as $v) { ?>
-            <div class="name_member_q">
-                <span><?=$v['name']?></span>
-                <span><?=date('d/m/Y',$v['date_created'])?></span>
-            </div>
-            <div class="content_question">
-                <?=$v['content']?>
-            </div>
-        <?php }?>
-    </div>
-</div>
 </div>
     </div>
     
