@@ -1,2 +1,0 @@
-<div class="addthis_inline_share_toolbox_dc09"></div>
-<div class="zalo-share-button" data-href="<?=$this->getCurrentPageURL()?>" data-oaid="<?=(!empty($params['oaidzalo'])) ? $params['oaidzalo'] : '579745863508352884'?>" data-layout="3" data-color="blue" data-customize=false></div>

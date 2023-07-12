@@ -146,7 +146,7 @@ if (!empty($_POST['dataOrder']['fullname'])) {
             for ($i = 0; $i < $max; $i++) {    
                 $id_product = $_SESSION['cart'][$i]['productid'];  
                 $quanlity = $_SESSION['cart'][$i]['qty']; 
-                $detail = $d->rawQueryOne("select id, name, inventory from #_product where id = ? limit 0,1", array($id_product));   
+                $detail = $d->rawQueryOne("select id, name, inventory from product where id = ? limit 0,1", array($id_product));   
                 $inventory = array();
                 $inventory['inventory'] = $detail['inventory'] - $quanlity;
                 $d->where('id', $detail['id']);

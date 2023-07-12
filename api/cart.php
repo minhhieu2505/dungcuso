@@ -23,19 +23,12 @@ if ($cmd == 'add-cart' && $id > 0) {
             }
         }
     }
-
-    if (!empty($config['order']['ship'])) {
-        $shipData = (!empty($ward)) ? $func->getInfoDetail('ship_price', "ward", $ward) : array();
-        $ship = (!empty($shipData)) ? $shipData['ship_price'] : 0;
-    }
-
     $proinfo = $cart->getProductInfo($id);
     $regular_price = $func->formatMoney($proinfo['regular_price'] * $quantity);
     $sale_price = $func->formatMoney($proinfo['sale_price'] * $quantity);
     $temp = $cart->getOrderTotal();
     $tempText = $func->formatMoney($temp);
     $total = $cart->getOrderTotal();
-    if (!empty($ship)) $total += $ship;
     $totalText = $func->formatMoney($total);
     $data = array('regularPrice' => $regular_price, 'salePrice' => $sale_price, 'tempText' => $tempText, 'totalText' => $totalText);
 

@@ -92,5 +92,5 @@
       </div>
    </div>
 </div>
-<div class="btn-opencart"><i class="fa-solid fa-cart-shopping"></i></div>
+<div class="btn-opencart"><i class="fa-solid fa-cart-shopping"></i><span class="count-cart"><?=count($_SESSION['cart']);?></span></div>
 <script lang="javascript">var __vnp = {code : 18868,key:'', secret : '5db40cb031a13d5bee2bb0d66e977a7e'};(function() {var ga = document.createElement('script');ga.type = 'text/javascript';ga.async=true; ga.defer=true;ga.src = '//core.vchat.vn/code/tracking.js?v=123';var s = document.getElementsByTagName('script');s[0].parentNode.insertBefore(ga, s[0]);})();</script>

@@ -40,7 +40,7 @@
 			<div class="icon-hd">
 					<i class="fa-solid fa-cart-shopping"></i>
 				</div>
-				<span class="count-cart">0</span>
+				<span class="count-cart"><?=count($_SESSION['cart']);?></span>
 			</a>
 		</div>
 		<div class="cart-header">

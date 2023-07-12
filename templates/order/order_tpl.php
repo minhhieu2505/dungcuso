@@ -25,6 +25,7 @@
                             $pro_price = $proinfo['regular_price'];
                             $pro_price_new = $proinfo['sale_price'];
                             $pro_price_qty = $pro_price * $quantity;
+                            $code = $_SESSION['cart'][$i]['code'];
                             $pro_price_new_qty = $pro_price_new * $quantity; ?>
                             <div class="procart procart-<?= $code ?>">
                                 <div class="form-row row">
