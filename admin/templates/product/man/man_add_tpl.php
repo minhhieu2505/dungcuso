@@ -22,7 +22,7 @@
 
 <!-- Main content -->
 <section class="content">
-    <form class="validation-form" novalidate method="post" action="<?=$linkSave?>" enctype="multipart/form-data">
+    <form class="validation-form" method="post" action="<?=$linkSave?>" enctype="multipart/form-data">
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i
                     class="far fa-save mr-2"></i>Lưu</button>
@@ -31,7 +31,6 @@
         </div>
 
         <?=$flash->getMessages('admin')?>
-
         <div class="row">
             <div class="col-xl-8">
                 <?php
@@ -169,9 +168,9 @@
                 </div>
                 <div class="row">
                 <div class="form-group col-md-4">
-                        <label class="d-block" for="sku">Mã sản phẩm:</label>
-                        <input type="text" class="form-control text-sm" name="data[sku]" id="sku"
-                            placeholder="Mã sản phẩm"
+                        <label class="d-block" for="sku">Mã sản phẩm(Từ 6 đến 8 ký tự):</label>
+                        <input type="text" class="form-control text-sm" pattern=".{4,}" maxlength="8" name="data[sku]" id="sku"
+                            placeholder="Mã sản phẩm" required
                             value="<?=(!empty($flash->has('sku'))) ? $flash->get('sku') : @$item['sku']?>">
                     </div>
                     <div class="form-group col-md-4">

@@ -7,6 +7,14 @@
     $linkDelete = "index.php?source=product&act=delete";
     $linkMulti = "index.php?source=product&act=man_photo&kind=man";
     $copyImg = (isset($config['product']['copy_image']) && $config['product']['copy_image'] == true) ? TRUE : FALSE;
+    $linkCurrent="";
+    if (!empty($_GET['keyword'])) {
+        $linkCurrent .= "&keyword=".$_GET['keyword'];
+        $linkFilter .= "&keyword=".$_GET['keyword'];
+    }
+    if (!empty($_GET['id_cate'])) {
+        $linkCurrent .= "&id_cate=".$_GET['id_cate'];
+    }
 ?>
 <!-- Content Header -->
 <section class="content-header text-sm">
@@ -28,13 +36,13 @@
             <div class="input-group input-group-sm">
                 <input class="form-control form-control-navbar text-sm" type="search" id="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="<?=(isset($_GET['keyword'])) ? $_GET['keyword'] : ''?>" onkeypress="doEnter(event,'keyword','<?=$linkMan?>')">
                 <div class="input-group-append bg-primary rounded-right">
-                    <button class="btn btn-navbar text-white" type="button" onclick="onSearch('keyword','<?=$linkMan?>')">
+                    <button class="btn btn-navbar text-white" type="button" onclick="onSearch('keyword','<?=$linkMan.$linkCurrent?>')">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <select name="" id="select-prolist" class="select-prolist select2 w-50">
+        <select name="" id="select-prolist" class="select-prolist select2 col-4">
             <option value="">Danh mục sản phẩm</option>
             <?php foreach($category as $v) { ?>
                 <option value="<?=$v['id']?>" <?=($v['id'] == $id_category ? 'selected' : '')?> ><?=$v['name']?></option>

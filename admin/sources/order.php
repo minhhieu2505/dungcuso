@@ -35,39 +35,29 @@
 	/* View order */
 	function viewMans()
 	{
-		global $d, $func, $strUrl, $curPage, $items, $paging, $minTotal, $maxTotal, $price_from, $price_to, $allNewOrder, $totalNewOrder, $allConfirmOrder, $totalConfirmOrder, $allDeliveriedOrder, $totalDeliveriedOrder, $allCanceledOrder, $totalCanceledOrder;
+		global $d, $func, $strUrl, $curPage, $items, $paging, $minTotal, $maxTotal, $allNewOrder, $totalNewOrder, $allConfirmOrder, $totalConfirmOrder, $allDeliveriedOrder, $totalDeliveriedOrder, $allCanceledOrder, $totalCanceledOrder, $order_status, $keyword, $order_payment, $order_date;
 		
 		$where = "";
 
 		$order_status = (isset($_REQUEST['order_status'])) ? htmlspecialchars($_REQUEST['order_status']) : 0;
 		$order_payment = (isset($_REQUEST['order_payment'])) ? htmlspecialchars($_REQUEST['order_payment']) : 0;
 		$order_date = (isset($_REQUEST['order_date'])) ? htmlspecialchars($_REQUEST['order_date']) : 0;
-		$range_price = (isset($_REQUEST['range_price'])) ? htmlspecialchars($_REQUEST['range_price']) : 0;
-		$city = (isset($_REQUEST['id_city'])) ? htmlspecialchars($_REQUEST['id_city']) : 0;
-		$district = (isset($_REQUEST['id_district'])) ? htmlspecialchars($_REQUEST['id_district']) : 0;
-		$ward = (isset($_REQUEST['id_ward'])) ? htmlspecialchars($_REQUEST['id_ward']) : 0;
 
 		if($order_status) $where .= " and order_status=$order_status";
-		if($order_payment) $where .= " and order_payment=$order_payment";
+		if($order_payment == 1){
+			$where .= " and order_payment = 'Ship Code'";
+		} elseif($order_payment == 2) {
+			$where .= " and order_payment = 'Thanh toán Online'";
+		}
 		if($order_date)
 		{
-			$order_date = explode("-",$order_date);
-			$date_from = trim($order_date[0].' 12:00:00 AM');
-			$date_to = trim($order_date[1].' 11:59:59 PM');
+			$order_date_1 = explode("-",$order_date);
+			$date_from = trim($order_date_1[0].' 12:00:00 AM');
+			$date_to = trim($order_date_1[1].' 11:59:59 PM');
 			$date_from = strtotime(str_replace("/","-",$date_from));
 			$date_to = strtotime(str_replace("/","-",$date_to));
 			$where .= " and date_created<=$date_to and date_created>=$date_from";
 		}
-		if($range_price)
-		{
-			$range_price = explode(";",$range_price);
-			$price_from = trim($range_price[0]);
-			$price_to = trim($range_price[1]);
-			$where .= " and total_price<=$price_to and total_price>=$price_from";
-		}
-		if($city) $where .= " and city=$city";
-		if($district) $where .= " and district=$district";
-		if($ward) $where .= " and ward=$ward";
 		if(isset($_REQUEST['keyword']))
 		{
 			$keyword = htmlspecialchars($_REQUEST['keyword']);

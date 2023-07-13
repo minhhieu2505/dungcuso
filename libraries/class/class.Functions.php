@@ -555,6 +555,17 @@
 			return $result;
 		}
 
+		public function checkSku($data)
+		{
+			$row = $this->d->rawQueryOne("select id from product where sku = ? limit 0,1", array($data));
+			if(!empty($row)){
+				return 1;
+			} else {
+				return 0;
+			}
+			
+		}
+
 		/* Check recaptcha */
 		public function checkRecaptcha($response='')
 		{

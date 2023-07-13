@@ -7,7 +7,7 @@ if (!defined('SOURCES'))
 if ($id != '') {
 	
 	/* Lấy sản phẩm detail */
-	$rowDetail = $d->rawQueryOne("select * from #_product where id = ? and find_in_set('hienthi',status) limit 0,1", array($id));
+	$rowDetail = $d->rawQueryOne("select * from product where id = ? and find_in_set('hienthi',status) limit 0,1", array($id));
 	/* Lấy danh mục sản phẩm */
 	$productList = $d->rawQueryOne("select * from category where id = ? and find_in_set('hienthi',status) limit 0,1", array($rowDetail['id_category']));
 	/* Cập nhật lượt xem */
@@ -19,7 +19,7 @@ if ($id != '') {
 	$where = "";
 	$where = "id <> ? and id_category = ? and find_in_set('hienthi',status)";
 	$params = array($id, $rowDetail['id_category']);
-	$sql = "select * from #_product where $where order by id desc $limit";
+	$sql = "select * from product where $where order by id desc $limit";
 	$product = $d->rawQuery($sql, $params);
 
 	/* Comment */
@@ -83,7 +83,7 @@ if ($id != '') {
 	$where = "";
 	$where = " id_category = ? and find_in_set('hienthi',status)";
 	$params = array($idl);
-	$sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where order by id desc";
+	$sql = "select photo, name, slug, sale_price, regular_price, discount, id from product where $where order by id desc";
 	$product = $d->rawQuery($sql, $params);
 	$breadCumb = array($titleMain, $productList['name']);
 } else {
@@ -119,9 +119,9 @@ if ($id != '') {
 	$perPage = 20;
 	$startpoint = ($curPage * $perPage) - $perPage;
 	$limit = " limit " . $startpoint . "," . $perPage;
-	$sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where $order $limit";
+	$sql = "select photo, name, slug, sale_price, regular_price, discount, id from product where $where $order $limit";
 	$product = $d->rawQuery($sql, $params);
-	$sqlNum = "select count(*) as 'num' from #_product where $where order by date_created desc";
+	$sqlNum = "select count(*) as 'num' from product where $where order by date_created desc";
 	$count = $d->rawQueryOne($sqlNum, $params);
 	$total = (!empty($count)) ? $count['num'] : 0;
 	$url = $func->getCurrentPageURL();
@@ -130,12 +130,12 @@ if ($id != '') {
 	if ($from > 0) {
 		$minPrice['sale_price'] = $from;
 	} else {
-		$minPrice = $d->rawQueryOne("select sale_price from #_product where id<>0 order by sale_price asc");
+		$minPrice = $d->rawQueryOne("select sale_price from product where id<>0 order by sale_price asc");
 	}
 	if($to > 0){
 		$maxPrice['sale_price'] = $to;
 	}else {
-		$maxPrice = $d->rawQueryOne("select sale_price from #_product where id<>0 order by sale_price desc");
+		$maxPrice = $d->rawQueryOne("select sale_price from product where id<>0 order by sale_price desc");
 	}
 	$cate_act = trim(json_encode($id_category),'"');
 	$cate_act = explode(',',$cate_act);

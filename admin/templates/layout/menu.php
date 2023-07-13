@@ -66,7 +66,7 @@
                 <!-- Tài khoản -->
                 <li class="nav-item has-treeview ">
                     <a class="nav-link" href="index.php?source=user&act=man_member" title="Quản lý tài khoản">
-                        <i class="nav-icon text-sm far fa-newspaper"></i>
+                    <i class="fas fa-users mr-2"></i>
                         <p>
                             Quản lý tài khoản
                             <i class="fa-regular fa-user-group"></i>
@@ -124,6 +124,20 @@
                         <?php } ?>
                     </ul>
                 </li>
+                <!-- Quản lý đơn hàng -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?source=order&act=man" title="Quản lý đơn hàng">
+                        <i class="nav-icon text-sm fas fa-shopping-bag"></i>
+                        <p>Quản lý đơn hàng</p>
+                    </a>
+                </li>
+                <!-- Quản lý kho -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?source=warehouse&act=man" title="Quản lý kho">
+                        <i class="nav-icon text-sm fas fa-warehouse"></i>
+                        <p>Quản lý kho</p>
+                    </a>
+                </li>
                 <!-- Thiết lập thông tin -->
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?source=setting&act=update" title="Thiết lập thông tin">
@@ -131,12 +145,7 @@
                         <p>Thiết lập thông tin</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?source=order&act=man" title="Quản lý đơn hàng">
-                        <i class="nav-icon text-sm fas fa-shopping-bag"></i>
-                        <p>Quản lý đơn hàng</p>
-                    </a>
-                </li>
+                
             </ul>
         </nav>
     </div>
