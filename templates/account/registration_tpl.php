@@ -12,13 +12,13 @@
                     <div class="invalid-feedback">Vui lòng nhập tài khoản hoặc địa chỉ email</div> 
             </div>
             <div class="form-group mb-3">
-            <label class="label" for="name">Mật khẩu *</label>
-                <input type="password" class="form-control text-sm" id="password" name="password" placeholder="" required="">
+            <label class="label" for="name">Mật khẩu (Tối thiểu 6 ký tự) *</label>
+                <input type="password" class="form-control text-sm" id="password" name="password" pattern=".{6,}" placeholder="" required="">
                     <div class="invalid-feedback">Vui lòng nhập mật khẩu</div> 
             </div>
             <div class="form-group mb-3">
-            <label class="label" for="name">Nhập lại mật khẩu *</label>
-                <input type="password" class="form-control text-sm" id="repassword" name="repassword" placeholder="" required="">
+            <label class="label" for="name">Nhập lại mật khẩu (Tối thiểu 6 ký tự) *</label>
+                <input type="password" class="form-control text-sm" id="repassword" name="repassword" pattern=".{6,}" placeholder="" required="">
                     <div class="invalid-feedback">Vui lòng nhập mật khẩu</div> 
             </div>
             <div class="form-group mb-3">

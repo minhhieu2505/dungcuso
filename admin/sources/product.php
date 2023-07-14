@@ -180,7 +180,7 @@
 		{
 			$response['messages'][] = 'Đường dẫn không được trống';
 		}
-		$checkSku = $func->checkSku($data['sku']);
+		$checkSku = $func->checkSku($data['sku'],$id);
 		if($checkSku == true){
 			$response['messages'][] = 'Mã sản phẩm đã tồn tại';
 		}
@@ -238,8 +238,6 @@
 			$d->where('id', $id);
 			if($d->update('product',$data))
 			{
-				// die('xx');
-				
 				/* Photo */
 				if($func->hasFile("file"))
 				{

@@ -31,7 +31,7 @@
             </div>
             <div class="forget-password d-flex align-items-center justify-content-between">
                 <a class="" href="dang-ky">Đăng ký</a>
-                <a class="" href="#">Quên mật khẩu</a>
+                <a class="" href="quen-mat-khau">Quên mật khẩu</a>
             </div>
             <div class="button-user d-flex align-items-center justify-content-between">
                 <button type="submit" class="btn form-control btn-primary rounded submit px-3" name="login-user" value="1">Đăng nhập</button>

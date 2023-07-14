@@ -26,6 +26,15 @@ switch ($action) {
             signupMember();
         break;
 
+    case 'quen-mat-khau':
+        $titleMain = "Quên mật khẩu";
+        $template = "account/forgot_password";
+        if (!empty($_SESSION[$loginMember]['active']))
+            $func->transfer("Trang không tồn tại", $configBase, false);
+        if (!empty($_POST['forgot-password']))
+        forgotPassword();
+        break;
+
     case 'thong-tin-ca-nhan':
         $titleMain = "Thông tin cá nhân";
         $template = "account/info";
@@ -261,26 +270,26 @@ function signupMember()
     $data['role'] = 0;
     if ($d->insert('user', $data)) {
         require 'vendor/autoload.php';
-                $mail = new PHPMailer(true);
-                try {
-                    //Server settings
-                    $mail->SMTPDebug = 0; //Enable verbose debug output
-                    $mail->isSMTP(); //Send using SMTP
-                    $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
-                    $mail->SMTPAuth = true; //Enable SMTP authentication
-                    $mail->Username = 'hieuminhtruong2505@gmail.com'; //SMTP username
-                    $mail->Password = 'yjdhzuiuesqsmmrp'; //SMTP password
-                    $mail->SMTPSecure = 'tls'; //Enable implicit TLS encryption
-                    $mail->Port = 587;
-                    $mail->CharSet = "utf-8"; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail = new PHPMailer(true);
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0; //Enable verbose debug output
+            $mail->isSMTP(); //Send using SMTP
+            $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+            $mail->SMTPAuth = true; //Enable SMTP authentication
+            $mail->Username = 'hieuminhtruong2505@gmail.com'; //SMTP username
+            $mail->Password = 'yjdhzuiuesqsmmrp'; //SMTP password
+            $mail->SMTPSecure = 'tls'; //Enable implicit TLS encryption
+            $mail->Port = 587;
+            $mail->CharSet = "utf-8"; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-                    //Recipients
-                    $mail->setFrom('from@example.com', 'Mailer'); //Add a recipient
-                    $mail->addAddress($email); //Name is optional
+            //Recipients
+            $mail->setFrom('from@example.com', 'Mailer'); //Add a recipient
+            $mail->addAddress($email); //Name is optional
 
-                    // Body
-                    $body = '<table border="0" width="100%">';
-                    $body .= '
+            // Body
+            $body = '<table border="0" width="100%">';
+            $body .= '
 				<tr>
 					<th align="left" colspan="2">
 					<table width="100%">
@@ -292,17 +301,133 @@ function signupMember()
 				</tr>
                 <div>Chúc mừng bạn đã đăng ký tài khoản thành công</div>
 				';
-                    //Content
-                    $mail->isHTML(true); //Set email format to HTML
-                    $mail->Subject = 'Đăng ký tài khoản thành công';
-                    $mail->Body = $body;
-                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-                    $mail->send();
-                    $func->transfer("Đăng ký thành viên thành công. Vui lòng đăng nhập", $configBase . "account/dang-nhap");
-                } catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                }
-        
+            //Content
+            $mail->isHTML(true); //Set email format to HTML
+            $mail->Subject = 'Đăng ký tài khoản thành công';
+            $mail->Body = $body;
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $mail->send();
+            $func->transfer("Đăng ký thành viên thành công. Vui lòng đăng nhập", $configBase . "account/dang-nhap");
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
+    } else {
+        $func->transfer("Đăng ký thành viên thất bại. Vui lòng thử lại sau.", $configBase, false);
+    }
+}
+function forgotPassword()
+{
+    global $d, $func, $flash, $configBase;
+
+
+    /* Data */
+    $message = '';
+    $response = array();
+    $func->dump($_POST,true);
+    $email = (!empty($_POST['email'])) ? htmlspecialchars($_POST['email']) : '';
+    /* Valid data */
+
+    if (!empty($username)) {
+        if (!$func->isAlphaNum($username)) {
+            $response['messages'][] = 'Tài khoản chỉ được nhập chữ thường và số (chữ thường không dấu, ghi liền nhau, không khoảng trắng)';
+        }
+
+        if ($func->checkAccount($username, 'username', 'user')) {
+            $response['messages'][] = 'Tài khoản đã tồn tại';
+        }
+    }
+
+    if (!empty($password) && empty($repassword)) {
+        $response['messages'][] = 'Xác nhận mật khẩu không được trống';
+    }
+
+    if (!empty($password) && !empty($repassword) && !$func->isMatch($password, $repassword)) {
+        $response['messages'][] = 'Mật khẩu không trùng khớp';
+    }
+
+    if (!empty($email)) {
+        if (!$func->isEmail($email)) {
+            $response['messages'][] = 'Email không hợp lệ';
+        }
+
+        if ($func->checkAccount($email, 'email', 'user')) {
+            $response['messages'][] = 'Email đã tồn tại';
+        }
+    }
+
+    if (!empty($phone) && !$func->isPhone($phone)) {
+        $response['messages'][] = 'Số điện thoại không hợp lệ';
+    }
+
+    if (!empty($response)) {
+        /* Flash data */
+        $flash->set('fullname', $fullname);
+        $flash->set('username', $username);
+        $flash->set('email', $email);
+        $flash->set('phone', $phone);
+        $flash->set('address', $address);
+
+        /* Errors */
+        $response['status'] = 'danger';
+        $message = base64_encode(json_encode($response));
+        $flash->set('message', $message);
+        $func->redirect($configBase . "account/dang-ky");
+    }
+
+    /* Save data */
+    $data['fullname'] = $fullname;
+    $data['username'] = $username;
+    $data['password'] = md5($password);
+    $data['email'] = $email;
+    $data['phone'] = $phone;
+    $data['address'] = $address;
+    $data['status'] = '';
+    $data['role'] = 0;
+    if ($d->insert('user', $data)) {
+        require 'vendor/autoload.php';
+        $mail = new PHPMailer(true);
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0; //Enable verbose debug output
+            $mail->isSMTP(); //Send using SMTP
+            $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+            $mail->SMTPAuth = true; //Enable SMTP authentication
+            $mail->Username = 'hieuminhtruong2505@gmail.com'; //SMTP username
+            $mail->Password = 'yjdhzuiuesqsmmrp'; //SMTP password
+            $mail->SMTPSecure = 'tls'; //Enable implicit TLS encryption
+            $mail->Port = 587;
+            $mail->CharSet = "utf-8"; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('from@example.com', 'Mailer'); //Add a recipient
+            $mail->addAddress($email); //Name is optional
+
+            // Body
+            $body = '<table border="0" width="100%">';
+            $body .= '
+				<tr>
+					<th align="left" colspan="2">
+					<table width="100%">
+					<tr>
+					<td><font size="4">Đăng ký tài khoản từ website <a href="http://' . $configUrl . '">' . $configUrl . '</a></font> 
+					</td>
+					</table>
+					</th>
+				</tr>
+                <div>Chúc mừng bạn đã đăng ký tài khoản thành công</div>
+				';
+            //Content
+            $mail->isHTML(true); //Set email format to HTML
+            $mail->Subject = 'Đăng ký tài khoản thành công';
+            $mail->Body = $body;
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $mail->send();
+            $func->transfer("Đăng ký thành viên thành công. Vui lòng đăng nhập", $configBase . "account/dang-nhap");
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
     } else {
         $func->transfer("Đăng ký thành viên thất bại. Vui lòng thử lại sau.", $configBase, false);
     }

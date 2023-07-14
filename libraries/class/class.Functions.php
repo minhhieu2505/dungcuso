@@ -555,9 +555,9 @@
 			return $result;
 		}
 
-		public function checkSku($data)
+		public function checkSku($data,$idpro)
 		{
-			$row = $this->d->rawQueryOne("select id from product where sku = ? limit 0,1", array($data));
+			$row = $this->d->rawQueryOne("select id from product where sku = ? and id <> ? limit 0,1", array($data,$idpro));
 			if(!empty($row)){
 				return 1;
 			} else {
