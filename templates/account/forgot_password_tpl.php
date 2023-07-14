@@ -20,9 +20,8 @@
         <form action="" name="forgot_password" method="post" class="login-form">
             <div class="form-group mb-3">
             
-            <label class="label" for="name">Tên tài khoản hoặc địa chỉ email *</label>
-                <input type="email" class="form-control text-sm" id="username" name="username" placeholder="" required="">
-                    <div class="invalid-feedback">Vui lòng nhập tài khoản</div> 
+            <label class="label" for="name">Địa chỉ email *</label>
+                <input type="email" class="form-control text-sm" id="email" name="email" placeholder="">
             </div>
             <div class="forget-password d-flex align-items-center justify-content-between">
                 <a class="" href="dang-nhap">Đăng nhập</a>

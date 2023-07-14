@@ -246,6 +246,8 @@ img:not([src]) { visibility: hidden; }
 /* Product */
 .grid-products { display: grid; grid-gap: 20px; grid-template-columns: repeat(4, 1fr); background: #fff; } 
 
+.grid-products.grid-no-filter { display: grid; grid-gap: 20px; grid-template-columns: repeat(5, 1fr); background: #fff; } 
+
 .grid-products.grid-4 { } 
 .product { } 
 .box-product { position: relative; display: block; margin-bottom: 1rem; padding: 10px; border: 0.5px solid #ddd; } 
@@ -1192,4 +1194,10 @@ input#sumbit_comment_product {
 }
 
 span.count-cart {
+}
+
+ol.breadcrumb {
+    padding: 0 15px;
+    border-radius: 0;
+    background: #ccc;
 }
