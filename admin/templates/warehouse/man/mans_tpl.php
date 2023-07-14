@@ -21,6 +21,10 @@
 <section class="content">
     <div class="card-footer text-sm sticky-top">
     	<a class="btn btn-sm bg-gradient-primary text-white" href="<?=$linkAdd?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
+        <a class="btn btn-sm bg-gradient-danger text-white" href="../upload/file/DSSP.xlsx" title="Tải file mẫu"><i class="fas fa-download mr-2"></i>Tải file mẫu</a>
+    </div>
+    <div>
+        <div class="text-danger">Lưu ý file dữ liệu nhập vào phải theo định dạng, thứ tự cột của file mẫu trên.</div>
     </div>
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
