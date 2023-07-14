@@ -207,6 +207,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group col-md-4">
+                        <label class="d-block" for="inventory">Chiết khấu:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control inventory text-sm" name="data[inventory]" id="inventory"
+                                placeholder="Sản phẩm tồn kho"
+                                value="<?=(!empty($flash->has('inventory'))) ? $flash->get('inventory') : @$item['inventory']?>">
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">
