@@ -167,24 +167,26 @@
 			}
 		}
 
-		if(!empty($config['product'][$type]['slug']))
+		$dataSlug = array();
+		$dataSlug['slug'] = $data['slug'];
+		$dataSlug['id'] = $id;
+		$dataSlug['copy'] = ($act == 'save_copy') ? true : false;
+		$checkSlug = $func->checkSlug($dataSlug);
+		if($checkSlug == 'exist')
 		{
-			$dataSlug = array();
-				$dataSlug['slug'] = $data['slug'];
-				$dataSlug['id'] = $id;
-				$dataSlug['copy'] = ($act == 'save_copy') ? true : false;
-				$checkSlug = $func->checkSlug($dataSlug);
-
-				if($checkSlug == 'exist')
-				{
-					$response['messages'][] = 'Đường dẫn đã tồn tại';
-				}
-				else if($checkSlug == 'empty')
-				{
-					$response['messages'][] = 'Đường dẫn không được trống';
-				}
+			$response['messages'][] = 'Đường dẫn đã tồn tại';
 		}
-		
+		else if($checkSlug == 'empty')
+		{
+			$response['messages'][] = 'Đường dẫn không được trống';
+		}
+		$checkSku = $func->checkSku($data['sku']);
+		if($checkSku == true){
+			$response['messages'][] = 'Mã sản phẩm đã tồn tại';
+		}
+		if(strlen($data['sku']) > strlen($func->changeTitle($data['sku']))){
+			$response['messages'][] = 'Mã sản phẩm sai định dạng';
+		}
 		if(!empty($data['regular_price']) && !$func->isNumber($data['regular_price']))
 		{
 			$response['messages'][] = 'Giá bán không hợp lệ';

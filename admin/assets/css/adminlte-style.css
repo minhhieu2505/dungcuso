@@ -452,3 +452,20 @@ slide-toggle
     font-size: 16px;
     color: #000;
 }
+
+input#keyword {
+    height: 38px;
+}
+.bg-light{background: #fff!important;}
+
+input#order_date {
+    background: #fff;
+}
+
+.input-group.bg-light .input-group-prepend .input-group-text {
+    background: #007bff;
+    color: #fff;
+}
+.form-date{
+    cursor: pointer!important;
+}

@@ -1202,47 +1202,6 @@ $(document).ready(function(){
 		});
 	}
 
-	/* Ajax place */
-	if($(".select-place").length)
-	{
-		$('body').on('change','.select-place', function(){
-			var id = $(this).val();
-			var child = $(this).data("child");
-			var level = parseInt($(this).data('level'));
-			var table = $(this).data('table');
-
-			if($("#"+child).length)
-			{
-				$.ajax({
-					url: 'api/place.php',
-					type: 'POST',
-					data: {
-						level: level,
-						id: id,
-						table: table
-					},
-					success: function(result)
-					{
-						var op = "<option value='0'>Chọn danh mục</option>";
-
-						if(level == 0)
-						{
-							$("#id_district").html(op);
-							$("#id_ward").html(op);
-						}
-						else if(level == 1)
-						{
-							$("#id_ward").html(op);
-						}
-						$("#"+child).html(result);
-					}
-				});
-			}
-
-			return false;
-		});
-	}
-
 	/* Database */
 	if($('.btn-database').length)
 	{
@@ -1794,6 +1753,40 @@ $(document).ready(function(){
 		if(id > 0){
 			window.location.href = CONFIG_BASE + "admin/" +LINK_FILTER  +"&id_cate="+id;
 		}
+	});
+	/* Select Order Status */
+	$('body').on("change",".select-status",function() {
+		var id = $(this).val();
+		if(id > 0){
+			window.location.href = CONFIG_BASE + "admin/" +LINK_FILTER+LINK_OD_SEARCH+LINK_OD_PAYMENT+LINK_OD_DATE  +"&order_status="+id;
+		}
+	});
+	/* Select Order Payment */
+	$('body').on("change",".select-payment",function() {
+		var id = $(this).val();
+		if(id > 0){
+			window.location.href = CONFIG_BASE + "admin/" +LINK_FILTER +LINK_OD_STATUS+LINK_OD_SEARCH+LINK_OD_DATE  +"&order_payment="+id;
+		}
+	});
+	$('#order_date').daterangepicker({
+		callback: this.render,
+		autoUpdateInput: false,
+		timePicker: false,
+		timePickerIncrement: 30,
+		locale: {
+			format: 'DD/MM/YYYY'
+			// format: 'DD/MM/YYYY hh:mm A'
+		}
+	});
+
+	$('#order_date').on('apply.daterangepicker', function (ev, picker) {
+		$(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+		var date = $('#order_date').val();
+		window.location.href = CONFIG_BASE + "admin/" +LINK_FILTER+LINK_OD_SEARCH+LINK_OD_PAYMENT+LINK_OD_STATUS +"&order_date="+date;
+	});
+
+	$('#order_date').on('cancel.daterangepicker', function (ev, picker) {
+		$(this).val('');
 	});
 
 

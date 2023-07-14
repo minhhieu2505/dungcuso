@@ -1,9 +1,14 @@
 <!-- Js Config -->
 <script type="text/javascript">
 	var CONFIG_BASE = '<?=$configBase?>';
+	var TOKEN = '<?= TOKEN ?>';
     var ADMIN = '<?=ADMIN?>';
     var ASSET = '<?=ASSET?>';
 	var LINK_FILTER = '<?=(!empty($linkFilter)) ? $linkFilter : ''?>';
+	var LINK_OD_STATUS = '<?=(!empty($linkStatus)) ? $linkStatus : ''?>';
+	var LINK_OD_SEARCH = '<?=(!empty($linkSearch)) ? $linkSearch : ''?>';
+	var LINK_OD_PAYMENT = '<?=(!empty($linkPayment)) ? $linkPayment : ''?>';
+	var LINK_OD_DATE = '<?=(!empty($linkDate)) ? $linkDate : ''?>';
 	var ID = <?=(!empty($id)) ? $id : 0?>;
 	var COM = '<?=(!empty($com)) ? $com : ''?>';
 	var ACT = '<?=(!empty($act)) ? $act : ''?>';
