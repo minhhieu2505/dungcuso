@@ -82,11 +82,6 @@ switch ($com) {
 		$template = isset($_GET['id']) ? "product/product_detail" : "product/product";
 		$titleMain = "Sản phẩm";
 		break;
-	case 'san-pham-ban-chay':
-		$source = "product";
-		$template = "product/product";
-		$titleMain = "Sản phẩm bán chạy";
-		break;
 	case 'tin-tuc':
 		$source = "news";
 		$template = isset($_GET['id']) ? "news/news_detail" : "news/news";

@@ -96,12 +96,12 @@
 		$totalConfirmOrder = $order_count['sum(total_price)'];
 
 		/* Lấy đơn hàng - đã giao */
-		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 4");
+		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 3");
 		$allDeliveriedOrder = $order_count['count(id)'];
 		$totalDeliveriedOrder = $order_count['sum(total_price)'];
 
 		/* Lấy đơn hàng - đã hủy */
-		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 5");
+		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 4");
 		$allCanceledOrder = $order_count['count(id)'];
 		$totalCanceledOrder = $order_count['sum(total_price)'];
 	}

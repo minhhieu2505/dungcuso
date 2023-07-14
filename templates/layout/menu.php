@@ -22,9 +22,6 @@
                     echo 'active'; ?> transition" href="<?=$configBase?>" title="Trang chủ">Trang chủ</a></li>
                 <li><a class="<?php if ($com == 'san-pham')
                     echo 'active'; ?> transition" href="<?=$configBase?>san-pham" title="Sản phẩm">Sản phẩm</a></li>
-                <li><a class="<?php if ($com == 'san-pham-ban-chay')
-                    echo 'active'; ?> transition" href="<?=$configBase?>san-pham-ban-chay" title="Sản phẩm bán chạy">Sản phẩm bán
-                        chạy</a></li>
                 <li><a class="<?php if ($com == 'huong-dan-mua-hang')
                     echo 'active'; ?> transition" href="<?=$configBase?>huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua
                         hàng</a></li>

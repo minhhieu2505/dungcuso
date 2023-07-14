@@ -99,6 +99,7 @@ if ($id != '') {
 	$id_sort = (!empty($_GET['id_sort'])) ? htmlspecialchars($_GET['id_sort']) : 0;
 	$from = (!empty($_GET['from'])) ? htmlspecialchars($_GET['from']) : 0;
 	$to = (!empty($_GET['to'])) ? htmlspecialchars($_GET['to']) : 0;
+	$p = (!empty($_GET['p'])) ? htmlspecialchars($_GET['p']) : 1;
 	if (!empty($id_category)) {
 		$where .= " and find_in_set(id_category,'$id_category')";
 	}
@@ -113,7 +114,7 @@ if ($id != '') {
 	} else {
 		$order .= " order by id desc";
 	}
-
+	$curPage = $p;
 
 	$curPage = $getPage;
 	$perPage = 20;

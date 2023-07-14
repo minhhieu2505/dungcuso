@@ -56,12 +56,6 @@
                                 <?php } ?>
                             </div>
                         </li>
-                        <li class="w-clear">
-                            <label class="attr-label-pro-detail">Số lượng tồn kho:</label>
-                            <div class="attr-content-pro-detail">
-                                <b><?= $rowDetail['inventory'] ?></b>
-                            </div>
-                        </li>
                         <strong>Đặc điểm nổi bật:</strong>
                         <div class="desc-pro-detail"><?= htmlspecialchars_decode($rowDetail['description']) ?></div>
                         <li class="w-clear">

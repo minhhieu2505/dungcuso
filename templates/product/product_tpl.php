@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-3 <?=($idl ? 'd-none' : '')?>">
         <div class="box-filter">
             <div class="filter-items">
                 <div class="filter-items-name"> Sắp xếp</div>
@@ -43,19 +43,19 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-9">
+    <div class="<?=($idl ? 'col-lg-12' : 'col-lg-9')?>">
         <div class="title-main"><span>
                 <?= (!empty($titleCate)) ? $titleCate : @$titleMain ?>
             </span></div>
         <div class="content-main content-product  w-clear">
             <?php if (!empty($product)) { ?>
-                <div class="grid-products grid-4">
+                <div class="grid-products grid-4 <?=($idl ? 'grid-no-filter' : '')?>">
                     <?php foreach ($product as $k => $v) { ?>
                         <div class="">
                             <div class="product">
                                 <div class="box-product">
                                     <a href="<?= $v['slug'] ?>" class="pic-product scale-img">
-                                        <img src="upload/product/<?= $v['photo'] ?>" alt="" width="600" height="600">
+                                        <img src="upload/product/<?= $v['photo'] ?>" alt="" onerror="this.src='assets/images/No-Image.png' width="600" height="600" >
                                     </a>
                                     <div class="info-product">
                                         <h3 class="name-product"><a href="<?= $v['slug'] ?>"
