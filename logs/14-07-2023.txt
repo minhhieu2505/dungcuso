@@ -104,3 +104,6 @@
 ::1(admin)--insert--warehouse_detail(49) (06:21:17 14/07/2023)
 ::1(admin)--insert--product(148) (06:21:17 14/07/2023)
 ::1(admin)--insert--warehouse_detail(50) (06:21:18 14/07/2023)
+::1(admin)--update--user([["","id","=","142"]]) (07:02:27 14/07/2023)
+::1(admin)--update--user([["","id","=","142"]]) (07:02:40 14/07/2023)
+::1(admin)--update--product([["","id","=","108"]]) (07:18:17 14/07/2023)

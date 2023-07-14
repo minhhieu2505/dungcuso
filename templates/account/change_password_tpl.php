@@ -29,13 +29,13 @@
         <div class="input-group input-user">
             <input type="password" class="form-control text-sm" id="password-old" name="password-old" placeholder="" value="" required>
         </div>
-        <label>Mật khẩu mới</label>
+        <label>Mật khẩu mới (Tối thiểu 6 ký tự)</label>
         <div class="input-group input-user">
-            <input type="password" class="form-control text-sm" id="password-new" name="password-new" placeholder="" value="" required>
+            <input type="password" class="form-control text-sm" id="password-new" pattern=".{6,}" name="password-new" placeholder="" value="" required>
         </div>
-        <label>Nhập lại mật khẩu mới</label>
+        <label>Nhập lại mật khẩu mới (Tối thiểu 6 ký tự)</label>
         <div class="input-group input-user">
-            <input type="password" class="form-control text-sm" id="password" name="password" placeholder="" value="" required>
+            <input type="password" class="form-control text-sm" id="password" pattern=".{6,}" name="password" placeholder="" value="" required>
         </div>
         <div class="button-user">
             <input type="submit" class="btn btn-primary btn-block" name="change_password" value="Cập nhật">
