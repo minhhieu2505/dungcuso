@@ -208,7 +208,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="d-block" for="inventory">Chiết khấu:</label>
+                        <label class="d-block" for="inventory">Sản phẩm tồn kho:</label>
                         <div class="input-group">
                             <input type="text" class="form-control inventory text-sm" name="data[inventory]" id="inventory"
                                 placeholder="Sản phẩm tồn kho"
