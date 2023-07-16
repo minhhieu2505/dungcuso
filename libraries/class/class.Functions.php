@@ -2,8 +2,6 @@
 	class Functions
 	{
 		private $d;
-		private $hash;
-		private $cache;
 
 		function __construct($d)
 		{
@@ -657,71 +655,6 @@
 		}
 
 		
-		/* Get list gallery */
-		public function listsGallery($file='')
-		{
-			$result = array();
-
-			if(!empty($file) && !empty($_POST['fileuploader-list-'.$file]))
-			{
-				$fileLists = '';
-				$fileLists = str_replace('"','',$_POST['fileuploader-list-'.$file]);
-				$fileLists = str_replace('[','',$fileLists);
-				$fileLists = str_replace(']','',$fileLists);
-				$fileLists = str_replace('{','',$fileLists);
-				$fileLists = str_replace('}','',$fileLists);
-				$fileLists = str_replace('0:/','',$fileLists);
-				$fileLists = str_replace('file:','',$fileLists);
-				$result = explode(',',$fileLists);
-			}
-
-			return $result;
-		}
-
-		/* Template gallery */
-		public function galleryFiler($numb=1, $id=0, $photo='', $name='', $folder='', $col='')
-		{
-			/* Params */
-			$params = array();
-			$params['numb'] = $numb;
-			$params['id'] = $id;
-			$params['photo'] = $photo;
-			$params['name'] = $name;
-			$params['folder'] = $folder;
-			$params['col'] = $col;
-
-			/* Get markdown */
-			$str = $this->markdown('gallery/admin', $params);
-			
-			return $str;
-		}
-
-		/* Delete gallery */
-		public function deleteGallery()
-		{
-			$row = $this->d->rawQuery("select id, com, photo from #_gallery where hash != '' and date_created < ".(time()-3*3600));
-			$array = array("product" => "upload/product", "news" => "upload/news");
-
-			if($row)
-			{
-				foreach($row as $item)
-				{
-					@unlink($array[$item['com']].$item['photo']);
-					$this->d->rawQuery("delete from #_gallery where id = ".$item['id']);
-				}
-			}
-		}
-		
-		/* Generate hash */
-		public function generateHash()
-		{
-			if(!$this->hash)
-			{
-				$this->hash = $this->stringRandom(10);
-			}
-			return $this->hash;
-		}
-
 		/* Lấy date */
 		public function makeDate($time=0, $dot='.', $lang='vi', $f=false)
 		{

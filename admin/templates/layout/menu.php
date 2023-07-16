@@ -108,7 +108,7 @@
                                     if (isset($is_permission) && $is_permission == true) if ($func->checkPermission('photo', 'man_photo', $k, null, 'phrase-1'))
                                         $none = "d-none";
                                     if ($com == 'photo' && $_GET['type'] == $k && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo'))
-                                        $active = "active"; ?>
+                                         ?>
                                     <li class="nav-item <?= $none ?>">
                                         <a class="nav-link <?= $active ?>"
                                             href="index.php?source=photo&act=man_photo&type=<?= $k ?>"
@@ -135,7 +135,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?source=warehouse&act=man" title="Quản lý kho">
                         <i class="nav-icon text-sm fas fa-warehouse"></i>
-                        <p>Quản lý kho</p>
+                        <p>Quản lý nhập hàng</p>
                     </a>
                 </li>
                 <!-- Thiết lập thông tin -->

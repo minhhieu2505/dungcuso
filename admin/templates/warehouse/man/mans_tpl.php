@@ -51,17 +51,17 @@
                                     <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$i+1?>" data-id="<?=$items[$i]['id']?>" data-table="warehouse">
                                 </td>
                                 <td class="align-middle">
-                                <a class="text-dark text-break" href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['code_invoice']?>"><?=$items[$i]['code_invoice']?></a>
+                                <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['code_invoice']?>"><?=$items[$i]['code_invoice']?></a>
 
                                     </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name_invoice']?>"><?=$items[$i]['name_invoice']?></a>
+                                    <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name_invoice']?>"><?=$items[$i]['name_invoice']?></a>
                                 </td>
                                 <td class="align-middle text-center text-md text-nowrap">
-                                    <a class="mr-2 btn btn-success me-2" href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="Danh sách sản phẩm"><i class="fas fa-eye"></i></a>
+                                    <a class="mr-2 btn btn-success me-2" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="Danh sách sản phẩm"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['date_created']?>"><?=date('d/m/Y',$items[$i]['date_created'])?></a>
+                                    <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['date_created']?>"><?=date('d/m/Y',$items[$i]['date_created'])?></a>
                                 </td>
                             </tr>
                         <?php } ?>

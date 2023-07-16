@@ -1,7 +1,7 @@
 <!-- Js Config -->
 <script type="text/javascript">
 	var CONFIG_BASE = '<?=$configBase?>';
-	var TOKEN = '<?= TOKEN ?>';
+	var TOKEN = '';
     var ADMIN = '<?=ADMIN?>';
     var ASSET = '<?=ASSET?>';
 	var LINK_FILTER = '<?=(!empty($linkFilter)) ? $linkFilter : ''?>';
@@ -42,5 +42,5 @@
 <script src="assets/comment/comment.js"></script>
 <script src="assets/fileuploader/fileuploader.min.js"></script>
 <script src="assets/js/chart.umd.min.js"></script>
-<!-- <script src="assets/js/charts.js"></script> -->
+<script src="assets/js/chart_jquery.js"></script>
 <script src="assets/js/apps.js"></script>

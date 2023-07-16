@@ -2,21 +2,14 @@
 	session_start();
 	define('LIBRARIES','../libraries/');
     define('THUMBS','thumbs');
-    define('WATERMARK','watermark');
-
-	if(empty($_SESSION['lang'])) $_SESSION['lang'] = 'vi';
-    $lang = $_SESSION['lang'];
+    $lang = 'vi';
 
     require_once LIBRARIES."config.php";
     require_once LIBRARIES.'autoload.php';
     new AutoLoad();
     $d = new PDODb($config['database']);
-    $func = new Functions($d, $cache);
+    $func = new Functions($d);
     $cart = new Cart($d);
-    // $cart = new Cart($d);
-
-    /* Slug lang */
-    $sluglang = 'slugvi';
 
     /* Setting */
     $setting = $d->rawQueryOne("select * from #_setting");

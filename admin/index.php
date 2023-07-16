@@ -10,10 +10,11 @@
     $d = new PDODb($config['database']);
     $flash = new Flash();
 	$cache = new Cache($d);
-    $func = new Functions($d, $cache);
+    $func = new Functions($d);
 	
 	/* Config type */
 	require_once LIBRARIES."config-type.php";
+	
 	
 	/* Setting */
 	$setting = $d->rawQueryOne("select * from #_setting limit 0,1");

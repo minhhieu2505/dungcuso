@@ -55,7 +55,7 @@ function viewMembers()
 	$perPage = 10;
 	$startpoint = ($curPage * $perPage) - $perPage;
 	$limit = " limit " . $startpoint . "," . $perPage;
-	$sql = "select * from user where id <> 0 $where order by id desc $limit";
+	$sql = "select * from user where id <> 0 and role = 0 $where order by id desc $limit";
 	$items = $d->rawQuery($sql);
 	$sqlNum = "select count(*) as 'num' from user where id <> 0 $where order by id desc";
 	$count = $d->rawQueryOne($sqlNum);

@@ -36,17 +36,17 @@
                 <div class="items-social">
                     <i><img class="lazy loaded" src="assets/images/email-icon.png" alt=""></i>
                     <p>E-mail</p>
-                    <a href="<?= $optsetting['email'] ?>"><?= $optsetting['email'] ?></a>
+                    <a target="_blank" href="mailto:<?= $optsetting['email'] ?>"><?= $optsetting['email'] ?></a>
                 </div>
                 <div class="items-social">
                     <i><img class="lazy loaded" src="assets/images/icons-phone.png" alt=""></i>
                     <p>Phone</p>
-                    <a href="<?= $optsetting['phone'] ?>"><?= $optsetting['phone'] ?></a>
+                    <a href="tel:<?= $optsetting['phone'] ?>"target="_blank"><?= $optsetting['phone'] ?></a>
                 </div>
                 <div class="items-social">
                     <i><img class="lazy loaded" src="assets/images/zalo-logo.png" alt=""></i>
                     <p>Zalo</p>
-                    <a href="<?= $optsetting['zalo'] ?>"><?= $optsetting['zalo'] ?></a>
+                    <a href="zalo:<?= $optsetting['zalo'] ?>"target="_blank"><?= $optsetting['zalo'] ?></a>
                 </div>
                 <div class="items-social">
                     <i><img class="lazy loaded" src="assets/images/messenger.png" alt=""></i>
